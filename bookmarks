@@ -14,7 +14,7 @@
  (position . 132746))
 ("org-capture-last-stored"
  (filename . "~/org/ref.org")
- (front-context-string . "* DONE Create OS")
- (rear-context-string . "nfirmation form\n")
- (position . 18585))
+ (front-context-string . "* DONE Install O")
+ (rear-context-string . " :Note:\n  :END:\n")
+ (position . 18838))
 )
