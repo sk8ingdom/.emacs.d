@@ -8,6 +8,8 @@
  )
  ;; OSX
  ((string-equal system-type "darwin")
+  (load "~/.emacs.d/osx-config/osx")
+  (load "~/.emacs.d/org-mode-config/osx-org")
  )
  ;; Linux
  ((string-equal system-type "gnu/linux")
@@ -31,3 +33,17 @@
 ;; (load "~/.emacs.d/add-ins/org-protocol")
 (require 'org-protocol)
 (server-start)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
+ '(tool-bar-mode nil)
+ '(tooltip-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Andale Mono" :foundry "outline" :slant normal :weight normal :height 100 :width normal)))))

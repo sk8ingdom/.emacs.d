@@ -13,8 +13,8 @@
  (rear-context-string . "ote:\n     :END:\n")
  (position . 132746))
 ("org-capture-last-stored"
- (filename . "u:/org/org.org")
- (front-context-string . "** T-Mobile\n   C")
- (rear-context-string . ":Note:\n   :END:\n")
- (position . 11635))
+ (filename . "~/org/ref.org")
+ (front-context-string . "* DONE Create OS")
+ (rear-context-string . "nfirmation form\n")
+ (position . 18585))
 )
