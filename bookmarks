@@ -3,18 +3,18 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored-marker"
- (filename . "u:/org/dev.org")
- (front-context-string . "**** REFERENCE [")
- (rear-context-string . "ote:\n     :END:\n")
- (position . 132746))
+ (filename . "~/org/dev.org")
+ (front-context-string . "***** REFERENCE ")
+ (rear-context-string . "te:\n      :END:\n")
+ (position . 7822))
 ("org-refile-last-stored"
- (filename . "u:/org/dev.org")
- (front-context-string . "**** REFERENCE [")
- (rear-context-string . "ote:\n     :END:\n")
- (position . 132746))
+ (filename . "~/org/dev.org")
+ (front-context-string . "**** TODO Get Mo")
+ (rear-context-string . "ebDAV account]]\n")
+ (position . 164866))
 ("org-capture-last-stored"
  (filename . "~/org/ref.org")
- (front-context-string . "* DONE Install O")
- (rear-context-string . " :Note:\n  :END:\n")
- (position . 18838))
+ (front-context-string . "* TODO Get Mobil")
+ (rear-context-string . "D67EE0A\n  :END:\n")
+ (position . 2169))
 )

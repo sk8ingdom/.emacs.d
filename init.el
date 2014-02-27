@@ -29,7 +29,8 @@
 ;; (load "~/.emacs.d/add-ins/calcfw-org")
 (load "~/.emacs.d/add-ins/htmlize")
 (load "~/.emacs.d/add-ins/ob-calc")
-;; No longer require the actual org-protocol file as it's included by default in 24.2
+(load "~/.emacs.d/add-ins/org-mobile")
+;; No longer required, included by default in 24.2
 ;; (load "~/.emacs.d/add-ins/org-protocol")
 (require 'org-protocol)
 (server-start)
