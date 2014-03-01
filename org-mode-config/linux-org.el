@@ -5,3 +5,7 @@
 
 ;; Targets that contribute to the agenda view
 (setq org-agenda-files (quote ("/share/homes/sk8ingdom")))
+
+;; Abbreviations
+(add-to-list 'org-link-abbrev-alist
+       '("val"            . "/share/homes/sk8ingdom"))

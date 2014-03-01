@@ -13,8 +13,8 @@
  (rear-context-string . "ebDAV account]]\n")
  (position . 164866))
 ("org-capture-last-stored"
- (filename . "~/org/ref.org")
- (front-context-string . "* TODO Get Mobil")
- (rear-context-string . "D67EE0A\n  :END:\n")
- (position . 2169))
+ (filename . "~/org/org.org")
+ (front-context-string . "** Skype\n   CREA")
+ (rear-context-string . ":Note:\n   :END:\n")
+ (position . 13628))
 )

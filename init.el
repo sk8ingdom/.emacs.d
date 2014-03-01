@@ -1,5 +1,13 @@
 ;; -*- mode: elisp -*-
 
+ ;; General
+(load "~/.emacs.d/general-config/general")
+
+;; Org-mode
+(load "~/.emacs.d/org-mode-config/general-org")
+(load "~/.emacs.d/org-mode-config/to-do-states")
+(load "~/.emacs.d/org-mode-config/capture-templates")
+
 (cond
  ;; Windows
  ((string-equal system-type "windows-nt")
@@ -17,13 +25,6 @@
   (load "~/.emacs.d/org-mode-config/linux-org")
  )
 )
- ;; General
-(load "~/.emacs.d/general-config/general")
-
-;; Org-mode
-(load "~/.emacs.d/org-mode-config/general-org")
-(load "~/.emacs.d/org-mode-config/to-do-states")
-(load "~/.emacs.d/org-mode-config/capture-templates")
 
 ;; Add-ins
 ;; (load "~/.emacs.d/add-ins/calcfw-org")
