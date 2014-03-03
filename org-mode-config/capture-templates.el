@@ -348,17 +348,9 @@
 ** TODO Buy [First] [Last] a Christmas Gift
    DEADLINE: +1y -2w")
    ;; }}}
-   ;;          (n) Note template     {{{
-   ("nn" "          (n) Note" entry (file "ref.org")
-    "* %? :note:\n  CREATED: %U
-  :PROPERTIES:
-  :Note:
-  :END:")
-   ;; }}}
-   ("s" "Special Tasks")
-   ;; TODO     (e) Payment template  {{{
-   ("se" "TODO      (e) Payment" entry (file "ref.org")
-    "* TODO Pay %? :fin:\n  CREATED: %U
+   ;;          (e) Payment template  {{{
+   ("ne" "          (e) Payment" entry (file "ref.org")
+    "* Paid %? :fin:\n  %t\n  CREATED: %U
   :PROPERTIES:
   :Total:
   :New:
@@ -368,9 +360,9 @@
   :Note:
   :END:")
    ;; }}}
-   ;; TODO     (f) Fuel template     {{{
-   ("sf" "TODO      (f) Fuel" entry (file+headline "fin.org" "Fuel Up")
-    "* TODO Fuel Up at %?\n  CREATED: %U
+   ;;          (f) Fuel template     {{{
+   ("nf" "          (f) Fuel" entry (file+headline "fin.org" "Fuel Up")
+    "* Fuel Up at %?\n  %t\n  CREATED: %U
   :PROPERTIES:
   :Total:
   :Per_Gal:
@@ -383,6 +375,41 @@
   :Location:
   :END:")
    ;; }}}
+   ;;          (n) Note template     {{{
+   ("nn" "          (n) Note" entry (file "ref.org")
+    "* %? :note:\n  CREATED: %U
+  :PROPERTIES:
+  :Note:
+  :END:")
+   ;; }}}
+   ;;          (h) Paycheck template {{{
+   ("nh" "          (h) Paycheck" entry (file+headline "fin.org" "Paycheck")
+    "* Paycheck %?\n  %t\n  CREATED: %U
+  :PROPERTIES:
+  :Total:
+  :Link:
+  :Note:
+  :END:")
+   ;; }}}
+   ;; TODO     (s) Shopping template {{{
+   ("ns" "          (s) Shopping" entry (file+headline "fin.org" "Shopping")
+    "* Shop at %?\n  %t\n  CREATED: %U
+  :PROPERTIES:
+  :Cost:
+  :Location:
+  :Note:
+  :END:
+  | Item                           | Price ($) | Amount | Total ($) |
+  |--------------------------------+-----------+--------+-----------|
+  |                                |           |        |           |
+  |                                |           |        |           |
+  |--------------------------------+-----------+--------+-----------|
+  | Total                          |           |        |           |
+  | Total + Tax (based on receipt) |           |        |           |
+  #+TBLFM: $4=$2*$3
+  ")
+   ;; }}}
+   ("s" "Special Tasks")
    ;; TODO     (g) Project Template  {{{
    ("sg" "TODO      (g) Project" entry (file+headline "wrk.org" "Projects")
         "* TODO %?[Platform] [Program] [Analysis Type]\n  CREATED: %U
@@ -423,32 +450,5 @@
   :Emails_Attachments:
   :Note:
   :END:")
-   ;; }}}
-   ;; TODO     (h) Paycheck template {{{
-   ("sh" "TODO      (h) Paycheck" entry (file+headline "fin.org" "Paycheck")
-    "* TODO Paycheck %?\n  CREATED: %U
-  :PROPERTIES:
-  :Total:
-  :Link:
-  :Note:
-  :END:")
-   ;; }}}
-   ;; TODO     (s) Shopping template {{{
-   ("ss" "TODO      (s) Shopping" entry (file+headline "fin.org" "Shopping")
-    "* TODO Shop at %?\n  CREATED: %U
-  :PROPERTIES:
-  :Cost:
-  :Location:
-  :Note:
-  :END:
-  | Item                           | Price ($) | Amount | Total ($) |
-  |--------------------------------+-----------+--------+-----------|
-  |                                |           |        |           |
-  |                                |           |        |           |
-  |--------------------------------+-----------+--------+-----------|
-  | Total                          |           |        |           |
-  | Total + Tax (based on receipt) |           |        |           |
-  #+TBLFM: $4=$2*$3
-  ")
    ;; }}}
  ))
