@@ -40,6 +40,7 @@
 	 ("soc"            . "file:soc.org::*")
 	 ("wrk"            . "file:wrk.org::*")
          ("facebook"       . "https://www.facebook.com/")
+         ("gmail"          . "https://mail.google.com/mail/u/0/#all/")
          ("google"         . "https://www.google.com/#q=")
          ("google-maps"    . "https://maps.google.com/maps?q=")
          ("google-plus"    . "https://plus.google.com/")
