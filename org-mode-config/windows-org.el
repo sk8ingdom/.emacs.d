@@ -8,4 +8,4 @@
 
 ;; Abbreviations
 (add-to-list 'org-link-abbrev-alist
-       '("val"            . "U:\"))
+       '("val"            . "U:\\"))
