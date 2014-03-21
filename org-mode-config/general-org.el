@@ -27,7 +27,9 @@
 
 ;; Abbreviations
 (setq org-link-abbrev-alist
-       '(("dev"            . "file:dev.org::*")
+       '(
+	 ;; Abbreviations for files
+	 ("dev"            . "file:dev.org::*")
 	 ("edu"            . "file:edu.org::*")
 	 ("fin"            . "file:fin.org::*")
 	 ("hea"            . "file:hea.org::*")
@@ -39,7 +41,10 @@
 	 ("ref"            . "file:ref.org::*")
 	 ("soc"            . "file:soc.org::*")
 	 ("wrk"            . "file:wrk.org::*")
+
+	 ;; Abbreviations for websites
          ("facebook"       . "https://www.facebook.com/")
+	 ("fedex"          . "https://www.fedex.com/fedextrack/?tracknumbers=")
          ("gmail"          . "https://mail.google.com/mail/u/0/#all/")
          ("google"         . "https://www.google.com/#q=")
          ("google-maps"    . "https://maps.google.com/maps?q=")
@@ -51,7 +56,10 @@
          ("okcupid"        . "http://www.okcupid.com/profile/")
          ("pinterest"      . "http://www.pinterest.com/")
          ("reddit"         . "http://reddit.com/user/")
+	 ("ups"            . "http://www.ups.com/WebTracking/processRequest?tracknum=")
          ("twitter"        . "https://www.twitter.com/")
          ("yelp-business"  . "http://www.yelp.com/biz/")
          ("yelp-user"      . "http://www.yelp.com/user_details?userid=")
-         ("youtube"        . "http://www.youtube.com/user/")))
+         ("youtube"        . "http://www.youtube.com/user/")
+	 )
+       )

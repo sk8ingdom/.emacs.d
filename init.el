@@ -7,6 +7,7 @@
 (load "~/.emacs.d/org-mode-config/general-org")
 (load "~/.emacs.d/org-mode-config/to-do-states")
 (load "~/.emacs.d/org-mode-config/capture-templates")
+(load "~/.emacs.d/org-mode-config/agenda-custom")
 
 (cond
  ;; Windows
