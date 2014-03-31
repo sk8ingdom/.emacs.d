@@ -387,20 +387,20 @@
    ;; }}}
    ;;          (h) Paycheck template {{{
    ("nh" "          (h) Paycheck" entry (file+headline "fin.org" "Paycheck")
-    "* Paycheck %?\n  %t\n  CREATED: %U
+    "* Paycheck %? :fin:\n  %t\n  CREATED: %U
   :PROPERTIES:
-  :Cost:
-  :Paid:
-  :Method:
-  :Merchant:
-  :Link:
+  :Cost:     -
+  :Paid:     -
+  :Method:   [[fin:Wells%20Fargo%20Debit%20Account][Wells Fargo Debit Account]]
+  :Merchant: [[peo:General%20Atomics%20Aeronautical%20Systems%20Inc.][General Atomics Aeronautical Systems Inc.]]
+  :Link:     [[val:fin/Banking/Work/General%20Atomics%20Aeronautical%20Systems%20Inc./Paycheck/YYYY-MM-DD.pdf][YYYY-MM-DD]]
   :Note:
   :END:")
    ;; }}}
 
    ;;          (s) Shopping template {{{
    ("ns" "          (s) Shopping" entry (file+headline "fin.org" "Shopping")
-    "* Shop at %?\n  %t\n  CREATED: %U
+    "* Shop at %? :fin:\n  %t\n  CREATED: %U
   :PROPERTIES:
   :Cost:
   :Paid:
