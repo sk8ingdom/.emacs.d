@@ -15,3 +15,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Andale Mono" :foundry "outline" :slant normal :weight normal :height 100 :width normal)))))
+
+;; Mapping Control ＆ Alt Keys
+(setq mac-command-modifier 'meta) ; sets the Command key to Meta
+(setq mac-option-modifier 'control) ; sets the Option key to Control
+(setq mac-control-modifier 'control) ; sets the Control key to Control
