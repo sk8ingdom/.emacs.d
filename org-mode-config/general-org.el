@@ -21,6 +21,9 @@
 (require 'org-id)
 (setq org-id-link-to-org-use-id t)
 
+;; Update ID file .org-id-locations on startup
+(org-id-update-id-locations)
+
 ;; Targets include this file and any file contributing to the agenda - up to 9 levels deep
 (setq org-refile-targets (quote ((nil :maxlevel . 9)
                                  (org-agenda-files :maxlevel . 9))))
