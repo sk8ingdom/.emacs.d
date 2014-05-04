@@ -28,11 +28,21 @@
 )
 
 ;; Add-ins
+
 ;; (load "~/.emacs.d/add-ins/calcfw-org")
 (load "~/.emacs.d/add-ins/htmlize")
 (load "~/.emacs.d/add-ins/ob-calc")
 (load "~/.emacs.d/add-ins/org-mobile")
+
 ;; No longer required, included by default in 24.2
 ;; (load "~/.emacs.d/add-ins/org-protocol")
 (require 'org-protocol)
+
+;; Use global IDs
+(require 'org-id)
+(setq org-id-link-to-org-use-id t)
+
+;; Update ID file .org-id-locations on startup
+(org-id-update-id-locations)
+
 (server-start)
