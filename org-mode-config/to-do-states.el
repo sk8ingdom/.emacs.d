@@ -21,21 +21,21 @@
 	 ;; GIFTED is given to someone as a gift
 	 ;; SOLD is sold to someone
 	 ;; DISCARDED is for thrown out
-	 (sequence "PURCHASE(p)" "TRANSIT(u@/!)" "SELL(k@/!)" "LOANED(n@/!)" "|" "OWN(o@/!)" "GIFTED(g@/!)"  "SOLD(c@/!)" "DISCARDED(q@/!)")
+	 (sequence "PURCHASE(p)" "TRANSIT(u@/!)" "SELL(k@/!)" "LOANED(n@/!)" "|" "CANCELLEDx@/!)" "OWN(o@/!)" "GIFTED(g@/!)"  "SOLD(c@/!)" "DISCARDED(q@/!)")
 
 	 ;; Sequence for MULTIMEDIA
 	 ;; CONSUME means to read (articles, books, quote, etc.), play (games), listen (music), or watch (a series or movie)
 	 ;; SUBSCRIBE means to add it to a newsreader or list of some sort
 	 ;; SHARE means to share on G+, Facebook, reddit, blog about, etc.
 	 ;; REFERENCE is for stuff you don't own but want to be available later
-	 (sequence "CONSUME(r)" "SUBSCRIBE(b@/!)" "SHARE(s@/!)" "|" "REFERENCE(f@/!)")
+	 (sequence "CONSUME(r)" "SUBSCRIBE(b@/!)" "SHARE(s@/!)" "|" "CANCELLEDx@/!)" "REFERENCE(f@/!)")
 
 	 ;; Sequence for EVENTS
 	 ;; VISIT means that there is something you would physically like to do, no dates associated
 	 ;; PLANNED means it's coming up in the future
 	 ;; MEETING means a real time meeting, i.e. at work, or on the phone for something official
 	 ;; VISITED means the event took place and is no longer scheduled
-	 (sequence "VISIT(v)" "PLANNED(l@/!)" "|" "MEETING(m)" "VISITED(y@/!)")
+	 (sequence "VISIT(v)" "PLANNED(l@/!)" "|" "CANCELLEDx@/!)" "MEETING(m)" "VISITED(y@/!)")
 	 )
        )
 
