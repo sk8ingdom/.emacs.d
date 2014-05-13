@@ -35,7 +35,7 @@
 	 ;; PLANNED means it's coming up in the future
 	 ;; MEETING means a real time meeting, i.e. at work, or on the phone for something official
 	 ;; VISITED means the event took place and is no longer scheduled
-	 (sequence "VISIT(v)" "PLANNED(l@/!)" "|" "CANCELLEDx(@/!)" "MEETING(m)" "VISITED(y@/!)")
+	 (sequence "VISIT(v)" "PLANNED(l@/!)" "|" "CANCELLED(x@/!)" "MEETING(m)" "VISITED(y@/!)")
 	 )
        )
 
