@@ -22,11 +22,7 @@
 	 ;; GIFTED is given to someone as a gift
 	 ;; SOLD is sold to someone
 	 ;; DISCARDED is for thrown out
-<<<<<<< HEAD
 	 (sequence "PURCHASE(p)" "TRANSIT(u@/!)" "SELL(k@/!)" "LOANED(n@/!)" "|" "UNWANTED(a@/!)" "OWN(o@/!)" "GIFTED(g@/!)"  "SOLD(c@/!)" "DISCARDED(q@/!)")
-=======
-	 (sequence "PURCHASE(p)" "TRANSIT(u@/!)" "SELL(k@/!)" "LOANED(n@/!)" "|" "CANCELLED(x@/!)" "OWN(o@/!)" "GIFTED(g@/!)"  "SOLD(c@/!)" "DISCARDED(q@/!)")
->>>>>>> FETCH_HEAD
 
 	 ;; Sequence for MULTIMEDIA
 	 ;; CONSUME means to read (articles, books, quote, etc.), play (games), listen (music), or watch (a series or movie)
@@ -34,11 +30,7 @@
 	 ;; SHARE means to share on G+, Facebook, reddit, blog about, etc.
 	 ;; IGNORED means not read and no desire to read in the future
 	 ;; REFERENCE is for stuff you don't own but want to be available later
-<<<<<<< HEAD
 	 (sequence "CONSUME(r)" "SUBSCRIBE(b@/!)" "SHARE(s@/!)" "|" "IGNORED(i@/!)" "REFERENCE(f@/!)")
-=======
-	 (sequence "CONSUME(r)" "SUBSCRIBE(b@/!)" "SHARE(s@/!)" "|" "CANCELLED(x@/!)" "REFERENCE(f@/!)")
->>>>>>> FETCH_HEAD
 
 	 ;; Sequence for EVENTS
 	 ;; VISIT means that there is something you would physically like to do, no dates associated
@@ -46,11 +38,7 @@
 	 ;; DIDNOTGO means the event was cancelled or I didn't go
 	 ;; MEETING means a real time meeting, i.e. at work, or on the phone for something official
 	 ;; VISITED means the event took place and is no longer scheduled
-<<<<<<< HEAD
 	 (sequence "VISIT(v)" "PLANNED(l@/!)" "|" "DIDNOTGO(z@/!)" "MEETING(m)" "VISITED(y@/!)")
-=======
-	 (sequence "VISIT(v)" "PLANNED(l@/!)" "|" "CANCELLED(x@/!)" "MEETING(m)" "VISITED(y@/!)")
->>>>>>> FETCH_HEAD
 	 )
        )
 
