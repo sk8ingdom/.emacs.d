@@ -8,6 +8,9 @@
 
 ;; Abbreviations
 (add-to-list 'org-link-abbrev-alist
-       '("val"            . "/Volumes/sk8ingdom/")
-       '("paycheck-ga"    . "Volumes/sk8ingdom/fin/Banking/Work/General Atomics Aeronautical Systems Inc./Paycheck")
+       '("local"   . "~/")
+       ;; Works anywhere
+       '("val"     . "Volumes/sk8ingdom/home/")
+       ;; Only works when connecte to local home network
+       ;;'("val-afp" . "Volumes/home/")
        )

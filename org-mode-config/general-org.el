@@ -17,6 +17,9 @@
 ;; Property Inheritance
 (setq org-use-property-inheritance t)
 
+;; Tag Inheritance
+(setq org-use-tag-inheritance nil)
+
 ;; Use global IDs
 (require 'org-id)
 (setq org-id-link-to-org-use-id t)
@@ -54,6 +57,7 @@
          ("google-plus"    . "https://plus.google.com/")
          ("google-scholar" . "http://scholar.google.com/scholar?hl=en&q=")
          ("github"         . "https://www.github.com/")
+         ("hacker-news"    . "https://news.ycombinator.com/item?id=")
          ("instagram"      . "https://www.instagram.com/")
          ("linkedin"       . "http://www.linkedin.com/")
          ("okcupid"        . "http://www.okcupid.com/profile/")

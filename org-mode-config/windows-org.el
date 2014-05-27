@@ -8,6 +8,6 @@
 
 ;; Abbreviations
 (add-to-list 'org-link-abbrev-alist
-       '("val"            . "U:/")
-       '("paycheck-ga"    . "http://dominicsurano.com:4041/homes/sk8ingdom/fin/Banking/Work/General Atomics Aeronautical Systems Inc./Paycheck")
+       '("local"  . "U:/")
+       '("val"    . "http://dominicsurano.com:4041/homes/sk8ingdom/")
        )

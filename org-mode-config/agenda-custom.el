@@ -17,7 +17,7 @@
 	("1p" agenda "Possessions agenda (active and inactive)"
 	 (
 	  (org-agenda-skip-function
-	   '(org-agenda-skip-entry-if 'nottodo '("PURCHASE" "TRANSIT" "SELL" "LOANED" "OWN" "GIFTED" "SOLD" "DISCARDED")))
+	   '(org-agenda-skip-entry-if 'nottodo '("PURCHASE" "TRANSIT" "SELL" "LOANED" "UNWANTED" "OWN" "GIFTED" "SOLD" "DISCARDED")))
 	  (org-agenda-include-inactive-timestamps 't)
 	  )
 	 )
@@ -26,7 +26,7 @@
 	("1m" agenda "Multimedia agenda (active and inactive)"
 	 (
 	  (org-agenda-skip-function
-	   '(org-agenda-skip-entry-if 'nottodo '("CONSUME" "SUBSCRIBE" "SHARE" "REFERENCE")))
+	   '(org-agenda-skip-entry-if 'nottodo '("CONSUME" "SUBSCRIBE" "SHARE" "IGNORE" "REFERENCE")))
 	  (org-agenda-include-inactive-timestamps 't)
 	  )
 	 )
@@ -35,7 +35,7 @@
 	("1e" agenda "Events agenda (active)"
 	 (
 	  (org-agenda-skip-function
-	   '(org-agenda-skip-entry-if 'nottodo '("VISIT" "PLANNED" "MEETING" "VISITED")))
+	   '(org-agenda-skip-entry-if 'nottodo '("VISIT" "PLANNED" "DIDNOTGO" "MEETING" "VISITED")))
 	  ;; (org-agenda-include-inactive-timestamps 't)
 	  )
 	 )
@@ -74,7 +74,7 @@
 	("2p" agenda "Possessions agenda table (active and inactive)"
 	 (
 	  (org-agenda-skip-function
-	   '(org-agenda-skip-entry-if 'nottodo '("PURCHASE" "TRANSIT" "SELL" "LOANED" "OWN" "GIFTED" "SOLD" "DISCARDED")))
+	   '(org-agenda-skip-entry-if 'nottodo '("PURCHASE" "TRANSIT" "SELL" "LOANED" "UNWANTED" "OWN" "GIFTED" "SOLD" "DISCARDED")))
 	  (org-agenda-include-inactive-timestamps 't)
 	  (org-agenda-overriding-columns-format "%50ITEM %10Cost %10Paid %20Merchant %20Method %20Note")
 	  (org-agenda-view-columns-initially t)
@@ -85,7 +85,7 @@
 	("2m" agenda "Multimedia agenda table (active and inactive)"
 	 (
 	  (org-agenda-skip-function
-	   '(org-agenda-skip-entry-if 'nottodo '("CONSUME" "SUBSCRIBE" "SHARE" "REFERENCE")))
+	   '(org-agenda-skip-entry-if 'nottodo '("CONSUME" "SUBSCRIBE" "SHARE" "IGNORED" "REFERENCE")))
 	  (org-agenda-include-inactive-timestamps 't)
 	  (org-agenda-overriding-columns-format "%11ITEM %10Creator %50Created %10Source %20Link %16Date %20Note")
 	  (org-agenda-view-columns-initially t)
@@ -96,7 +96,7 @@
 	("2e" agenda "Events agenda table (active)"
 	 (
 	  (org-agenda-skip-function
-	   '(org-agenda-skip-entry-if 'nottodo '("VISIT" "PLANNED" "MEETING" "VISITED")))
+	   '(org-agenda-skip-entry-if 'nottodo '("VISIT" "PLANNED" "DIDNOTGO" "MEETING" "VISITED")))
 	  ;; (org-agenda-include-inactive-timestamps 't)
 	  (org-agenda-overriding-columns-format "%50ITEM %50Attend %20Location %20Note")
 	  (org-agenda-view-columns-initially t)
@@ -134,21 +134,21 @@
 	 )
 
 	;; For all POSSESSIONS
-	("3p" "Possessions list (active and inactive)" todo "PURCHASE|TRANSIT|SELL|LOANED|OWN|GIFTED|SOLD|DISCARDED"
+	("3p" "Possessions list (active and inactive)" todo "PURCHASE|TRANSIT|SELL|LOANED|UNWANTED|OWN|GIFTED|SOLD|DISCARDED"
 	 (
 	  (org-agenda-include-inactive-timestamps 't)
 	  )
 	 )
 
 	;; For all MULTIMEDIA
-	("3m" "Multimedia list (active and inactive)" todo "CONSUME|SUBSCRIBE|SHARE|REFERENCE"
+	("3m" "Multimedia list (active and inactive)" todo "CONSUME|SUBSCRIBE|SHARE|IGNORED|REFERENCE"
 	 (
 	  (org-agenda-include-inactive-timestamps 't)
 	  )
 	 )
 
 	;; For all EVENTS
-	("3e" "Events list (active)" todo "VISIT|PLANNED|MEETING|VISITED"
+	("3e" "Events list (active)" todo "VISIT|PLANNED|DIDNOTGO|MEETING|VISITED"
 	 (
 	  ;; (org-agenda-include-inactive-timestamps 't)
 	  )
@@ -181,7 +181,7 @@
 	 )
 
 	;; For all POSSESSIONS; requires the properties described in org-agenda-overriding-columns-format
-	("4p" "Possessions list table (active and inactive)" todo "PURCHASE|TRANSIT|SELL|LOANED|OWN|GIFTED|SOLD|DISCARDED"
+	("4p" "Possessions list table (active and inactive)" todo "PURCHASE|TRANSIT|SELL|UNWANTED|LOANED|OWN|GIFTED|SOLD|DISCARDED"
 	 (
 	  (org-agenda-include-inactive-timestamps 't)
 	  (org-agenda-overriding-columns-format "%50ITEM %10Cost %10Paid %20Merchant %20Method %20Note")
@@ -190,7 +190,7 @@
 	 )
 
 	;; For all MULTIMEDIA; requires the properties described in org-agenda-overriding-columns-format
-	("4m" "Multimedia list table (active and inactive)" todo "CONSUME|SUBSCRIBE|SHARE|REFERENCE"
+	("4m" "Multimedia list table (active and inactive)" todo "CONSUME|SUBSCRIBE|SHARE|IGNORED|REFERENCE"
 	 (
 	  (org-agenda-include-inactive-timestamps 't)
 	  (org-agenda-overriding-columns-format "%11ITEM %10Creator %50Created %10Source %20Link %16Date %20Note")
@@ -199,7 +199,7 @@
 	 )
 
 	;; For all EVENTS; requires the properties described in org-agenda-overriding-columns-format
-	("4e" "Events list table (active)" todo "VISIT|PLANNED|MEETING|VISITED"
+	("4e" "Events list table (active)" todo "VISIT|PLANNED|DIDNOTGO|MEETING|VISITED"
 	 (
 	  ;; (org-agenda-include-inactive-timestamps 't)
 	  (org-agenda-overriding-columns-format "%50ITEM %50Attend %20Location %20Note")

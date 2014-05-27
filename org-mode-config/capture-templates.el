@@ -39,7 +39,7 @@
    ;; }}}
 
    ;; DONE     (d) Done template     {{{
-   ("td" "Done      (d) DONE" entry (file "ref.org")
+   ("td" "DONE      (d) Done" entry (file "ref.org")
     "* DONE %?\n  CREATED: %U
   :PROPERTIES:
   :Note:
@@ -91,6 +91,19 @@
    ;; LOANED   (n) Loaned template   {{{
    ("pn" "LOANED    (n) Loaned" entry (file "ref.org")
     "* LOANED %?\n  CREATED: %U
+  :PROPERTIES:
+  :Cost:
+  :Paid:
+  :Method:
+  :Merchant:
+  :Link:
+  :Note:
+  :END:")
+   ;; }}}
+
+   ;; UNWANTED (a) Unwanted template {{{
+   ("pa" "UNWANTED  (a) Unwanted" entry (file "ref.org")
+    "* UNWANTED %?\n  CREATED: %U
   :PROPERTIES:
   :Cost:
   :Paid:
@@ -198,6 +211,20 @@
   %:initial")
    ;; }}}
 
+   ;; IGNORED  (i) Ignored org-prot  {{{
+   ("mi" "IGNORED   (i) Ignored org-protocol" entry (file "ref.org")
+    "* IGNORED [[%:link][%:description]]\n  CREATED: %U
+  :PROPERTIES:
+  :Creator:  %?
+  :Created:  %:description
+  :Source:
+  :Link:     %:link
+  :Date:     %u
+  :Note:
+  :END:
+  %:initial")
+   ;; }}}
+
    ;; REFERENCE(f) Reference org-prot{{{
    ("mf" "REFERENCE (f) Reference org-protocol" entry (file "ref.org")
     "* REFERENCE [[%:link][%:description]]\n  CREATED: %U
@@ -228,6 +255,16 @@
 
    ;; PLANNED  (l) Planned template  {{{
    ("el" "PLANNED   (l) Planned" entry (file "ref.org")
+    "* PLANNED %?\n  CREATED: %U
+  :PROPERTIES:
+  :Attend:   [[peo:Dominic Surano][Dominic Surano]]
+  :Location:
+  :Note:
+  :END:")
+   ;; }}}
+
+   ;; DIDNOTGO (z) Didnotgo template {{{
+   ("ez" "DIDNOTGO  (z) DIDNOTGO" entry (file "ref.org")
     "* PLANNED %?\n  CREATED: %U
   :PROPERTIES:
   :Attend:   [[peo:Dominic Surano][Dominic Surano]]
