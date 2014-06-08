@@ -281,7 +281,10 @@
   :Attend:   [[peo:Dominic Surano][Dominic Surano]]
   :Location:
   :Note:
-  :END:")
+  :END:
+
+  Tasks from meeting:
+  -")
    ;; }}}
 
    ;; VISITED  (y) Visited template  {{{

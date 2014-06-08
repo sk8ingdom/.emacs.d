@@ -15,7 +15,7 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 
 ;; Property Inheritance
-(setq org-use-property-inheritance t)
+(setq org-use-property-inheritance nil)
 
 ;; Tag Inheritance
 (setq org-use-tag-inheritance nil)
@@ -30,6 +30,9 @@
 ;; Targets include this file and any file contributing to the agenda - up to 9 levels deep
 (setq org-refile-targets (quote ((nil :maxlevel . 9)
                                  (org-agenda-files :maxlevel . 9))))
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps t)
+(setq org-refile-allow-creating-parent-nodes t)
 
 ;; Abbreviations
 (setq org-link-abbrev-alist

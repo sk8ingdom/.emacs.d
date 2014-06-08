@@ -1,3 +1,10 @@
+;; Default agenda preferences
+;; These two should work but currently don't--might work for TODO agenda instead of timeline agenda
+(setq org-agenda-todo-ignore-scheduled 'all)
+(setq org-agenda-tags-todo-honor-ignore-options t)
+;; Exclude scheduled items from timeline agenda
+(setq org-agenda-entry-types '(:deadline))
+
 ;; Custom agenda commands to quickly view lists of relevent data
 (setq org-agenda-custom-commands
       '(
