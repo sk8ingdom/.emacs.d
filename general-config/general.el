@@ -7,3 +7,7 @@
 
 ;; Enable transient mark mode
 (transient-mark-mode 1)
+
+;; Calc mode
+;; Disable multiplication having precedence over division
+(setq calc-multiplication-has-precedence nil)
