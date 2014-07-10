@@ -27,6 +27,19 @@
 ;; Update ID file .org-id-locations on startup
 (org-id-update-id-locations)
 
+;; Add ID automatically on capture
+(add-hook 'org-capture-prepare-finalize-hook 'org-id-get-create)
+
+;; Add ID properties to all headlines in the current file which do not already have one
+(defun my/org-add-ids-to-headlines-in-file ()
+  (interactive)
+  (org-map-entries 'org-id-get-create))
+
+;; Uncomment to enable writing IDs to all org entries before saving
+;; (add-hook 'org-mode-hook
+;;  (lambda ()
+;;    (add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local)))
+
 ;; Targets include this file and any file contributing to the agenda - up to 9 levels deep
 (setq org-refile-targets (quote ((nil :maxlevel . 9)
                                  (org-agenda-files :maxlevel . 9))))
