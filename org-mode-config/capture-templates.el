@@ -433,7 +433,7 @@
   :Paid:     -
   :Method:   [[fin:Wells%20Fargo%20Debit%20Account][Wells Fargo Debit Account]]
   :Merchant: [[peo:General%20Atomics%20Aeronautical%20Systems%20Inc.][General Atomics Aeronautical Systems Inc.]]
-  :Link:     [[val:fin/Banking/Work/General%20Atomics%20Aeronautical%20Systems%20Inc./Paycheck/YYYY-MM-DD.pdf][YYYY-MM-DD]]
+  :Link:     [[val:fin/Banking/Work/General%20Atomics%20Aeronautical%20Systems%20Inc./Paycheck/YYYY-MM-DD.pdf][YYYY-MM-DD.pdf]]
   :Note:
   :END:")
    ;; }}}
