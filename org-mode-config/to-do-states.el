@@ -47,3 +47,6 @@
 
 ;; Add a note when the TODO item changes state
 (setq org-log-done 'note)
+
+;; Add state changes to the :LOGBOOK:
+(setq org-log-into-drawer t)

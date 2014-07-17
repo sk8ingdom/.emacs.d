@@ -38,6 +38,15 @@
 ;; (load "~/.emacs.d/add-ins/org-protocol")
 (require 'org-protocol)
 
+;; Disable git
+(setq vc-handled-backends ())
+
+;; Disable backup
+(setq backup-inhibited t)
+
+;; Disable auto-save
+(setq auto-save-default nil)
+
 ;; Use global IDs
 (require 'org-id)
 (setq org-id-link-to-org-use-id t)
