@@ -7,10 +7,5 @@
 (setq org-agenda-files (quote ("~/org")))
 
 ;; Abbreviations
-(add-to-list 'org-link-abbrev-alist
-       '("local"   . "~/")
-       ;; Works anywhere
-       '("val"     . "Volumes/sk8ingdom/home/")
-       ;; Only works when connecte to local home network
-       ;;'("val-afp" . "Volumes/home/")
-       )
+(add-to-list 'org-link-abbrev-alist '("val"     . "/Volumes/sk8ingdom/"))
+(add-to-list 'org-link-abbrev-alist '("local"   . "~/"))

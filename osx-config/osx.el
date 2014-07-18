@@ -1,6 +1,14 @@
 ;; Disable toolbar (to enable it again, replace the -1 with 1)
 (tool-bar-mode -1)
 
+;; Full screen by default
+;; (set-frame-parameter nil 'fullscreen 'fullboth)
+
+;; Maximized by default
+(setq initial-frame-alist
+      `((left . 0) (top . 0)
+        (width . 207) (height . 56)))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
