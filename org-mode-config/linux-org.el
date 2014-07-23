@@ -7,5 +7,5 @@
 (setq org-agenda-files (quote ("/share/homes/sk8ingdom")))
 
 ;; Abbreviations
-(add-to-list 'org-link-abbrev-alist '("local" ."~/"))
-(add-to-list 'org-link-abbrev-alist '("val"   . "TBA"))
+(add-to-list 'org-link-abbrev-alist '("local"   ."~/"))
+(add-to-list 'org-link-abbrev-alist '("val"     . "TBA"))

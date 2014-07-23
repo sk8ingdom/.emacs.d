@@ -7,5 +7,5 @@
 (setq org-agenda-files (quote ("U:/org")))
 
 ;; Abbreviations
-(add-to-list 'org-link-abbrev-alist '("local"  . "U:/"))
-(add-to-list 'org-link-abbrev-alist '("val"    . "http://dominicsurano.com:4041/homes/sk8ingdom/"))
+(add-to-list 'org-link-abbrev-alist '("local"   . "U:/"))
+(add-to-list 'org-link-abbrev-alist '("val"     . "http://dominicsurano.com:4041/homes/sk8ingdom/"))

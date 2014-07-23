@@ -1,5 +1,5 @@
 ;; Disable toolbar (to enable it again, replace the -1 with 1)
-(tool-bar-mode -1)
+(tool-bar-mode nil)
 
 ;; Full screen by default
 ;; (set-frame-parameter nil 'fullscreen 'fullboth)
@@ -25,6 +25,9 @@
  '(default ((t (:family "Andale Mono" :foundry "outline" :slant normal :weight normal :height 100 :width normal)))))
 
 ;; Mapping Control ＆ Alt Keys
-(setq mac-command-modifier 'meta) ; sets the Command key to Meta
-(setq mac-option-modifier 'control) ; sets the Option key to Control
-(setq mac-control-modifier 'control) ; sets the Control key to Control
+;; Sets the Command key to Meta
+(setq mac-command-modifier 'meta) 
+;; Sets the Option key to Control
+(setq mac-option-modifier 'control)
+;; Sets the Control key to Control
+(setq mac-control-modifier 'control)

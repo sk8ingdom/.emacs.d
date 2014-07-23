@@ -1,10 +1,23 @@
-;; org-mode configuration
 ;; Enable org-mode
 (require 'org)
 
-;; Make org-mode work with files ending in .org
-;; Default in recent emacsen
-;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; Enable calcfw-org
+;; (load "~/.emacs.d/add-ins/calcfw-org")
+
+;; Enable htmlize
+(load "~/.emacs.d/add-ins/htmlize")
+
+;; Enable ob-calc
+(load "~/.emacs.d/add-ins/ob-calc")
+
+;; Enable org-mobile
+(load "~/.emacs.d/add-ins/org-mobile")
+
+;; Enable org-collector
+(load "~/.emacs.d/add-ins/org-collector.el")
+
+;; Enable org-protocol
+(require 'org-protocol)
 
 ;; Disable subscripts on export
 (setq org-export-with-sub-superscripts nil)

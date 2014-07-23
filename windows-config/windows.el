@@ -1,5 +1,5 @@
-;; Disable toolbar (to enable it again, replace the -1 with 1)
-(tool-bar-mode -1)
+;; Disable toolbar
+(tool-bar-mode nil)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
