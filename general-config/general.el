@@ -21,4 +21,13 @@
 ;; Disable auto-save
 (setq auto-save-default nil)
 
+;; Automatically convert line endings to unix
+;;(add-hook 'find-file-hook 'find-file-check-line-endings)
+;;(defun dos-file-endings-p ()
+;;	(string-match "dos" (symbol-name buffer-file-coding-system)))
+;;(defun find-file-check-line-endings ()
+;;	(when (dos-file-endings-p)
+;;		(set-buffer-file-coding-system 'undecided-unix)
+;;		(set-buffer-modified-p nil)))
+
 (server-start)
