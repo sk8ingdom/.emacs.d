@@ -439,7 +439,7 @@
    ;; }}}
 
    ;;          (s) Shopping template {{{
-   ("ns" "          (s) Shopping" entry (file+headline "ref.org")
+   ("ns" "          (s) Shopping" entry (file "ref.org")
     "* Shop at %? :fin:\n  %t\n  CREATED: %U
   :PROPERTIES:
   :Cost:
