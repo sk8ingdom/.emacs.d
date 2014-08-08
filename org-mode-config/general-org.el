@@ -19,6 +19,9 @@
 ;; Enable org-protocol
 (require 'org-protocol)
 
+;; Enable syntax-highlighting
+(setq org-src-fontify-natively t)
+
 ;; Disable subscripts on export
 (setq org-export-with-sub-superscripts nil)
 
@@ -99,3 +102,6 @@
          ("youtube"        . "http://www.youtube.com/user/")
 	 )
        )
+
+;; Export drawers
+(setq org-export-with-drawers t)
