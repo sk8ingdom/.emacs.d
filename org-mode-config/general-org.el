@@ -19,6 +19,41 @@
 ;; Enable org-protocol
 (require 'org-protocol)
 
+;; Enable request
+;; (load "~/.emacs.d/add-ins/request.el")
+
+;; Fetch metadata from readability json
+(require 'json)
+(require 'url)
+
+(defun my/get-and-parse-json (url key)
+  (interactive)
+  (with-current-buffer (url-retrieve-synchronously (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))
+    (goto-char url-http-end-of-headers)
+    (let ((json-object-type 'plist)
+	  (json-array-type 'list)
+	  (json-key-type 'keyword))
+      (let ((result (json-read)))
+	(plist-get result (intern (concat ":" key))))
+	)))
+
+(defun my/get-creator()
+  (my/get-and-parse-json (plist-get org-store-link-plist :link) "author"))
+
+(defun my/get-title()
+  (my/get-and-parse-json (plist-get org-store-link-plist :link) "title"))
+
+(defun my/get-source()
+  (my/get-and-parse-json (plist-get org-store-link-plist :link) "domain"))
+
+(defun my/get-date()
+  (my/get-and-parse-json (plist-get org-store-link-plist :link) "date_published"))
+
+
+(defun my/get-note()
+  (my/get-and-parse-json (plist-get org-store-link-plist :link) "excerpt"))
+
+
 ;; Enable syntax-highlighting
 (setq org-src-fontify-natively t)
 
@@ -30,10 +65,10 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
-;; Property Inheritance
+;; Property inheritance
 (setq org-use-property-inheritance nil)
 
-;; Tag Inheritance
+;; Tag inheritance
 (setq org-use-tag-inheritance nil)
 
 ;; Use global IDs

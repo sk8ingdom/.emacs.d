@@ -229,12 +229,12 @@
    ("mf" "REFERENCE (f) Reference org-protocol" entry (file "ref.org")
     "* REFERENCE [[%:link][%:description]]\n  CREATED: %U
   :PROPERTIES:
-  :Creator:  %?
-  :Created:  %:description
-  :Source:
+  :Creator:  %(my/get-creator)
+  :Created:  %(my/get-title)
+  :Source:   %(my/get-source)
   :Link:     %:link
-  :Date:     %u
-  :Note:
+  :Date:     [%(my/get-date)]
+  :Note:     %(my/get-note)
   :END:
   %:initial")
    ;; }}}
