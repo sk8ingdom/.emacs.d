@@ -28,7 +28,9 @@
 
 (defun my/get-and-parse-json (url key)
   (interactive)
-  (with-current-buffer (url-retrieve-synchronously (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))
+  (with-current-buffer
+      (url-retrieve-synchronously 
+       (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))
     (goto-char url-http-end-of-headers)
     (let ((json-object-type 'plist)
 	  (json-array-type 'list)
@@ -37,20 +39,51 @@
 	(plist-get result (intern (concat ":" key))))
 	)))
 
+;; Helper function to remove bad encoding from readability
+;; Look up codes here: http://www.danshort.com/HTMLentities/
+(defun my/fix-readability-encoding (string)
+  (if (equal string nil)
+      ""
+    (replace-regexp-in-string
+     (regexp-quote "&#x201D;") "\""
+     (replace-regexp-in-string
+      (regexp-quote "&#x201C;") "\""
+      (replace-regexp-in-string
+       (regexp-quote "&#x2014;") "--"
+       (replace-regexp-in-string
+	(regexp-quote "&#x2018;") "'"
+	(replace-regexp-in-string
+	 (regexp-quote "&#x2019;") "'"
+	 (replace-regexp-in-string
+	  (regexp-quote "&#x2022;") "-"
+	  (replace-regexp-in-string
+	   (regexp-quote "&#x2026;") "..."
+	   (replace-regexp-in-string
+	    (regexp-quote "&hellip;") "..."
+	    string))))))))))
+
 ;; Helper functions for org-capture using org-protocol
 (defun my/get-creator()
-  (my/get-and-parse-json (plist-get org-store-link-plist :link) "author"))
+  (my/fix-readability-encoding
+   (my/get-and-parse-json (plist-get org-store-link-plist :link) "author")))
 
 (defun my/get-title()
-  (my/get-and-parse-json (plist-get org-store-link-plist :link) "title"))
+  (my/fix-readability-encoding
+   (my/get-and-parse-json (plist-get org-store-link-plist :link) "title")))
 
 (defun my/get-source()
-  (my/get-and-parse-json (plist-get org-store-link-plist :link) "domain"))
+  (my/fix-readability-encoding
+   (my/get-and-parse-json (plist-get org-store-link-plist :link) "domain")))
+
+(defun my/get-via()
+  "%^(Via)p")
 
 (defun my/get-date()
   (with-temp-buffer
     (insert
-     (replace-regexp-in-string (regexp-quote "[]") "" (concat "[" (my/get-and-parse-json (plist-get org-store-link-plist :link) "date_published") "]")))
+     (replace-regexp-in-string 
+      (regexp-quote "[]") "" 
+      (concat "[" (my/get-and-parse-json (plist-get org-store-link-plist :link) "date_published") "]")))
     (point-min)
     ;; (message (buffer-string))
     (org-time-stamp-inactive)
@@ -59,13 +92,14 @@
     ))
 
 (defun my/get-note()
-  (my/get-and-parse-json (plist-get org-store-link-plist :link) "excerpt"))
+  (my/fix-readability-encoding
+   (my/get-and-parse-json (plist-get org-store-link-plist :link) "excerpt")))
 
-(defun my/get-initial()
+(defun my/get-quote()
   (let ((initial (plist-get org-store-link-plist :initial)))
     (if (equal initial "")
 	""
-      (concat "\n" initial))))
+      (concat "\n\n  %?\n\n  #+BEGIN_QUOTE\n  " initial "\n  #+END_QUOTE"))))
 
 ;; Enable syntax-highlighting
 (setq org-src-fontify-natively t)

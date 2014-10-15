@@ -185,44 +185,45 @@
 
    ;; SUBSCRIBE(b) Subscribe org-prot{{{
    ("mb" "SUBSCRIBE (b) Subscribe org-protocol" entry (file "ref.org")
-    "* SUBSCRIBE [[%:link][%:description]]\n  CREATED: %U
+    "* SUBSCRIBE [[%:link][%(my/get-title)]]\n  CREATED: %U
   :PROPERTIES:
-  :Creator:  %?
-  :Created:  %:description
-  :Source:
+  :Creator:  %(my/get-creator)
+  :Created:  %(my/get-title)
+  :Source:   %(my/get-source)
+  :Via:      %(my/get-via)
   :Link:     %:link
-  :Date:     %u
-  :Note:
-  :END:
-  %:initial")
+  :Date:     %(my/get-date)
+  :Note:     %(my/get-note)
+  :END:      %(my/get-quote)")
+   ;; }}}
    ;; }}}
 
    ;; SHARE    (s) Share org-prot    {{{
    ("ms" "SHARE     (s) Share org-protocol" entry (file "ref.org")
-    "* SHARE [[%:link][%:description]]\n  CREATED: %U
+    "* SHARE [[%:link][%(my/get-title)]]\n  CREATED: %U
   :PROPERTIES:
-  :Creator:  %?
-  :Created:  %:description
-  :Source:
+  :Creator:  %(my/get-creator)
+  :Created:  %(my/get-title)
+  :Source:   %(my/get-source)
+  :Via:      %(my/get-via)
   :Link:     %:link
-  :Date:     %u
-  :Note:
-  :END:
-  %:initial")
+  :Date:     %(my/get-date)
+  :Note:     %(my/get-note)
+  :END:      %(my/get-quote)")
    ;; }}}
 
    ;; IGNORED  (i) Ignored org-prot  {{{
    ("mi" "IGNORED   (i) Ignored org-protocol" entry (file "ref.org")
-    "* IGNORED [[%:link][%:description]]\n  CREATED: %U
+    "* IGNORED  [[%:link][%(my/get-title)]]\n  CREATED: %U
   :PROPERTIES:
-  :Creator:  %?
-  :Created:  %:description
-  :Source:
+  :Creator:  %(my/get-creator)
+  :Created:  %(my/get-title)
+  :Source:   %(my/get-source)
+  :Via:      %(my/get-via)
   :Link:     %:link
-  :Date:     %u
-  :Note:
-  :END:
-  %:initial")
+  :Date:     %(my/get-date)
+  :Note:     %(my/get-note)
+  :END:      %(my/get-quote)")
    ;; }}}
 
    ;; REFERENCE(f) Reference org-prot{{{
@@ -232,11 +233,11 @@
   :Creator:  %(my/get-creator)
   :Created:  %(my/get-title)
   :Source:   %(my/get-source)
-  :Via:      %^{Via}p
+  :Via:      %(my/get-via)
   :Link:     %:link
   :Date:     %(my/get-date)
   :Note:     %(my/get-note)
-  :END:      %(my/get-initial)")
+  :END:      %(my/get-quote)")
    ;; }}}
 
    ;; These templates are used with the EVENTS TODO sequence
