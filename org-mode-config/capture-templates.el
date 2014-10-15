@@ -227,18 +227,17 @@
 
    ;; REFERENCE(f) Reference org-prot{{{
    ("mf" "REFERENCE (f) Reference org-protocol" entry (file "ref.org")
-    "* REFERENCE [[%:link][%:description]]\n  CREATED: %U
+    "* REFERENCE [[%:link][%(my/get-title)]]\n  CREATED: %U
   :PROPERTIES:
   :Creator:  %(my/get-creator)
   :Created:  %(my/get-title)
   :Source:   %(my/get-source)
+  :Via:      %^{Via}p
   :Link:     %:link
-  :Date:     [%(my/get-date)]
+  :Date:     %(my/get-date)
   :Note:     %(my/get-note)
-  :END:
-  %:initial")
+  :END:      %(my/get-initial)")
    ;; }}}
-
 
    ;; These templates are used with the EVENTS TODO sequence
    ("e" "Events")

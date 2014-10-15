@@ -30,4 +30,7 @@
 ;;		(set-buffer-file-coding-system 'undecided-unix)
 ;;		(set-buffer-modified-p nil)))
 
+;; Enable follow link bindings
+(ffap-bindings)
+
 (server-start)

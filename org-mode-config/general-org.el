@@ -37,6 +37,7 @@
 	(plist-get result (intern (concat ":" key))))
 	)))
 
+;; Helper functions for org-capture using org-protocol
 (defun my/get-creator()
   (my/get-and-parse-json (plist-get org-store-link-plist :link) "author"))
 
@@ -47,12 +48,24 @@
   (my/get-and-parse-json (plist-get org-store-link-plist :link) "domain"))
 
 (defun my/get-date()
-  (my/get-and-parse-json (plist-get org-store-link-plist :link) "date_published"))
-
+  (with-temp-buffer
+    (insert
+     (replace-regexp-in-string (regexp-quote "[]") "" (concat "[" (my/get-and-parse-json (plist-get org-store-link-plist :link) "date_published") "]")))
+    (point-min)
+    ;; (message (buffer-string))
+    (org-time-stamp-inactive)
+    ;; (execute-kbd-macro [return])
+    (buffer-string)
+    ))
 
 (defun my/get-note()
   (my/get-and-parse-json (plist-get org-store-link-plist :link) "excerpt"))
 
+(defun my/get-initial()
+  (let ((initial (plist-get org-store-link-plist :initial)))
+    (if (equal initial "")
+	""
+      (concat "\n" initial))))
 
 ;; Enable syntax-highlighting
 (setq org-src-fontify-natively t)
