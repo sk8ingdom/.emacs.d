@@ -22,6 +22,41 @@
 ;; Enable request
 ;; (load "~/.emacs.d/add-ins/request.el")
 
+;; org-protocol custom handler
+(add-to-list 'org-protocol-protocol-alist
+             '("Multimedia capture protocol"
+               :protocol "multimedia-capture"
+               :function my/multimedia-capture))
+
+(defun my/multimedia-capture (data)
+  (let* ((parts (org-protocol-split-data data t org-protocol-data-separator))
+	 (template (or (and (>= 2 (length (car parts))) (pop parts))
+		       org-protocol-default-template-key))
+	 (link (org-protocol-sanitize-uri (car parts)))
+	 (type (if (string-match "^\\([a-z]+\\):" link)
+		   (match-string 1 link)))
+	 (via (or (cadr parts) ""))
+	 (title (or (caddr parts) ""))
+	 (quote (or (cadddr parts) ""))
+	 (orglink (org-make-link-string
+		   link (if (string-match "[^[:space:]]" title) title link)))
+	 (org-capture-link-is-already-stored t)) ;; avoid call to org-store-link
+    (setq org-stored-links
+	  (cons (list link title) org-stored-links))
+    (kill-new orglink)
+    (org-store-link-props :type type
+			  ;; :creator creator
+			  :title title
+			  ;; :source source
+			  ;; :via via
+			  :link link
+			  ;; :date date
+			  ;; :note note
+			  ;; :quote quote
+			  )
+    (raise-frame)
+    (funcall 'org-capture nil template)))
+
 ;; Fetch metadata from readability json
 (require 'json)
 (require 'url)
