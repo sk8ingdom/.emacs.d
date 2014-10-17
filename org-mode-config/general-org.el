@@ -20,7 +20,7 @@
 (require 'org-protocol)
 
 ;; Enable request
-;; (load "~/.emacs.d/add-ins/request.el")
+(load "~/.emacs.d/add-ins/request.el")
 
 ;; org-protocol custom handler
 (add-to-list 'org-protocol-protocol-alist
@@ -63,9 +63,11 @@
     (raise-frame)
     (funcall 'org-capture nil template)))
 
-(defun my/get-json (url key)
+(defun my/get-json (url)
   (interactive)
-  (with-current-buffer (url-retrieve-synchronously (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))
+  ;; http://www.readability.com/api/content/v1/parser?url=
+  ;; &token=b661b54be0fbd228e0bad2854238a3eec30e96b1
+  (with-current-buffer (url-retrieve-synchronously url)
     (goto-char url-http-end-of-headers)
     (let ((json-object-type 'plist)
 	  (json-array-type 'list)
