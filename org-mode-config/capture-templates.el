@@ -422,7 +422,7 @@
    ("nn" "          (n) Note" entry (file "ref.org")
     "* %? :note:\n  CREATED: %U
   :PROPERTIES:
-  :Note: %:link
+  :Note:
   :END:")
    ;; }}}
    ;;          (h) Paycheck template {{{
