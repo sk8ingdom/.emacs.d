@@ -33,14 +33,14 @@
   ;; emacsclient org-protocol:/multimedia-capture:/link/via/quote
   ;; Currently not working
   (let* ((parts (org-protocol-split-data data t org-protocol-data-separator))
-	 (template (or (and (>= 2 (length (car parts))) (pop parts))
-		       org-protocol-default-template-key))
+	 ;; (template (or (and (>= 2 (length (car parts))) (pop parts))
+	 ;;  	          org-protocol-default-template-key))
 	 (link (org-protocol-sanitize-uri (car parts)))
-	 (type (if (string-match "^\\([a-z]+\\):" link)
-		   (match-string 1 link)))
-	 (via (or (cadr parts) ""))
+	 ;; (type (if (string-match "^\\([a-z]+\\):" link)
+	 ;;	      (match-string 1 link)))
+	 (via (org-protocol-sanitize-uri (cadr parts)))
 	 (quote (or (caddr parts) ""))
-	 (json (my/get-and-parse-json link))
+	 (json (my/get-json link))
 	 (creator (or (my/fix-readability-encoding (plist-get json :author) "")))
 	 (title (or (my/fix-readability-encoding (plist-get json :title) "")))
 	 (source (or (my/fix-readability-encoding (plist-get json :domain) "")))
@@ -50,7 +50,7 @@
     (setq org-stored-links
 	  (cons (list link title) org-stored-links))
     (kill-new orglink)
-    (org-store-link-props :type type
+    (org-store-link-props ;; :type type
 			  :creator creator
 			  :title title
 			  :source source
@@ -67,12 +67,13 @@
   (interactive)
   ;; http://www.readability.com/api/content/v1/parser?url=
   ;; &token=b661b54be0fbd228e0bad2854238a3eec30e96b1
-  (with-current-buffer (url-retrieve-synchronously url)
+  ;; (with-current-buffer (url-retrieve-synchronously url)
+  (with-current-buffer (url-retrieve-synchronously (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))
     (goto-char url-http-end-of-headers)
     (let ((json-object-type 'plist)
 	  (json-array-type 'list)
-	  (json-key-type 'keyword)))
-    (json-read)))
+	  (json-key-type 'keyword))
+      (json-read))))
 
 ;; Fetch metadata from readability json
 (require 'json)
@@ -125,7 +126,9 @@
    (my/get-and-parse-json (plist-get org-store-link-plist :link) "domain")))
 
 (defun my/get-via()
-  "")
+  (with-temp-buffer
+    (org-insert-link)
+    (buffer-string)))
 
 (defun my/get-date()
   (with-temp-buffer
@@ -137,8 +140,7 @@
     ;; (message (buffer-string))
     (org-time-stamp-inactive)
     ;; (execute-kbd-macro [return])
-    (buffer-string)
-    ))
+    (buffer-string)))
 
 (defun my/get-note()
   (my/fix-readability-encoding
