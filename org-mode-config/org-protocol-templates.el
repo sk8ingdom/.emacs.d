@@ -66,12 +66,7 @@
     (raise-frame)
     (funcall 'org-capture)))
 
-;; Legacy functions
-;; All functions below this point were created before I had a good idea what I was doing
-;; They will likely be deleted in the future but currently still work
-
 (defun get-json-readability (url)
-  (interactive)
   ;; http://www.readability.com/api/content/v1/parser?url=
   ;; &token=b661b54be0fbd228e0bad2854238a3eec30e96b1
   (with-current-buffer (url-retrieve-synchronously (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))
@@ -80,30 +75,6 @@
 	  (json-array-type 'list)
 	  (json-key-type 'keyword))
       (json-read))))
-
-;; Fetch metadata from readability json
-;; Works with the following capture template:
-;;  ("mf" "REFERENCE (f) Reference org-protocol" entry (file "ref.org")
-;;   "* REFERENCE [[%:link][%(get-title-readability)]]\n  CREATED: %U
-;; :PROPERTIES:
-;; :Creator:  %(get-creator-readability)
-;; :Created:  %(get-title-readability)
-;; :Source:   %(get-source-readability)
-;; :Via:      %(get-via-readability)
-;; :Link:     %:link
-;; :Date:     %(get-date-readability)
-;; :Note:     %(get-note-readability)
-;; :END:      %(get-quote-readability)")
-
-(defun get-and-parse-json-readability (url key)
-  (interactive)
-  (with-current-buffer (url-retrieve-synchronously (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))
-    (goto-char url-http-end-of-headers)
-    (let ((json-object-type 'plist)
-	  (json-array-type 'list)
-	  (json-key-type 'keyword))
-      (let ((result (json-read)))
-	(plist-get result (intern (concat ":" key)))))))
 
 (defun fix-encoding-readability (string)
   ;; Helper function to remove bad encoding from readability
@@ -129,6 +100,43 @@
 	   (replace-regexp-in-string
 	    (regexp-quote "&hellip;") "..."
 	    string)))))))))))
+
+(defun get-json-stackoverflow (url)
+  (with-current-buffer (url-retrieve-synchronously (concat "https://www.kimonolabs.com/api/6a74l7lo?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2=" url "&kimwithurl=1"))
+    (goto-char url-http-end-of-headers)
+    (let ((json-object-type 'plist)
+	  (json-array-type 'list)
+	  (json-key-type 'keyword))
+      (json-read))))
+
+;; Legacy functions
+;; All functions below this point were created before I had a good idea what I was doing
+;; They will likely be deleted in the future but currently still work
+
+;; Fetch metadata from readability json
+;; Works with the following capture template:
+;;  ("mf" "REFERENCE (f) Reference org-protocol" entry (file "ref.org")
+;;   "* REFERENCE [[%:link][%(get-title-readability)]]\n  CREATED: %U
+;; :PROPERTIES:
+;; :Creator:  %(get-creator-readability)
+;; :Created:  %(get-title-readability)
+;; :Source:   %(get-source-readability)
+;; :Via:      %(get-via-readability)
+;; :Link:     %:link
+;; :Date:     %(get-date-readability)
+;; :Note:     %(get-note-readability)
+;; :END:      %(get-quote-readability)")
+
+(defun get-and-parse-json-readability (url key)
+  ;; https://www.kimonolabs.com/api/6a74l7lo?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2=26483083&kimpath3=deserializing-derived-classes-with-custom-serializationbinder
+  (interactive)
+  (with-current-buffer (url-retrieve-synchronously (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))
+    (goto-char url-http-end-of-headers)
+    (let ((json-object-type 'plist)
+	  (json-array-type 'list)
+	  (json-key-type 'keyword))
+      (let ((result (json-read)))
+	(plist-get result (intern (concat ":" key)))))))
 
 ;; Helper functions for org-capture using org-protocol
 (defun get-creator-readability()
