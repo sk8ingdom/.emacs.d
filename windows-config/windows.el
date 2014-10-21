@@ -1,6 +1,9 @@
 ;; Disable toolbar
 (tool-bar-mode nil)
 
+;; Set ssl client
+(setq tls-program '("\"C:/Program Files (x86)/Git/bin/openssl.exe\" s_client -connect %h:%p -no_ssl2 -ign_eof"))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

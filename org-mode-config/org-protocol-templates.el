@@ -2,8 +2,8 @@
 (require 'json)
 (require 'url)
 
-(defun org-protocol-capture-readability ()
-  (interactive)
+(defun org-protocol-capture-readability (&optional goto)
+  (interactive "P")
   ;; Used to capture multimedia links using the readability API
   ;; Should be invoked interactively with M-x org-protocol-capture-readability
   ;; The prompt should be answered with either an encoded link such as:
@@ -13,6 +13,8 @@
   ;; This is likely easiest accomplished by creating a javascript bookmarklet such as:
   ;;     javascript:(function(s){try{s=document.selection.createRange().text}catch(_){s=document.getSelection()}prompt('',encodeURIComponent(location.href)+'/'+encodeURIComponent(s))})()
   ;; and copying the text
+  ;; Like org-capture, using the C-0, C-1, etc. goto prefix arguments work
+  ;; The keys prefix argument is not implemented because I don't use it.
   (let* (
 	 ;; Prompt for the data which should be in the form describe above
 	 (data (read-string "Link / quote: "))
@@ -64,7 +66,7 @@
 	 		  :quote quote
 	 		  )
     (raise-frame)
-    (funcall 'org-capture)))
+    (funcall 'org-capture goto)))
 
 (defun get-json-readability (url)
   ;; http://www.readability.com/api/content/v1/parser?url=
