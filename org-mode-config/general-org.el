@@ -30,38 +30,46 @@
 
 (defun my/multimedia-capture (data)
   ;; Capture template should look like:
-  ;; emacsclient org-protocol:/multimedia-capture:/link/via/quote
+  ;; emacsclient org-protocol:/multimedia-capture:/link/via-link/quote
   ;; Currently not working
+  ;; This is still a work in progress and it isn't working great
   (let* ((parts (org-protocol-split-data data t org-protocol-data-separator))
-	 ;; (template (or (and (>= 2 (length (car parts))) (pop parts))
-	 ;;  	          org-protocol-default-template-key))
 	 (link (org-protocol-sanitize-uri (car parts)))
-	 ;; (type (if (string-match "^\\([a-z]+\\):" link)
-	 ;;	      (match-string 1 link)))
-	 (via (org-protocol-sanitize-uri (cadr parts)))
-	 (quote (or (caddr parts) ""))
+	 (via-link (org-protocol-sanitize-uri (cadr parts)))
+	 (via-json (my/get-json via-link))
+	 (via (or (my/fix-readability-encoding (plist-get via-json :title)) ""))
+	 (quote (or (concat "\n\n  %?\n\n  #+BEGIN_QUOTE\n  " (caddr parts) "\n  #+END_QUOTE") ""))
 	 (json (my/get-json link))
-	 (creator (or (my/fix-readability-encoding (plist-get json :author) "")))
-	 (title (or (my/fix-readability-encoding (plist-get json :title) "")))
-	 (source (or (my/fix-readability-encoding (plist-get json :domain) "")))
+	 (creator (or (my/fix-readability-encoding (plist-get json :author)) ""))
+	 (created (or (my/fix-readability-encoding (plist-get json :title)) ""))
+	 (source (or (my/fix-readability-encoding (plist-get json :domain)) ""))
+	 (date (with-temp-buffer
+		 (insert
+		  (replace-regexp-in-string 
+		   (regexp-quote "[]") "" 
+		   (concat "[" (plist-get json :date_published) "]")))
+		 (point-min)
+		 (org-time-stamp-inactive)
+		 (buffer-string)))
+	 (note (or (my/fix-readability-encoding (plist-get json :excerpt)) ""))
 	 (orglink (org-make-link-string
-		   link (if (string-match "[^[:space:]]" title) title link)))
+	 	   link (if (string-match "[^[:space:]]" title) title link)))
 	 (org-capture-link-is-already-stored t)) ;; avoid call to org-store-link
     (setq org-stored-links
 	  (cons (list link title) org-stored-links))
     (kill-new orglink)
-    (org-store-link-props ;; :type type
-			  :creator creator
-			  :title title
-			  :source source
-			  :via via
-			  :link link
-			  ;; :date date
-			  ;; :note note
-			  ;; :quote quote
-			  )
+    (org-store-link-props :creator creator
+	 		  :created created
+	 		  :source source
+	 		  :via via
+			  :via-link via
+	 		  :link link
+	 		  :date date
+	 		  :note note
+	 		  :quote quote
+	 		  )
     (raise-frame)
-    (funcall 'org-capture nil template)))
+    (funcall 'org-capture)))
 
 (defun my/get-json (url)
   (interactive)
@@ -73,9 +81,22 @@
     (let ((json-object-type 'plist)
 	  (json-array-type 'list)
 	  (json-key-type 'keyword))
+      ;; (let ((result (json-read)))))))
       (json-read))))
 
 ;; Fetch metadata from readability json
+;; Works with the following capture template:
+;;  ("mf" "REFERENCE (f) Reference org-protocol" entry (file "ref.org")
+;;   "* REFERENCE [[%:link][%(my/get-title)]]\n  CREATED: %U
+;; :PROPERTIES:
+;; :Creator:  %(my/get-creator)
+;; :Created:  %(my/get-title)
+;; :Source:   %(my/get-source)
+;; :Via:      %(my/get-via)
+;; :Link:     %:link
+;; :Date:     %(my/get-date)
+;; :Note:     %(my/get-note)
+;; :END:      %(my/get-quote)")
 (require 'json)
 (require 'url)
 
@@ -95,6 +116,8 @@
   (if (equal string nil)
       ""
     (replace-regexp-in-string
+     (regexp-quote  "&amp;") "&"
+    (replace-regexp-in-string
      (regexp-quote "&#x201D;") "\""
      (replace-regexp-in-string
       (regexp-quote "&#x201C;") "\""
@@ -110,7 +133,7 @@
 	   (regexp-quote "&#x2026;") "..."
 	   (replace-regexp-in-string
 	    (regexp-quote "&hellip;") "..."
-	    string))))))))))
+	    string)))))))))))
 
 ;; Helper functions for org-capture using org-protocol
 (defun my/get-creator()
