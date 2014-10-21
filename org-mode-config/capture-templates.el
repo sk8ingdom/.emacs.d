@@ -171,73 +171,72 @@
 
    ;; CONSUME  (r) Consume org-prot  {{{
    ("mr" "CONSUME   (r) Consume org-protocol" entry (file "ref.org")
-    "* CONSUME [[%:link][%:description]]\n  CREATED: %U
+    "* CONSUME  [[%:link][%:created]]\n  CREATED: %U
   :PROPERTIES:
-  :Creator:  %?
-  :Created:  %:description
-  :Source:
+  :Creator:  %:creator
+  :Created:  %:created
+  :Source:   %:source
+  :Via:      %:via
   :Link:     %:link
-  :Date:     %u
-  :Note:
-  :END:
-  %:initial")
+  :Date:     %:date
+  :Note:     %:note
+  :END:%:quote")
    ;; }}}
 
    ;; SUBSCRIBE(b) Subscribe org-prot{{{
    ("mb" "SUBSCRIBE (b) Subscribe org-protocol" entry (file "ref.org")
-    "* SUBSCRIBE [[%:link][%(my/get-title)]]\n  CREATED: %U
+    "* SUBSCRIBE  [[%:link][%:created]]\n  CREATED: %U
   :PROPERTIES:
-  :Creator:  %(my/get-creator)
-  :Created:  %(my/get-title)
-  :Source:   %(my/get-source)
-  :Via:      %(my/get-via)
+  :Creator:  %:creator
+  :Created:  %:created
+  :Source:   %:source
+  :Via:      %:via
   :Link:     %:link
-  :Date:     %(my/get-date)
-  :Note:     %(my/get-note)
-  :END:      %(my/get-quote)")
-   ;; }}}
+  :Date:     %:date
+  :Note:     %:note
+  :END:%:quote")
    ;; }}}
 
    ;; SHARE    (s) Share org-prot    {{{
    ("ms" "SHARE     (s) Share org-protocol" entry (file "ref.org")
-    "* SHARE [[%:link][%(my/get-title)]]\n  CREATED: %U
+    "* SHARE  [[%:link][%:created]]\n  CREATED: %U
   :PROPERTIES:
-  :Creator:  %(my/get-creator)
-  :Created:  %(my/get-title)
-  :Source:   %(my/get-source)
-  :Via:      %(my/get-via)
+  :Creator:  %:creator
+  :Created:  %:created
+  :Source:   %:source
+  :Via:      %:via
   :Link:     %:link
-  :Date:     %(my/get-date)
-  :Note:     %(my/get-note)
-  :END:      %(my/get-quote)")
+  :Date:     %:date
+  :Note:     %:note
+  :END:%:quote")
    ;; }}}
 
    ;; IGNORED  (i) Ignored org-prot  {{{
    ("mi" "IGNORED   (i) Ignored org-protocol" entry (file "ref.org")
-    "* IGNORED  [[%:link][%(my/get-title)]]\n  CREATED: %U
+    "* IGNORED [[%:link][%:created]]\n  CREATED: %U
   :PROPERTIES:
-  :Creator:  %(my/get-creator)
-  :Created:  %(my/get-title)
-  :Source:   %(my/get-source)
-  :Via:      %(my/get-via)
+  :Creator:  %:creator
+  :Created:  %:created
+  :Source:   %:source
+  :Via:      %:via
   :Link:     %:link
-  :Date:     %(my/get-date)
-  :Note:     %(my/get-note)
-  :END:      %(my/get-quote)")
+  :Date:     %:date
+  :Note:     %:note
+  :END:%:quote")
    ;; }}}
 
    ;; REFERENCE(f) Reference org-prot{{{
    ("mf" "REFERENCE (f) Reference org-protocol" entry (file "ref.org")
-    "* REFERENCE [[%:link][%(my/get-title)]]\n  CREATED: %U
+    "* REFERENCE [[%:link][%:created]]\n  CREATED: %U
   :PROPERTIES:
-  :Creator:  %(my/get-creator)
-  :Created:  %(my/get-title)
-  :Source:   %(my/get-source)
-  :Via:      %(my/get-via)
+  :Creator:  %:creator
+  :Created:  %:created
+  :Source:   %:source
+  :Via:      %:via
   :Link:     %:link
-  :Date:     %(my/get-date)
-  :Note:     %(my/get-note)
-  :END:      %(my/get-quote)")
+  :Date:     %:date
+  :Note:     %:note
+  :END:%:quote")
    ;; }}}
 
    ;; These templates are used with the EVENTS TODO sequence
