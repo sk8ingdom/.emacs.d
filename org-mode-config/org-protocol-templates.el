@@ -29,13 +29,13 @@
 	 ;; Get the json object based on the link
 	 (json (get-json-readability link))
 	 ;; Get creator from json object
-	 (creator (or (fix-encoding-readability (plist-get json :author)) ""))
+	 (creator (or (fix-encoding (plist-get json :author)) ""))
 	 ;; Get created from json object
-	 (created (or (fix-encoding-readability (plist-get json :title)) ""))
+	 (created (or (fix-encoding (plist-get json :title)) ""))
 	 ;; Prompt for the via link; orglink is created automatically from the link and description prompt
 	 (via (or (concat "[[" (read-string "Via link: ") "][" (read-string "Via description: ") "]]") ""))
 	 ;; Get source from json object
-	 (source (or (fix-encoding-readability (plist-get json :domain)) ""))
+	 (source (or (fix-encoding (plist-get json :domain)) ""))
 	 ;; Get date from json object; if doesn't exist, set it to nothing
 	 (date (if (plist-get json :date_published)
 		   (with-temp-buffer
@@ -48,7 +48,7 @@
 		     (buffer-string))
 		   ""))
 	 ;; Get note from json object
-	 (note (or (fix-encoding-readability (plist-get json :excerpt)) ""))
+	 (note (or (fix-encoding (plist-get json :excerpt)) ""))
 	 ;; Make orglink
 	 (orglink (org-make-link-string
 	 	   link (if (string-match "[^[:space:]]" created) created link)))
@@ -78,31 +78,6 @@
 	  (json-key-type 'keyword))
       (json-read))))
 
-(defun fix-encoding-readability (string)
-  ;; Helper function to remove bad encoding from readability
-  ;; Look up codes here: http://www.danshort.com/HTMLentities/
-  (if (equal string nil)
-      ""
-    (replace-regexp-in-string
-     (regexp-quote  "&amp;") "&"
-    (replace-regexp-in-string
-     (regexp-quote "&#x201D;") "\""
-     (replace-regexp-in-string
-      (regexp-quote "&#x201C;") "\""
-      (replace-regexp-in-string
-       (regexp-quote "&#x2014;") "--"
-       (replace-regexp-in-string
-	(regexp-quote "&#x2018;") "'"
-	(replace-regexp-in-string
-	 (regexp-quote "&#x2019;") "'"
-	 (replace-regexp-in-string
-	  (regexp-quote "&#x2022;") "-"
-	  (replace-regexp-in-string
-	   (regexp-quote "&#x2026;") "..."
-	   (replace-regexp-in-string
-	    (regexp-quote "&hellip;") "..."
-	    string)))))))))))
-
 (defun get-json-stackoverflow (url)
   (with-current-buffer (url-retrieve-synchronously (concat "https://www.kimonolabs.com/api/6a74l7lo?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2=" url "&kimwithurl=1"))
     (goto-char url-http-end-of-headers)
@@ -110,6 +85,65 @@
 	  (json-array-type 'list)
 	  (json-key-type 'keyword))
       (json-read))))
+
+(defun get-json-imdb (url)
+  (with-current-buffer (url-retrieve-synchronously (concat "https://www.kimonolabs.com/api/5havjcjc?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2=" url "&kimwithurl=1"))
+    (goto-char url-http-end-of-headers)
+    (let ((json-object-type 'plist)
+	  (json-array-type 'list)
+	  (json-key-type 'keyword))
+      (json-read))))
+
+(defun get-json (url)
+  (with-current-buffer (url-retrieve-synchronously (get-json-url url))
+    (goto-char url-http-end-of-headers)
+    (let ((json-object-type 'plist)
+	  (json-array-type 'list)
+	  (json-key-type 'keyword))
+      (json-read))))
+
+(defun get-json-url (url)
+  (cond ((string-match "imdb\.com" url)
+	 (concat "https://www.kimonolabs.com/api/5havjcjc?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2=" 
+		 ((lambda (url)
+		   ((string-match "\\(tt[0-9].*\\)" url)
+		    (match-string 1))) url)
+		 "&kimwithurl=1"))
+	((string-match "stackoverflow\.com" url)
+	 (concat "https://www.kimonolabs.com/api/6a74l7lo?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+		 (substring url 33 42)
+		 "&kimwithurl=1"))
+	((string-match "gmane\.org" url)
+	 (concat "https://www.kimonolabs.com/api/9oqm87li?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2=" url "&kimwithurl=1"))
+        (t
+	 (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))))
+
+(defun fix-encoding (string)
+  ;; Helper function to remove bad encoding from readability
+  ;; Look up codes here: http://www.danshort.com/HTMLentities/
+  (if (equal string nil)
+      ""
+    (replace-regexp-in-string
+     (regexp-quote "&#xA0;") " "
+     (replace-regexp-in-string
+      (regexp-quote "&amp;") "&"
+      (replace-regexp-in-string
+       (regexp-quote "&#x201D;") "\""
+       (replace-regexp-in-string
+	(regexp-quote "&#x201C;") "\""
+	(replace-regexp-in-string
+	 (regexp-quote "&#x2014;") "--"
+	 (replace-regexp-in-string
+	  (regexp-quote "&#x2018;") "'"
+	  (replace-regexp-in-string
+	   (regexp-quote "&#x2019;") "'"
+	   (replace-regexp-in-string
+	    (regexp-quote "&#x2022;") "-"
+	    (replace-regexp-in-string
+	     (regexp-quote "&#x2026;") "..."
+	     (replace-regexp-in-string
+	      (regexp-quote "&hellip;") "..."
+	      string))))))))))))
 
 ;; Legacy functions
 ;; All functions below this point were created before I had a good idea what I was doing
@@ -142,15 +176,15 @@
 
 ;; Helper functions for org-capture using org-protocol
 (defun get-creator-readability()
-  (fix-encoding-readability
+  (fix-encoding
    (get-and-parse-json-readability (plist-get org-store-link-plist :link) "author")))
 
 (defun get-title-readability()
-  (fix-encoding-readability
+  (fix-encoding
    (get-and-parse-json-readability (plist-get org-store-link-plist :link) "title")))
 
 (defun get-source-readability()
-  (fix-encoding-readability
+  (fix-encoding
    (get-and-parse-json-readability (plist-get org-store-link-plist :link) "domain")))
 
 (defun get-via-readability()
@@ -169,7 +203,7 @@
     (buffer-string)))
 
 (defun get-note-readability()
-  (fix-encoding-readability
+  (fix-encoding
    (get-and-parse-json-readability (plist-get org-store-link-plist :link) "excerpt")))
 
 (defun get-quote-readability()
