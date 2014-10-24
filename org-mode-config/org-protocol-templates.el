@@ -27,74 +27,34 @@
 		    ""
 		  (concat "\n\n  %?\n\n  #+BEGIN_QUOTE\n  " (cadr parts) "\n  #+END_QUOTE")))
 	 ;; Get the json object based on the link
-	 (json (get-json-readability link))
-	 ;; Get creator from json object
-	 (creator (or (fix-encoding (plist-get json :author)) ""))
-	 ;; Get created from json object
-	 (created (or (fix-encoding (plist-get json :title)) ""))
-	 ;; Prompt for the via link; orglink is created automatically from the link and description prompt
-	 (via (or (concat "[[" (read-string "Via link: ") "][" (read-string "Via description: ") "]]") ""))
-	 ;; Get source from json object
-	 (source (or (fix-encoding (plist-get json :domain)) ""))
-	 ;; Get date from json object; if doesn't exist, set it to nothing
-	 (date (if (plist-get json :date_published)
-		   (with-temp-buffer
-		     (insert
-		      (replace-regexp-in-string 
-		       (regexp-quote "[]") "" 
-		       (concat "[" (plist-get json :date_published) "]")))
-		     (point-min)
-		     (org-time-stamp-inactive)
-		     (buffer-string))
-		   ""))
-	 ;; Get note from json object
-	 (note (or (fix-encoding (plist-get json :excerpt)) ""))
-	 ;; Make orglink
+	 (json (get-json link))
+	 ;; Get the host of the json url based on the link
+	 (host (url-host (url-generic-parse-url (get-json-url link))))
+	 ;; Get the parsed data
+	 ;; Returned as an alist: creator, created, via, source, link, date, note, quote
+	 (parsed-data (get-parsed-data json host))
 	 (orglink (org-make-link-string
 	 	   link (if (string-match "[^[:space:]]" created) created link)))
-	 (org-capture-link-is-already-stored t)) ;; avoid call to org-store-link
-    (setq org-stored-links
-	  (cons (list link created) org-stored-links))
-    (kill-new orglink)
-    (org-store-link-props :creator creator
-	 		  :created created
-			  :via via
-	 		  :source source
-	 		  :link link
-	 		  :date date
-	 		  :note note
-	 		  :quote quote
-	 		  )
-    (raise-frame)
-    (funcall 'org-capture goto)))
-
-(defun get-json-readability (url)
-  ;; http://www.readability.com/api/content/v1/parser?url=
-  ;; &token=b661b54be0fbd228e0bad2854238a3eec30e96b1
-  (with-current-buffer (url-retrieve-synchronously (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))
-    (goto-char url-http-end-of-headers)
-    (let ((json-object-type 'plist)
-	  (json-array-type 'list)
-	  (json-key-type 'keyword))
-      (json-read))))
-
-(defun get-json-stackoverflow (url)
-  (with-current-buffer (url-retrieve-synchronously (concat "https://www.kimonolabs.com/api/6a74l7lo?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2=" url "&kimwithurl=1"))
-    (goto-char url-http-end-of-headers)
-    (let ((json-object-type 'plist)
-	  (json-array-type 'list)
-	  (json-key-type 'keyword))
-      (json-read))))
-
-(defun get-json-imdb (url)
-  (with-current-buffer (url-retrieve-synchronously (concat "https://www.kimonolabs.com/api/5havjcjc?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2=" url "&kimwithurl=1"))
-    (goto-char url-http-end-of-headers)
-    (let ((json-object-type 'plist)
-	  (json-array-type 'list)
-	  (json-key-type 'keyword))
-      (json-read))))
-
+	 ;; avoid call to org-store-link
+	 (org-capture-link-is-already-stored t)
+	 ;; Make orglink
+	 (setq org-stored-links
+	       (cons (list link created) org-stored-links))
+	 (kill-new orglink)
+	 (org-store-link-props :creator creator
+			       :created created
+			       :via via
+			       :source source
+			       :link link
+			       :date date
+			       :note note
+			       :quote quote
+			       )
+	 (raise-frame)
+	 (funcall 'org-capture goto))))
+  
 (defun get-json (url)
+  ;; Retrieves json object from any URL
   (with-current-buffer (url-retrieve-synchronously (get-json-url url))
     (goto-char url-http-end-of-headers)
     (let ((json-object-type 'plist)
@@ -103,20 +63,66 @@
       (json-read))))
 
 (defun get-json-url (url)
+  ;; Builds the json url from the actual url
+  ;; Some domains have specific json URLs
+  ;; If the domain doesn't have a specific json URL, it uses the readability API
   (cond ((string-match "imdb\.com" url)
 	 (concat "https://www.kimonolabs.com/api/5havjcjc?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2=" 
-		 ((lambda (url)
-		   ((string-match "\\(tt[0-9].*\\)" url)
-		    (match-string 1))) url)
+		 (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
 		 "&kimwithurl=1"))
 	((string-match "stackoverflow\.com" url)
 	 (concat "https://www.kimonolabs.com/api/6a74l7lo?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
-		 (substring url 33 42)
+		 (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
 		 "&kimwithurl=1"))
 	((string-match "gmane\.org" url)
-	 (concat "https://www.kimonolabs.com/api/9oqm87li?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2=" url "&kimwithurl=1"))
+	 (concat "https://www.kimonolabs.com/api/9oqm87li?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+		 (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
+		 "&kimwithurl=1"))
         (t
 	 (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))))
+
+(defun get-json-date-from-org (date)
+  ;; Attempts to build the org-date from parsed website data
+  (with-temp-buffer
+    (insert
+     (replace-regexp-in-string 
+      (regexp-quote "[]") "" 
+      (concat "[" date "]")))
+    (point-min)
+    (org-time-stamp-inactive)
+    (buffer-string)))
+
+(defun get-parsed-data (json host)
+  (if (equals host "www.kimonolabs.com")
+      (get-parsed-data-kimono json)
+    (get-parsed-data-readability json)))
+
+(defun get-parsed-data-kimono (json)
+  (let (
+	(creator (or (concat "[["
+			     (plist-get (plist-get (car (plist-get (plist-get json :results) :article)) :creator) :text)
+			     "]["
+			     (plist-get (plist-get (car (plist-get (plist-get json :results) :article)) :creator) :href))
+		     ""))
+	(created (or (plist-get (car (plist-get (plist-get json :results) :article)) :created) ""))
+	(date (or (get-json-date-from-org (plist-get (car (plist-get (plist-get json :results) :article)) :date)) ""))
+	(note (or (plist-get (car (plist-get (plist-get json :results) :article)) :note) "")))
+    (message "%s" "kimonolabs.com"))
+  (let (
+	;; Get creator from json object
+	(creator (or (fix-encoding (plist-get json :author)) ""))
+	;; Get created from json object
+	(created (or (fix-encoding (plist-get json :title)) ""))
+	;; Get date from json object; if doesn't exist, set it to nothing
+	(date (or (get-json-date-from-org (plist-get json :date_published)) ""))
+	;; Get note from json object
+	(note (or (fix-encoding (plist-get json :excerpt)) "")))
+    (message "%s" "readability"))
+  ;; Prompt for the via link; orglink is created automatically from the link and description prompt
+  (via (or (concat "[[" (read-string "Via link: ") "][" (read-string "Via description: ") "]]") ""))
+  ;; Get source from json object
+  ;; (source (or (fix-encoding (plist-get json :domain)) ""))
+  (source (or (fix-encoding host) "")))
 
 (defun fix-encoding (string)
   ;; Helper function to remove bad encoding from readability
@@ -124,90 +130,25 @@
   (if (equal string nil)
       ""
     (replace-regexp-in-string
-     (regexp-quote "&#xA0;") " "
+     (regexp-quote "&quot;") "\""
      (replace-regexp-in-string
-      (regexp-quote "&amp;") "&"
+      (regexp-quote "&#xA0;") " "
       (replace-regexp-in-string
-       (regexp-quote "&#x201D;") "\""
+       (regexp-quote "&amp;") "&"
        (replace-regexp-in-string
-	(regexp-quote "&#x201C;") "\""
+	(regexp-quote "&#x201D;") "\""
 	(replace-regexp-in-string
-	 (regexp-quote "&#x2014;") "--"
+	 (regexp-quote "&#x201C;") "\""
 	 (replace-regexp-in-string
-	  (regexp-quote "&#x2018;") "'"
+	  (regexp-quote "&#x2014;") "--"
 	  (replace-regexp-in-string
-	   (regexp-quote "&#x2019;") "'"
+	   (regexp-quote "&#x2018;") "'"
 	   (replace-regexp-in-string
-	    (regexp-quote "&#x2022;") "-"
+	    (regexp-quote "&#x2019;") "'"
 	    (replace-regexp-in-string
-	     (regexp-quote "&#x2026;") "..."
+	     (regexp-quote "&#x2022;") "-"
 	     (replace-regexp-in-string
-	      (regexp-quote "&hellip;") "..."
-	      string))))))))))))
-
-;; Legacy functions
-;; All functions below this point were created before I had a good idea what I was doing
-;; They will likely be deleted in the future but currently still work
-
-;; Fetch metadata from readability json
-;; Works with the following capture template:
-;;  ("mf" "REFERENCE (f) Reference org-protocol" entry (file "ref.org")
-;;   "* REFERENCE [[%:link][%(get-title-readability)]]\n  CREATED: %U
-;; :PROPERTIES:
-;; :Creator:  %(get-creator-readability)
-;; :Created:  %(get-title-readability)
-;; :Source:   %(get-source-readability)
-;; :Via:      %(get-via-readability)
-;; :Link:     %:link
-;; :Date:     %(get-date-readability)
-;; :Note:     %(get-note-readability)
-;; :END:      %(get-quote-readability)")
-
-(defun get-and-parse-json-readability (url key)
-  ;; https://www.kimonolabs.com/api/6a74l7lo?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2=26483083&kimpath3=deserializing-derived-classes-with-custom-serializationbinder
-  (interactive)
-  (with-current-buffer (url-retrieve-synchronously (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))
-    (goto-char url-http-end-of-headers)
-    (let ((json-object-type 'plist)
-	  (json-array-type 'list)
-	  (json-key-type 'keyword))
-      (let ((result (json-read)))
-	(plist-get result (intern (concat ":" key)))))))
-
-;; Helper functions for org-capture using org-protocol
-(defun get-creator-readability()
-  (fix-encoding
-   (get-and-parse-json-readability (plist-get org-store-link-plist :link) "author")))
-
-(defun get-title-readability()
-  (fix-encoding
-   (get-and-parse-json-readability (plist-get org-store-link-plist :link) "title")))
-
-(defun get-source-readability()
-  (fix-encoding
-   (get-and-parse-json-readability (plist-get org-store-link-plist :link) "domain")))
-
-(defun get-via-readability()
-  (with-temp-buffer
-    (org-insert-link)
-    (buffer-string)))
-
-(defun get-date-readability()
-  (with-temp-buffer
-    (insert
-     (replace-regexp-in-string 
-      (regexp-quote "[]") "" 
-      (concat "[" (get-and-parse-json-readability (plist-get org-store-link-plist :link) "date_published") "]")))
-    (point-min)
-    (org-time-stamp-inactive)
-    (buffer-string)))
-
-(defun get-note-readability()
-  (fix-encoding
-   (get-and-parse-json-readability (plist-get org-store-link-plist :link) "excerpt")))
-
-(defun get-quote-readability()
-  (let ((initial (plist-get org-store-link-plist :initial)))
-    (if (equal initial "")
-	""
-      (concat "\n\n  %?\n\n  #+BEGIN_QUOTE\n  " initial "\n  #+END_QUOTE"))))
+	      (regexp-quote "&#x2026;") "..."
+	      (replace-regexp-in-string
+	       (regexp-quote "&hellip;") "..."
+	       string)))))))))))))
