@@ -2,6 +2,8 @@
 (require 'json)
 (require 'url)
 
+(setq debug-on-error t)
+
 (defun org-protocol-capture-readability (&optional goto)
   (interactive "P")
   ;; Used to capture multimedia links using the readability API
@@ -32,26 +34,35 @@
 	 (host (url-host (url-generic-parse-url (get-json-url link))))
 	 ;; Get the parsed data
 	 ;; Returned as an alist: creator, created, via, source, link, date, note, quote
-	 (parsed-data (get-parsed-data json host))
+	 (json-data (get-json-data json host))
+	 (creator (plist-get json-data :creator))
+	 (created (plist-get json-data :created))
+	 (date (plist-get json-data :date))
+	 (note (plist-get json-data :note))
+	 ;; Prompt for the via link; orglink is created automatically from the link and description prompt
+	 (via (or (concat "[[" (read-string "Via link: ") "][" (read-string "Via description: ") "]]") ""))
+	 ;; Get source from json object
+	 ;; (source (or (fix-encoding (plist-get json :domain)) ""))
+	 (source (or (fix-encoding host) ""))
 	 (orglink (org-make-link-string
-	 	   link (if (string-match "[^[:space:]]" created) created link)))
+		   link (if (string-match "[^[:space:]]" created) created link)))
 	 ;; avoid call to org-store-link
-	 (org-capture-link-is-already-stored t)
-	 ;; Make orglink
-	 (setq org-stored-links
-	       (cons (list link created) org-stored-links))
-	 (kill-new orglink)
-	 (org-store-link-props :creator creator
-			       :created created
-			       :via via
-			       :source source
-			       :link link
-			       :date date
-			       :note note
-			       :quote quote
-			       )
-	 (raise-frame)
-	 (funcall 'org-capture goto))))
+	 (org-capture-link-is-already-stored t))
+    ;; Make orglink
+    (setq org-stored-links
+	  (cons (list link created) org-stored-links))
+    (kill-new orglink)
+    (org-store-link-props :creator creator
+			  :created created
+			  :via via
+			  :source source
+			  :link link
+			  :date date
+			  :note note
+			  :quote quote
+			  )
+    (raise-frame)
+    (funcall 'org-capture goto)))
   
 (defun get-json (url)
   ;; Retrieves json object from any URL
@@ -92,12 +103,12 @@
     (org-time-stamp-inactive)
     (buffer-string)))
 
-(defun get-parsed-data (json host)
-  (if (equals host "www.kimonolabs.com")
-      (get-parsed-data-kimono json)
-    (get-parsed-data-readability json)))
+(defun get-json-data (json host)
+  (if (equal host "www.kimonolabs.com")
+      (get-json-data-kimono json)
+    (get-json-data-readability json)))
 
-(defun get-parsed-data-kimono (json)
+(defun get-json-data-kimono (json)
   (let (
 	(creator (or (concat "[["
 			     (plist-get (plist-get (car (plist-get (plist-get json :results) :article)) :creator) :text)
@@ -107,7 +118,9 @@
 	(created (or (plist-get (car (plist-get (plist-get json :results) :article)) :created) ""))
 	(date (or (get-json-date-from-org (plist-get (car (plist-get (plist-get json :results) :article)) :date)) ""))
 	(note (or (plist-get (car (plist-get (plist-get json :results) :article)) :note) "")))
-    (message "%s" "kimonolabs.com"))
+    (setq json-data '(:creator "creator" :created "created" :date "date" :note "note)"))))
+
+(defun get-json-data-readability (json)
   (let (
 	;; Get creator from json object
 	(creator (or (fix-encoding (plist-get json :author)) ""))
@@ -117,12 +130,7 @@
 	(date (or (get-json-date-from-org (plist-get json :date_published)) ""))
 	;; Get note from json object
 	(note (or (fix-encoding (plist-get json :excerpt)) "")))
-    (message "%s" "readability"))
-  ;; Prompt for the via link; orglink is created automatically from the link and description prompt
-  (via (or (concat "[[" (read-string "Via link: ") "][" (read-string "Via description: ") "]]") ""))
-  ;; Get source from json object
-  ;; (source (or (fix-encoding (plist-get json :domain)) ""))
-  (source (or (fix-encoding host) "")))
+    (setq json-data '(:creator "creator" :created "created" :date "date" :note "note)"))))
 
 (defun fix-encoding (string)
   ;; Helper function to remove bad encoding from readability
