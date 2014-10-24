@@ -2,9 +2,7 @@
 (require 'json)
 (require 'url)
 
-(setq debug-on-error t)
-
-(defun org-protocol-capture-readability (&optional goto)
+(defun org-chrome-capture (&optional goto)
   (interactive "P")
   ;; Used to capture multimedia links using the readability API
   ;; Should be invoked interactively with M-x org-protocol-capture-readability
@@ -43,7 +41,7 @@
 	 (via (or (concat "[[" (read-string "Via link: ") "][" (read-string "Via description: ") "]]") ""))
 	 ;; Get source from json object
 	 ;; (source (or (fix-encoding (plist-get json :domain)) ""))
-	 (source (or (fix-encoding host) ""))
+	 (source (url-host (url-generic-parse-url link)))
 	 (orglink (org-make-link-string
 		   link (if (string-match "[^[:space:]]" created) created link)))
 	 ;; avoid call to org-store-link
@@ -109,20 +107,27 @@
     (get-json-data-readability json)))
 
 (defun get-json-data-kimono (json)
-  (let (
+  (let (;; Get creator from json object
 	(creator (or (concat "[["
-			     (plist-get (plist-get (car (plist-get (plist-get json :results) :article)) :creator) :text)
+			     (plist-get (plist-get (car (plist-get (plist-get json :results) :multimedia)) :creator) :href)
 			     "]["
-			     (plist-get (plist-get (car (plist-get (plist-get json :results) :article)) :creator) :href))
+			     (plist-get (plist-get (car (plist-get (plist-get json :results) :multimedia)) :creator) :text)
+			     "]]")
 		     ""))
-	(created (or (plist-get (car (plist-get (plist-get json :results) :article)) :created) ""))
-	(date (or (get-json-date-from-org (plist-get (car (plist-get (plist-get json :results) :article)) :date)) ""))
-	(note (or (plist-get (car (plist-get (plist-get json :results) :article)) :note) "")))
-    (setq json-data '(:creator "creator" :created "created" :date "date" :note "note)"))))
+	;; Get created from json object
+	(created (or (plist-get (car (plist-get (plist-get json :results) :multimedia)) :created) ""))
+	;; Get date from json object; if doesn't exist, set it to nothing
+	(date (or (get-json-date-from-org (plist-get (car (plist-get (plist-get json :results) :multimedia)) :date)) ""))
+	;; Get note from json object
+	(note (or (plist-get (car (plist-get (plist-get json :results) :multimedia)) :note) "")))
+    (setq json-data nil)
+    (setq json-data (plist-put json-data :creator creator))
+    (setq json-data (plist-put json-data :created created))
+    (setq json-data (plist-put json-data :date date))
+    (setq json-data (plist-put json-data :note note))))
 
 (defun get-json-data-readability (json)
-  (let (
-	;; Get creator from json object
+  (let (;; Get creator from json object
 	(creator (or (fix-encoding (plist-get json :author)) ""))
 	;; Get created from json object
 	(created (or (fix-encoding (plist-get json :title)) ""))
@@ -130,7 +135,11 @@
 	(date (or (get-json-date-from-org (plist-get json :date_published)) ""))
 	;; Get note from json object
 	(note (or (fix-encoding (plist-get json :excerpt)) "")))
-    (setq json-data '(:creator "creator" :created "created" :date "date" :note "note)"))))
+    (setq json-data nil)
+    (setq json-data (plist-put json-data :creator creator))
+    (setq json-data (plist-put json-data :created created))
+    (setq json-data (plist-put json-data :date date))
+    (setq json-data (plist-put json-data :note note))))
 
 (defun fix-encoding (string)
   ;; Helper function to remove bad encoding from readability
