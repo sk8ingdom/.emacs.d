@@ -2,7 +2,7 @@
 (require 'json)
 (require 'url)
 
-(defun org-chrome-capture (&optional goto)
+(defun org-chrome-multimedia-capture (&optional goto)
   (interactive "P")
   ;; Used to capture multimedia links using the readability API
   ;; Should be invoked interactively with M-x org-protocol-capture-readability
@@ -60,7 +60,7 @@
 			  :quote quote
 			  )
     (raise-frame)
-    (funcall 'org-capture goto)))
+    (funcall 'org-capture goto "mr")))
   
 (defun get-json (url)
   ;; Retrieves json object from any URL
@@ -85,6 +85,10 @@
 		 "&kimwithurl=1"))
 	((string-match "gmane\.org" url)
 	 (concat "https://www.kimonolabs.com/api/9oqm87li?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+		 (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
+		 "&kimwithurl=1"))
+	((string-match "amazon\.com" url)
+	 (concat "https://www.kimonolabs.com/api/8shfuve2?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
 		 (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
 		 "&kimwithurl=1"))
         (t

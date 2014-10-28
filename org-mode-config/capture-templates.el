@@ -464,40 +464,9 @@
    ("sg" "TODO      (g) Project" entry (file+headline "wrk.org" "Projects")
         "* TODO %?[Platform] [Program] [Analysis Type]\n  CREATED: %U
   :PROPERTIES:
-  :Subject: [Platform] | [Program] | [Analysis Type]
-  :Start_Date:
-  :Requestor:
-  :Other Contacts:
-  :Due_Date:
-  :Distribute_To:
-  :Date_Complete:
-  :Status:
-  :Priority:
-  :Complete:
-  :SAG_Originator:
-  :Charge_Number: [XXXX-XXX-XXX]
-  :Estimate_Hours:
-  :Hours_Charged:
-  :Assigned_Eng:
-  :Deliverable:
-  :Platform:
-  :Planning_Sheet:
-  :WD_Analysis:
-  :WD_Flutter:
-  :WD_Testing:
-  :Task_Description: Perform flutter analysis on [Platform] with [Payload]
-  :Data_Info:
-  :Data_Office:
-  :Spec_Req: No flutter within the 115% expanded flight envelope
-  :Assy_Pod Data Sheets:
-  :Assy_Mass Property Sheets:
-  :Assy_Dynamic Deck Parts:
-  :Assy_ZAERO Parts:
-  :FEM_Final: [Config] [Fuel] [MIM] Dynamic FEM
-  :Input_Final: [Config] [Fuel] [MIM] ZAERO deck
-  :Report_Location:
-  :Complete_Result_Summary:
-  :Emails_Attachments:
+  :For:
+  :Other:
+  :CN:
   :Note:
   :END:")
    ;; }}}
