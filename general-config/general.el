@@ -33,4 +33,7 @@
 ;; Enable follow link bindings
 (ffap-bindings)
 
+;; Enable nastran-mode
+;; (load "~/.emacs.d/add-ins/nastran-mode")
+
 (server-start)
