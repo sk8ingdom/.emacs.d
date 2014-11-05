@@ -1,7 +1,3 @@
-;; Package management
-(require 'package)
-(package-initialize)
-
 ;; Disable the splash screen
 (setq inhibit-splash-screen t)
 
@@ -9,6 +5,7 @@
 (transient-mark-mode t)
 
 ;; Calc mode
+
 ;; Disable multiplication having precedence over division
 (setq calc-multiplication-has-precedence nil)
 
@@ -33,7 +30,20 @@
 ;; Enable follow link bindings
 (ffap-bindings)
 
-;; Enable nastran-mode
-;; (load "~/.emacs.d/add-ins/nastran-mode")
+;; Plugins
 
+;; Package
+(require 'package)
+(package-initialize)
+
+;; nastran-mode
+;; (load "~/.emacs.d/plugins/nastran-mode")
+
+;; htmlize
+(load "~/.emacs.d/plugins/htmlize")
+
+;; Enable request
+(load "~/.emacs.d/plugins/request.el")
+
+;; Start Emacs server
 (server-start)
