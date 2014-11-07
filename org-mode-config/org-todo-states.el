@@ -35,11 +35,10 @@
 
 	 ;; Sequence for EVENTS
 	 ;; VISIT means that there is something you would physically like to do, no dates associated
-	 ;; PLANNED means it's coming up in the future
 	 ;; DIDNOTGO means the event was cancelled or I didn't go
 	 ;; MEETING means a real time meeting, i.e. at work, or on the phone for something official
 	 ;; VISITED means the event took place and is no longer scheduled
-	 (sequence "VISIT(v@/!)" "PLANNED(l@/!)" "|" "DIDNOTGO(z@/!)" "MEETING(m)" "VISITED(y@/!)")
+	 (sequence "VISIT(v@/!)" "|" "DIDNOTGO(z@/!)" "MEETING(m)" "VISITED(y@/!)")
 	 )
        )
 

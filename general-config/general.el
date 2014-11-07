@@ -36,14 +36,17 @@
 (require 'package)
 (package-initialize)
 
-;; nastran-mode
+;; Enable nastran-mode
 ;; (load "~/.emacs.d/plugins/nastran-mode")
 
-;; htmlize
+;; Enable htmlize
 (load "~/.emacs.d/plugins/htmlize")
 
 ;; Enable request
-(load "~/.emacs.d/plugins/request.el")
+(load "~/.emacs.d/plugins/request")
+
+;; Enable web-mode
+;; (load "~/.emacs.d/plugins/web-mode")
 
 ;; Start Emacs server
 (server-start)

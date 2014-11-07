@@ -60,7 +60,8 @@
 			  :quote quote
 			  )
     (raise-frame)
-    (funcall 'org-capture goto "mr")))
+    ;; (funcall 'org-capture goto "mr")))
+    (funcall 'org-capture goto)))
   
 (defun get-json (url)
   ;; Retrieves json object from any URL

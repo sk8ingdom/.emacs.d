@@ -46,9 +46,6 @@
 ;; Update ID file .org-id-locations on startup
 (org-id-update-id-locations)
 
-;; Add ID automatically on capture
-(add-hook 'org-capture-prepare-finalize-hook 'org-id-get-create)
-
 ;; Add ID properties to all headlines in the current file which do not already have one
 (defun my/org-add-ids-to-headlines-in-file ()
   (interactive)
