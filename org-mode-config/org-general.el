@@ -19,9 +19,6 @@
 (require 'org-protocol)
 (load "~/.emacs.d/org-mode-config/org-protocol-templates")
 
-;; Enable org-outlook
-(load "~/.emacs.d/plugins/org-outlook")
-
 ;; Enable syntax-highlighting
 (setq org-src-fontify-natively t)
 

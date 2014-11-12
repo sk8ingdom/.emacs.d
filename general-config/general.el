@@ -32,7 +32,7 @@
 
 ;; Plugins
 
-;; Package
+;; Enable package
 (require 'package)
 (package-initialize)
 

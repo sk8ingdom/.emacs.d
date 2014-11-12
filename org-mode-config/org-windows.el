@@ -9,3 +9,8 @@
 ;; Abbreviations
 (add-to-list 'org-link-abbrev-alist '("local"   . "U:/"))
 (add-to-list 'org-link-abbrev-alist '("val"     . "http://dominicsurano.com:4041/homes/sk8ingdom/"))
+
+;; Plugins
+
+;; Enable org-outlook
+(load "~/.emacs.d/plugins/org-outlook")
