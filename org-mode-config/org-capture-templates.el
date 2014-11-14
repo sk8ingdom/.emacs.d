@@ -423,15 +423,15 @@
 
    ;;          (c) Contact template
    ("nc" "          (c) Contact" entry (file+headline "peo.org" "People")
-    "* %?
+    "* %^{First} %^{Last} %? %^g
   :LOGBOOK:
   :END:
   CREATED: %U
   :PROPERTIES:
-  :First:
+  :First:    %\1
   :Middle:
-  :Last:
-  :Birthday:
+  :Last:     %\2
+  :Birthday: %^{Birthday}u
   :P_Phone:
   :P_Email:
   :P_Web:
@@ -466,13 +466,14 @@
   :YouTube:
   :Note:
   :END:
-** [First] [Last] Wish List
-** TODO Wish [First] [Last] a Happy Birthday
-   DEADLINE: +1y
-*** TODO Buy [First] [Last] a Birthday Gift
-    DEADLINE: +1y
-** TODO Buy [First] [Last] a Christmas Gift
-   DEADLINE: +1y")
+** Wish List
+** Tasks
+*** TODO Wish %\1 %\2 a Happy Birthday
+    DEADLINE: %^{Birthday}t
+**** TODO Buy %\1 %\2 a Birthday Gift
+     DEADLINE: %\4
+*** TODO Buy %\1 %\2 a Christmas Gift
+    DEADLINE: %^{Christmas}t")
 
    ;;          (e) Payment template
    ("ne" "          (e) Payment" entry (file "ref.org")
