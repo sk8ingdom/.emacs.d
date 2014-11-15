@@ -140,7 +140,7 @@
   "Org Outlook"
   :group 'org-mode)
 
-(defcustom org-outlook-location (w32-short-file-name "c:/Program Files/Microsoft Office/OFFICE12/OFFICE12/OUTLOOK.exe")
+(defcustom org-outlook-location (w32-short-file-name "C:/Program Files (x86)/Microsoft Office/Office14/OUTLOOK.EXE")
   "* Microsoft Outlook 2007 location."
   :type 'string
   :group 'org-outlook)
