@@ -329,6 +329,7 @@
   :PROPERTIES:
   :Attend:   [[peo:Dominic Surano][Dominic Surano]]
   :Location:
+  :Via:
   :Note:
   :END:")
 
@@ -342,6 +343,7 @@
   :PROPERTIES:
   :Attend:   [[peo:Dominic Surano][Dominic Surano]]
   :Location:
+  :Via:
   :Note:
   :END:")
 
@@ -356,6 +358,7 @@
   :PROPERTIES:
   :Attend:   [[peo:Dominic Surano][Dominic Surano]]
   :Location:
+  :Via:
   :Note:
   :END:
 
@@ -375,6 +378,7 @@
   :PROPERTIES:
   :Attend:   [[peo:Dominic Surano][Dominic Surano]]
   :Location:
+  :Via:
   :Note:
   :END:")
 
@@ -575,6 +579,7 @@
   :For:
   :Other:
   :CN:
+  :Via:
   :Note:
   :END:")
  ))
