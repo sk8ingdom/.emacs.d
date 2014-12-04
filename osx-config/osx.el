@@ -7,7 +7,7 @@
 ;; Maximized by default
 (setq initial-frame-alist
       `((left . 0) (top . 0)
-        (width . 207) (height . 62)))
+        (width . 207) (height . 70)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
