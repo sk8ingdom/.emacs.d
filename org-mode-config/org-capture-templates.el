@@ -405,16 +405,16 @@
   CREATED: %U
   :PROPERTIES:
   :Company:
-  :W_Phone:
-  :W_Email:
-  :W_Web:
-  :W_Street:
-  :W_City:
-  :W_State:
-  :W_Zip:
-  :W_Map:
-  :W_Wifi:
-  :W_Pass:
+  :Phone:
+  :Email:
+  :Website:
+  :Address:
+  :City:
+  :State:
+  :Zip:
+  :Map:
+  :Wifi:
+  :Pass:
   :Hours:
   :Yelp:
   :Facebook:
@@ -436,30 +436,30 @@
   :Middle:
   :Last:     %\2
   :Birthday: %^{Birthday}u
-  :P_Phone:
-  :P_Email:
-  :P_Web:
-  :P_Street:
-  :P_City:
-  :P_State:
-  :P_Zip:
-  :P_Map:
+  :Phone:
+  :Email:
+  :Website:
+  :Address:
+  :City:
+  :State:
+  :Zip:
+  :Map:
   :Company:
-  :W_Group:
-  :W_Title:
-  :W_Phone:
-  :W_Email:
-  :W_Web:
-  :W_Office:
-  :W_Street:
-  :W_City:
-  :W_State:
-  :W_Zip:
-  :W_Map:
+  :W-Group:
+  :W-Title:
+  :W-Phone:
+  :W-Email:
+  :W-Website:
+  :W-Address:
+  :W-Office:
+  :W-City:
+  :W-State:
+  :W-Zip:
+  :W-Map:
   :Facebook:
   :G:
-  :G_Plus:
-  :G_Scho:
+  :G-Plus:
+  :G-Scho:
   :Github:
   :Instagram:
   :Linkedin:
