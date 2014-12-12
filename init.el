@@ -8,6 +8,7 @@
 (load "~/.emacs.d/org-mode-config/org-todo-states")
 (load "~/.emacs.d/org-mode-config/org-capture-templates")
 (load "~/.emacs.d/org-mode-config/org-agenda-custom")
+(load "~/.emacs.d/org-mode-config/org-abbreviations")
 
 (cond
  ;; Windows
@@ -26,3 +27,6 @@
   (load "~/.emacs.d/org-mode-config/org-linux")
  )
 )
+
+;; Plugins
+(load "~/.emacs.d/org-mode-config/org-plugins")

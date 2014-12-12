@@ -325,6 +325,7 @@
   :LOGBOOK:
   - State \"VISIT\"      from \"\"           %U
   :END:
+  %^T--%^T
   CREATED: %U
   :PROPERTIES:
   :Attend:   [[peo:Dominic Surano][Dominic Surano]]
@@ -339,6 +340,7 @@
   :LOGBOOK:
   - State \"DIDNOTGO\"   from \"\"           %U
   :END:
+  %^T--%^T
   CREATED: %U
   :PROPERTIES:
   :Attend:   [[peo:Dominic Surano][Dominic Surano]]
@@ -354,7 +356,7 @@
   - State \"MEETING\"    from \"\"           %U
   :END:
   CREATED: %U
-  %T--%T
+  %T--%^T
   :PROPERTIES:
   :Attend:   [[peo:Dominic Surano][Dominic Surano]]
   :Location:
@@ -374,6 +376,7 @@
   :LOGBOOK:
   - State \"VISITED\"    from \"\"           %U
   :END:
+  %^T--%^T
   CREATED: %U
   :PROPERTIES:
   :Attend:   [[peo:Dominic Surano][Dominic Surano]]

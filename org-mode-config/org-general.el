@@ -1,29 +1,6 @@
 ;; Enable org-mode
 (require 'org)
 
-;; Plugins
-
-;; Enable calcfw-org
-;; (load "~/.emacs.d/plugins/calcfw-org")
-
-;; Enable ob-calc
-(load "~/.emacs.d/plugins/ob-calc")
-
-;; Enable org-mobile
-(load "~/.emacs.d/plugins/org-mobile")
-
-;; Enable org-collector
-(load "~/.emacs.d/plugins/org-collector")
-
-;; Enable org-protocol
-(require 'org-protocol)
-(load "~/.emacs.d/org-mode-config/org-protocol-templates")
-
-;; Enable org-contacts
-;; No need to set org-contacts-files, defaults to agenda files
-(load "~/.emacs.d/plugins/org-contacts")
-(add-to-list 'org-contacts-files (concat org-directory "/peo.org"))
-
 ;; Enable syntax-highlighting
 (setq org-src-fontify-natively t)
 
@@ -34,6 +11,7 @@
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+(define-key global-map "\C-cc" 'org-capture)
 
 ;; Property inheritance
 (setq org-use-property-inheritance nil)
@@ -64,47 +42,6 @@
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps t)
 (setq org-refile-allow-creating-parent-nodes t)
-
-;; Abbreviations
-(setq org-link-abbrev-alist
-       '(
-	 ;; Abbreviations for files
-	 ("dev"            . "file:dev.org::*")
-	 ("edu"            . "file:edu.org::*")
-	 ("fin"            . "file:fin.org::*")
-	 ("hea"            . "file:hea.org::*")
-	 ("hob"            . "file:hob.org::*")
-	 ("mul"            . "file:mul.org::*")
-	 ("org"            . "file:org.org::*")
-	 ("peo"            . "file:peo.org::*")
-	 ("pos"            . "file:pos.org::*")
-	 ("ref"            . "file:ref.org::*")
-	 ("soc"            . "file:soc.org::*")
-	 ("wrk"            . "file:wrk.org::*")
-
-	 ;; Abbreviations for websites
-         ("facebook"       . "https://www.facebook.com/")
-	 ("fedex"          . "https://www.fedex.com/fedextrack/?tracknumbers=")
-         ("gmail"          . "https://mail.google.com/mail/u/0/#all/")
-         ("google"         . "https://www.google.com/#q=")
-         ("google-maps"    . "https://maps.google.com/maps?q=")
-         ("google-plus"    . "https://plus.google.com/")
-         ("google-scholar" . "http://scholar.google.com/scholar?hl=en&q=")
-         ("github"         . "https://www.github.com/")
-         ("hacker-news"    . "https://news.ycombinator.com/item?id=")
-         ("instagram"      . "https://www.instagram.com/")
-         ("linkedin"       . "http://www.linkedin.com/")
-         ("okcupid"        . "http://www.okcupid.com/profile/")
-         ("pinterest"      . "http://www.pinterest.com/")
-         ("reddit"         . "http://reddit.com/user/")
-         ("twitter"        . "https://www.twitter.com/")
-	 ("ups"            . "http://www.ups.com/WebTracking/processRequest?tracknum=")
-	 ("usps"           . "https://tools.usps.com/go/TrackConfirmAction.action?tRef=fullpage&tLc=1&text28777=&tLabels=")
-         ("yelp-business"  . "http://www.yelp.com/biz/")
-         ("yelp-user"      . "http://www.yelp.com/user_details?userid=")
-         ("youtube"        . "http://www.youtube.com/user/")
-	 )
-       )
 
 ;; Export drawers
 (setq org-export-with-drawers t)
