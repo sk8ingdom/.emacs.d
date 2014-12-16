@@ -402,24 +402,24 @@
 
    ;;          (b) Business template
    ("nb" "          (b) Business" entry (file+headline "peo.org" "Businesses")
-    "* %?
+    "* %^{Company} %?
   :LOGBOOK:
   :END:
   CREATED: %U
   :PROPERTIES:
-  :Company:
-  :Phone:
-  :Email:
-  :Website:
-  :Address:
-  :City:
-  :State:
-  :Zip:
-  :Map:
+  :Company:  %\\1
+  :Phone:    %^{Phone}
+  :Email:    %^{Email}
+  :Website:  %^{Website}
+  :Address:  %^{Address}
+  :City:     %^{City}
+  :State:    %^{State}
+  :Zip:      %^{Zip}
+  :Map:      [[google-maps:%\\5+%\\6+%\\7+%\\8][Google Maps]]
   :Wifi:
   :Pass:
   :Hours:
-  :Yelp:
+  :Yelp:     [[yelp-business:%^{Yelp}][\\9]]
   :Facebook:
   :G_Plus:
   :Instagram:
@@ -430,23 +430,23 @@
 
    ;;          (c) Contact template
    ("nc" "          (c) Contact" entry (file+headline "peo.org" "People")
-    "* %^{First} %^{Last} %? %^g
+    "* %^{First} %^{Last}%? %^g
   :LOGBOOK:
   :END:
   CREATED: %U
   :PROPERTIES:
-  :First:    %\1
+  :First:    %\\1
   :Middle:
-  :Last:     %\2
-  :Birthday: %^{Birthday}u
-  :Phone:
-  :Email:
+  :Last:     %\\2
+  :Birthday: %^{Birth Date}u
+  :Phone:    %^{Phone}
+  :Email:    %^{Email}
   :Website:
-  :Address:
-  :City:
-  :State:
-  :Zip:
-  :Map:
+  :Address:  %^{Address}
+  :City:     %^{City}
+  :State:    %^{State}
+  :Zip:      %^{Zip}
+  :Map:      [[google-maps:%\\5+%\\6+%\\7+%\\8][Google Maps]]
   :Company:
   :W-Group:
   :W-Title:
@@ -475,12 +475,24 @@
   :END:
 ** Wish List
 ** Tasks
-*** TODO Wish %\1 %\2 a Happy Birthday
+*** TODO Wish %\\1 %\\2 a Happy Birthday
     DEADLINE: %^{Birthday}t
-**** TODO Buy %\1 %\2 a Birthday Gift
-     DEADLINE: %\4
-*** TODO Buy %\1 %\2 a Christmas Gift
-    DEADLINE: %^{Christmas}t")
+    :LOGBOOK:  
+    - State \"TODO\"       from \"\"           %U
+    :END:
+    CREATED: %U
+**** TODO Buy %\\1 %\\2 a Birthday Gift
+     DEADLINE: %^{Birthday}t
+     :LOGBOOK:  
+     - State \"TODO\"       from \"\"           %U
+     :END:
+    CREATED: %U
+*** TODO Buy %\\1 %\\2 a Christmas Gift
+    DEADLINE: <2014-12-25 Thu +1y>
+    :LOGBOOK:  
+    - State \"TODO\"       from \"\"           %U
+    :END:
+    CREATED: %U")
 
    ;;          (e) Payment template
    ("ne" "          (e) Payment" entry (file "ref.org")
@@ -559,13 +571,14 @@
   :Merchant:
   :Note:
   :END:
+
   | Item                           | Price ($) |    Amount | Total ($) |
   | <30>                           |       <9> |       <9> |       <9> |
   |--------------------------------+-----------+-----------+-----------|
   |                                |           |           |           |
   |                                |           |           |           |
   |--------------------------------+-----------+-----------+-----------|
-  | Tax                            |           |           |           |
+  | Tax                            |           |         1 |           |
   | Total                          |           |           |           |
   #+TBLFM: $4=$2*$3::@>$4=vsum(@3..@-1)
   ")
