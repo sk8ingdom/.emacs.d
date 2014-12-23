@@ -481,18 +481,24 @@
     - State \"TODO\"       from \"\"           %U
     :END:
     CREATED: %U
+    :PROPERTIES:
+    :END:
 **** TODO Buy %\\1 %\\2 a Birthday Gift
      DEADLINE: %^{Birthday}t
      :LOGBOOK:  
      - State \"TODO\"       from \"\"           %U
      :END:
     CREATED: %U
+    :PROPERTIES:
+    :END:
 *** TODO Buy %\\1 %\\2 a Christmas Gift
     DEADLINE: <2014-12-25 Thu +1y>
     :LOGBOOK:  
     - State \"TODO\"       from \"\"           %U
     :END:
-    CREATED: %U")
+    CREATED: %U
+    :PROPERTIES:
+    :END:")
 
    ;;          (e) Payment template
    ("ne" "          (e) Payment" entry (file "ref.org")
@@ -538,6 +544,7 @@
   :END:
   CREATED: %U
   :PROPERTIES:
+  :Via:
   :Note:
   :END:")
 
