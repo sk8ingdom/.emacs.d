@@ -233,7 +233,7 @@
 
    ;; CONSUME  (r) Consume template
    ("mr" "CONSUME   (r) Consume org-protocol" entry (file "ref.org")
-    "* CONSUME  [[%:link][%:created]]
+    "* CONSUME [[%:link][%:created]]
   :LOGBOOK:
   - State \"CONSUME\"    from \"\"           %U
   :END:
@@ -284,7 +284,7 @@
 
    ;; IGNORED  (r) Ignored template
    ("mi" "IGNORED   (i) Ignored org-protocol" entry (file "ref.org")
-    "* IGNORED  [[%:link][%:created]]
+    "* IGNORED [[%:link][%:created]]
   :LOGBOOK:
   - State \"IGNORED\"    from \"\"           %U
   :END:
