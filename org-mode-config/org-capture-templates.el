@@ -535,6 +535,7 @@
   :MPG:
   :PPM:
   :Merchant:
+  :Note:
   :END:")
 
    ;;          (n) Note template
