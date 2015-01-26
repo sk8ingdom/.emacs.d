@@ -355,8 +355,8 @@
   :LOGBOOK:
   - State \"MEETING\"    from \"\"           %U
   :END:
-  CREATED: %U
   %T--%^T
+  CREATED: %U
   :PROPERTIES:
   :Attend:   [[peo:Dominic Surano][Dominic Surano]]
   :Location:
