@@ -1,6 +1,9 @@
 ;; Enable org-mode
 (require 'org)
 
+;; Remove trailing whitespace
+(add-hook 'org-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+
 ;; Enable syntax-highlighting
 (setq org-src-fontify-natively t)
 
