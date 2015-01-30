@@ -4,6 +4,17 @@
 ;; Enable transient mark mode
 (transient-mark-mode t)
 
+;; Tabs
+
+;; Disable tabs by default
+(setq-default indent-tabs-mode nil)
+
+;; Remove tabs before saving
+(add-hook 'write-file-hooks
+          (lambda () (if (not indent-tabs-mode)
+                         (untabify (point-min) (point-max)))
+            nil ))
+
 ;; Encoding
 
 ;; Set encoding to us-ascii
@@ -62,11 +73,11 @@ prompt the user for a coding system."
 ;; Automatically convert line endings to unix
 ;;(add-hook 'find-file-hook 'find-file-check-line-endings)
 ;;(defun dos-file-endings-p ()
-;;	(string-match "dos" (symbol-name buffer-file-coding-system)))
+;;      (string-match "dos" (symbol-name buffer-file-coding-system)))
 ;;(defun find-file-check-line-endings ()
-;;	(when (dos-file-endings-p)
-;;		(set-buffer-file-coding-system 'undecided-unix)
-;;		(set-buffer-modified-p nil)))
+;;      (when (dos-file-endings-p)
+;;              (set-buffer-file-coding-system 'undecided-unix)
+;;              (set-buffer-modified-p nil)))
 
 ;; Enable follow link bindings
 (ffap-bindings)

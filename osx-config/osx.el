@@ -26,7 +26,7 @@
 
 ;; Mapping Control ＆ Alt Keys
 ;; Sets the Command key to Meta
-(setq mac-command-modifier 'meta) 
+(setq mac-command-modifier 'meta)
 ;; Sets the Option key to Control
 (setq mac-option-modifier 'control)
 ;; Sets the Control key to Control

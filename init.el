@@ -1,6 +1,6 @@
-;; -*- mode: elisp -*-
+;; -*- mode: emacs-lisp -*-
 
- ;; General
+;; General
 (load "~/.emacs.d/general-config/general")
 
 ;; Org-mode

@@ -8,7 +8,7 @@
    ;; TODO     (t) Todo template
    ("tt" "TODO      (t) Todo" entry (file "ref.org")
     "* TODO %?
-  :LOGBOOK:  
+  :LOGBOOK:
   - State \"TODO\"       from \"\"           %U
   :END:
   CREATED: %U
@@ -20,7 +20,7 @@
    ;; WAITING  (w) Waiting template
    ("tw" "WAITING   (w) Waiting" entry (file "ref.org")
     "* WAITING %?
-  :LOGBOOK:  
+  :LOGBOOK:
   - State \"WAITING\"    from \"\"           %U
   :END:
   CREATED: %U
@@ -32,7 +32,7 @@
    ;; CANCELLED(x) Cancelled template
    ("tx" "CANCELLED (x) Cancelled" entry (file "ref.org")
     "* CANCELLED %
-  :LOGBOOK:  
+  :LOGBOOK:
   - State \"TODO\"       from \"\"           %U
   :END:
   CREATED: %U
@@ -44,7 +44,7 @@
    ;; DELEGATED(e) Delegated template
    ("te" "DELEGATED (e) Delegated" entry (file "ref.org")
     "* DELEGATED %?
-  :LOGBOOK:  
+  :LOGBOOK:
   - State \"DELEGATED\"  from \"\"           %U
   :END:
   CREATED: %U
@@ -56,7 +56,7 @@
    ;; DONE     (d) Done template
    ("td" "DONE      (d) Done" entry (file "ref.org")
     "* DONE %?
-  :LOGBOOK:  
+  :LOGBOOK:
   - State \"DONE\"       from \"\"           %U
   :END:
   CREATED: %U
@@ -477,7 +477,7 @@
 ** Tasks
 *** TODO Wish %\\1 %\\2 a Happy Birthday
     DEADLINE: %^{Birthday}t
-    :LOGBOOK:  
+    :LOGBOOK:
     - State \"TODO\"       from \"\"           %U
     :END:
     CREATED: %U
@@ -485,7 +485,7 @@
     :END:
 **** TODO Buy %\\1 %\\2 a Birthday Gift
      DEADLINE: %^{Birthday}t
-     :LOGBOOK:  
+     :LOGBOOK:
      - State \"TODO\"       from \"\"           %U
      :END:
     CREATED: %U
@@ -493,7 +493,7 @@
     :END:
 *** TODO Buy %\\1 %\\2 a Christmas Gift
     DEADLINE: <2014-12-25 Thu +1y>
-    :LOGBOOK:  
+    :LOGBOOK:
     - State \"TODO\"       from \"\"           %U
     :END:
     CREATED: %U
@@ -595,7 +595,7 @@
    ;; TODO     (g) Project Template
    ("sg" "TODO      (g) Project" entry (file+headline "wrk.org" "Projects")
         "* TODO %?[Platform] [Program] [Analysis Type]
-  :LOGBOOK:  
+  :LOGBOOK:
   - State \"TODO\"       from \"\"           %U
   :END:
   CREATED: %U
