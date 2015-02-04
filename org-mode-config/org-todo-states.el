@@ -42,11 +42,20 @@
          )
        )
 
-;; Mark the time a TODO item changes state
-(setq org-log-done 'time)
-
-;; Add a note when the TODO item changes state
+;; Record time and note when a task is completed
 (setq org-log-done 'note)
 
-;; Add state changes to the :LOGBOOK:
+;; Record time and note when the scheduled date of a task is modified
+(setq org-log-reschedule 'note)
+
+;; Record time and note when the deadline of a task is modified
+(setq org-log-redeadline 'note)
+
+;; Record time and note when clocking out of a task
+(setq org-log-clock-out 'note)
+
+;; Record time and note when a task is refiled
+(setq org-log-refile 'note)
+
+;; Log everything into the LOGBOOK drawer
 (setq org-log-into-drawer t)

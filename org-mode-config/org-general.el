@@ -1,5 +1,6 @@
 ;; Enable org-mode
 (require 'org)
+(require 'org-crypt)
 
 ;; Remove trailing whitespace
 (add-hook 'org-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
