@@ -488,11 +488,11 @@
      :LOGBOOK:
      - State \"TODO\"       from \"\"           %U
      :END:
-    CREATED: %U
-    :PROPERTIES:
-    :END:
+     CREATED: %U
+     :PROPERTIES:
+     :END:
 *** TODO Buy %\\1 %\\2 a Christmas Gift
-    DEADLINE: <2014-12-25 Thu +1y>
+    DEADLINE: <2015-12-25 Fri +1y>
     :LOGBOOK:
     - State \"TODO\"       from \"\"           %U
     :END:
