@@ -589,24 +589,7 @@
   | Tax                            |           |         1 |           |
   | Total                          |           |           |           |
   #+TBLFM: $4=$2*$3::@>$4=vsum(@3..@-1)
-  ")
-
-   ("s" "Special Tasks")
-   ;; TODO     (g) Project Template
-   ("sg" "TODO      (g) Project" entry (file+headline "wrk.org" "Projects")
-        "* TODO %?[Platform] [Program] [Analysis Type]
-  :LOGBOOK:
-  - State \"TODO\"       from \"\"           %U
-  :END:
-  CREATED: %U
-  :PROPERTIES:
-  :For:
-  :Other:
-  :CN:
-  :Via:
-  :Note:
-  :END:")
- ))
+  ")))
 
 ;; Add ID automatically on capture
 (add-hook 'org-capture-prepare-finalize-hook 'org-id-store-link)
