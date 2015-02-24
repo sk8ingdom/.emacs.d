@@ -535,6 +535,7 @@
   :MPG:
   :PPM:
   :Merchant:
+  :Link:
   :Note:
   :END:")
 
@@ -578,6 +579,7 @@
   :Method:
   :Merchant:
   :Note:
+  :Link:
   :END:
 
   | Item                           | Price ($) |    Amount | Total ($) |
