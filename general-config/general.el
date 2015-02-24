@@ -84,6 +84,9 @@ prompt the user for a coding system."
 
 ;; Plugins
 
+;; Enable winner-mode
+(winner-mode t)
+
 ;; Enable package
 (require 'package)
 (package-initialize)
