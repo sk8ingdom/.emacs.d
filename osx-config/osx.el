@@ -25,9 +25,25 @@
  '(default ((t (:family "Andale Mono" :foundry "outline" :slant normal :weight normal :height 100 :width normal)))))
 
 ;; Mapping Control ＆ Alt Keys
-;; Sets the Command key to Meta
-(setq mac-command-modifier 'meta)
-;; Sets the Option key to Control
-(setq mac-option-modifier 'control)
-;; Sets the Control key to Control
+;; Requires the following in System Preferences > Keyboard > Modifer Keys
+;;
+;; Apple Internal Keyboard / Trackpad:
+;;
+;;    Caps Lock   : Control
+;;    Control Key : Command
+;;    Option Key  : Control
+;;    Command Key : Option
+;;
+;; daskeyboard:
+;;
+;;   Caps Lock   : Control
+;;   Control Key : Command
+;;   Option Key  : Option
+;;   Command Key : Control
+;;
+;; Sets the remapped Command key to Meta
+(setq mac-command-modifier 'control)
+;; Sets the remapped Option key to Control
+(setq mac-option-modifier 'meta)
+;; Sets the remapped control key to Control
 (setq mac-control-modifier 'control)
