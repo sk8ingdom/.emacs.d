@@ -235,7 +235,7 @@
   :Link:     %:link
   :Date:     %:date
   :Note:     %:note
-  :END
+  :END:
   :LOGBOOK:
   - State \"CONSUME\"    from \"\"           %U
   :END::%:quote")
