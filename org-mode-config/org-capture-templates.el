@@ -238,7 +238,7 @@
   :END:
   :LOGBOOK:
   - State \"CONSUME\"    from \"\"           %U
-  :END:%quote")
+  :END:%:quote")
 
    ;; SUBSCRIBE(r) Subscribe template
    ("mb" "SUBSCRIBE (b) Subscribe org-protocol" entry (file "ref.org")
@@ -254,7 +254,7 @@
   :END:
   :LOGBOOK:
   - State \"SUBSCRIBE\"  from \"\"           %U
-  :END:%quote")
+  :END:%:quote")
 
    ;; SHARE    (s) Share template
    ("ms" "SHARE     (s) Share org-protocol" entry (file "ref.org")
@@ -270,7 +270,7 @@
   :END:
   :LOGBOOK:
   - State \"SHARE\"      from \"\"           %U
-  :END:%quote")
+  :END:%:quote")
 
    ;; IGNORED  (r) Ignored template
    ("mi" "IGNORED   (i) Ignored org-protocol" entry (file "ref.org")
@@ -287,7 +287,7 @@
   :END:
   :LOGBOOK:
   - State \"IGNORED\"    from \"\"           %U
-  :END:%quote")
+  :END:%:quote")
 
    ;; REFERENCE(f) Reference template
    ("mf" "REFERENCE (b) Reference org-protocol" entry (file "ref.org")
@@ -304,7 +304,7 @@
   :END:
   :LOGBOOK:
   - State \"REFERENCE\"  from \"\"           %U
-  :END:%quote")
+  :END:%:quote")
 
    ;; These templates are used with the EVENTS TODO sequence
    ("e" "Events")
