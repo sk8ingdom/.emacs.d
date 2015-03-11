@@ -560,6 +560,17 @@
   - State \"\"           from \"\"           %U
   :END:")
 
+   ;;          (j) Journal template
+   ("nj" "          (j) Journal" entry (file+headline "org.org" "Write Daily Journal")
+    "* Journal %?%u :org:
+  :PROPERTIES:
+  :Via:
+  :Note:
+  :END:
+  :LOGBOOK:
+  - State \"\"           from \"\"           %U
+  :END:")
+
    ;;          (p) Paycheck template
    ("np" "          (p) Paycheck" entry (file+headline "fin.org" "Paycheck")
     "* Paycheck %? :fin:
