@@ -72,8 +72,8 @@
   :PROPERTIES:
   :Cost:
   :Paid:
-  :Method:
-  :Merchant:
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
+  :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
   :Note:
   :END:
@@ -87,8 +87,8 @@
   :PROPERTIES:
   :Cost:
   :Paid:
-  :Method:
-  :Merchant:
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
+  :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
   :Note:
   :END:
@@ -102,8 +102,8 @@
   :PROPERTIES:
   :Cost:
   :Paid:
-  :Method:
-  :Merchant:
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
+  :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
   :Note:
   :END:
@@ -117,8 +117,8 @@
   :PROPERTIES:
   :Cost:
   :Paid:
-  :Method:
-  :Merchant:
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
+  :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
   :Note:
   :END:
@@ -132,8 +132,8 @@
   :PROPERTIES:
   :Cost:
   :Paid:
-  :Method:
-  :Merchant:
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
+  :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
   :Note:
   :END:
@@ -148,8 +148,8 @@
   :PROPERTIES:
   :Cost:
   :Paid:
-  :Method:
-  :Merchant:
+    :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
+  :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
   :Note:
   :END:
@@ -164,8 +164,8 @@
   :PROPERTIES:
   :Cost:
   :Paid:
-  :Method:
-  :Merchant:
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
+  :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
   :Note:
   :END:
@@ -180,8 +180,8 @@
   :PROPERTIES:
   :Cost:
   :Paid:
-  :Method:
-  :Merchant:
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
+  :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
   :Note:
   :END:
@@ -196,7 +196,8 @@
   :PROPERTIES:
   :Cost:
   :Paid:
-  :Method:
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
+  :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Merchant:
   :Link:
   :Note:
@@ -212,8 +213,8 @@
   :PROPERTIES:
   :Cost:
   :Paid:
-  :Method:
-  :Merchant:
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
+  :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
   :Note:
   :END:
@@ -405,7 +406,7 @@
   :Wifi:
   :Pass:
   :Hours:
-  :Yelp:     [[yelp-business:%^{Yelp}][\\9]]
+  :Yelp:     [[yelp-business:%^{Yelp}][%\\9]]
   :Facebook:
   :G_Plus:
   :Instagram:
@@ -505,10 +506,10 @@
    ("ne" "          (e) Payment" entry (file "ref.org")
     "* Paid %? :fin:
   :PROPERTIES:
-  :Cost:
-  :Paid:
-  :Method:
-  :Merchant:
+  :Cost:     %^{Cost}
+  :Paid:     %^{Paid}
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\3]]
+  :Merchant: [[peo:%^{Merchant}][%\\4]]
   :Link:
   :Note:
   :END:
@@ -519,20 +520,20 @@
 
    ;;          (f) Fuel template
    ("nf" "          (f) Fuel" entry (file+headline "fin.org" "Fuel Up")
-    "* Fuel Up at %? :fin:
+    "* Fuel Up at %^{Merchant|Costco Poway|Costco Mission Valley San Diego} %^{YYYY-MM-DD} :fin:
   :PROPERTIES:
-  :Cost:
-  :Paid:
-  :Method:
-  :Per_Gal:
-  :Gallons:
-  :Beg_Mil:
-  :End_Mil:
+  :Cost:     %^{Cost}
+  :Paid:     %\\3
+  :Method:   [[fin:%^{Method|Wells Fargo Debit Account|Wells Fargo Credit Account}][%\\4]]
+  :Per_Gal:  %^{Per Gallon}
+  :Gallons:  %^{Gallons}
+  :Beg_Mil:  %?
+  :End_Mil:  %^{End Miles}
   :Tot_Mil:
   :MPG:
   :PPM:
-  :Merchant:
-  :Link:
+  :Merchant: [[peo:%\\1][%\\1]]
+  :Link:     [[val:fin/Receipts/%\\2 %^{Merchant Short Name} Receipt.pdf][%\\2 %\\8 Receipt.pdf]]
   :Note:
   :END:
   :LOGBOOK:
@@ -562,25 +563,25 @@
 
    ;;          (j) Journal template
    ("nj" "          (j) Journal" entry (file+headline "org.org" "Write Daily Journal")
-    "* Journal %?%u :org:
+    "* Journal %^{YYYY-MM-DD} :org:
   :PROPERTIES:
   :Via:
   :Note:
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
-  :END:")
+  :END:\n\n   %?")
 
    ;;          (p) Paycheck template
    ("np" "          (p) Paycheck" entry (file+headline "fin.org" "Paycheck")
-    "* Paycheck %? :fin:
+    "* Paycheck %^{YYYY-MM-DD} :fin:
   :PROPERTIES:
-  :Cost:     -
-  :Paid:     -
-  :Method:   [[fin:Wells%20Fargo%20Debit%20Account][Wells Fargo Debit Account]]
-  :Merchant: [[peo:General%20Atomics%20Aeronautical%20Systems%20Inc.][General Atomics Aeronautical Systems Inc.]]
-  :Link:     [[val:fin/Banking/Work/General%20Atomics%20Aeronautical%20Systems%20Inc./Paycheck/YYYY-MM-DD.pdf][YYYY-MM-DD.pdf]]
-  :Note:
+  :Cost:     -%^{Amount}
+  :Paid:     -%\\2
+  :Method:   [[fin:Wells Fargo Debit Account][Wells Fargo Debit Account]]
+  :Merchant: [[peo:General Atomics Aeronautical Systems Inc.][General Atomics Aeronautical Systems Inc.]]
+  :Link:     [[val:fin/Banking/Work/General Atomics Aeronautical Systems Inc./Paycheck/%\\1.pdf][%\\1.pdf]]
+  :Note:     %?
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
@@ -589,14 +590,14 @@
 
    ;;          (s) Shopping template
    ("ns" "          (s) Shopping" entry (file "ref.org")
-    "* Shop at %? :fin:
+    "* Shop at %^{Merchant|Sprouts Hillcrest San Diego|Trader Joe's Hillcrest San Diego|Trader Joe's Mira Mesa San Diego|Farmer's Market Hillcrest San Diego|Costco Poway|Costco Mission Valley San Diego|Target Mission Valley San Diego|Poncho Villa North Park San Diego|VONS Poway|Ralphs Hillcrest San Diego|Whole Foods Hillcrest San Diego} %^{YYYY-MM-DD} :fin:
   :PROPERTIES:
-  :Cost:
-  :Paid:
-  :Method:
-  :Merchant:
-  :Note:
-  :Link:
+  :Cost:     %^{Cost}
+  :Paid:     %\\3
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\4]]
+  :Merchant: [[peo:%\\1][%\\1]]
+  :Note:     %?
+  :Link:     [[val:fin/Receipts/%\\2 %^{Merchant Short Name} Receipt.pdf][%\\2 %\\5 Receipt.pdf]]
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
