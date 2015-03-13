@@ -257,6 +257,22 @@
   - State \"SUBSCRIBE\"  from \"\"           %U
   :END:%:quote")
 
+   ;; CONSUMING(l) Consuming template
+   ("mr" "CONSUMING (l) Consuming org-protocol" entry (file "ref.org")
+    "* CONSUMING [[%:link][%:created]]
+  :PROPERTIES:
+  :Creator:  %:creator
+  :Created:  %:created
+  :Source:   %:source
+  :Via:      %:via
+  :Link:     %:link
+  :Date:     %:date
+  :Note:     %:note
+  :END:
+  :LOGBOOK:
+  - State \"CONSUMING\"  from \"\"           %U
+  :END:%:quote")
+
    ;; SHARE    (s) Share template
    ("ms" "SHARE     (s) Share org-protocol" entry (file "ref.org")
     "* SHARE [[%:link][%:created]]
@@ -533,7 +549,7 @@
   :MPG:
   :PPM:
   :Merchant: [[peo:%\\1][%\\1]]
-  :Link:     [[val:fin/Receipts/%\\2 %^{Merchant Short Name} Receipt.pdf][%\\2 %\\8 Receipt.pdf]]
+  :Link:     [[val:fin/Receipts/%\\2 %^{Merchant Short Name}.pdf][%\\2 %\\8.pdf]]
   :Note:
   :END:
   :LOGBOOK:
@@ -597,7 +613,7 @@
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\4]]
   :Merchant: [[peo:%\\1][%\\1]]
   :Note:     %?
-  :Link:     [[val:fin/Receipts/%\\2 %^{Merchant Short Name} Receipt.pdf][%\\2 %\\5 Receipt.pdf]]
+  :Link:     [[val:fin/Receipts/%\\2 %^{Merchant Short Name}.pdf][%\\2 %\\5.pdf]]
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U

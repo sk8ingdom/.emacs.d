@@ -28,10 +28,11 @@
          ;; Sequence for MULTIMEDIA
          ;; CONSUME means to read (articles, books, quote, etc.), play (games), listen (music), or watch (a series or movie)
          ;; SUBSCRIBE means to add it to a newsreader or list of some sort
+         ;; CONSUMING means currently consuming
          ;; SHARE means to share on G+, Facebook, reddit, blog about, etc.
          ;; IGNORED means not read and no desire to read in the future
          ;; REFERENCE is for stuff you don't own but want to be available later
-         (sequence "CONSUME(r@/!)" "SUBSCRIBE(b@/!)" "SHARE(s@/!)" "|" "IGNORED(i@/!)" "REFERENCE(f@/!)")
+         (sequence "CONSUME(r@/!)" "SUBSCRIBE(b@/!)" "CONSUMING(l@/!)" "SHARE(s@/!)" "|" "IGNORED(i@/!)" "REFERENCE(f@/!)")
 
          ;; Sequence for EVENTS
          ;; VISIT means that there is something you would physically like to do, no dates associated
