@@ -401,10 +401,10 @@
   :Email:
   :Password:
   :Note:
-  :END
+  :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
-  :END::")
+  :END:")
 
    ;;          (b) Business template
    ("nb" "          (b) Business" entry (file+headline "peo.org" "Businesses")
