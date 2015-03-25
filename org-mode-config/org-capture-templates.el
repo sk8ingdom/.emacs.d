@@ -578,7 +578,7 @@
   :END:")
 
    ;;          (j) Journal template
-   ("nj" "          (j) Journal" entry (file+headline "org.org" "Write Daily Journal")
+   ("nj" "          (j) Journal" entry (file+headline "org.org" "Journal")
     "* Journal %^{YYYY-MM-DD} :org:
   :PROPERTIES:
   :Via:
