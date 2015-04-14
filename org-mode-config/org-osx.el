@@ -6,5 +6,5 @@
 (setq org-agenda-files (quote ("~/org")))
 
 ;; Abbreviations
-(add-to-list 'org-link-abbrev-alist '("val"     . "/Volumes/home/"))
+(add-to-list 'org-link-abbrev-alist '("val"     . "file+sys:/Volumes/home/"))
 (add-to-list 'org-link-abbrev-alist '("local"   . "~/"))
