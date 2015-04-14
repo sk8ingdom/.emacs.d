@@ -49,3 +49,8 @@
 
 ;; Export drawers
 (setq org-export-with-drawers t)
+
+;; Force links to open in current window
+(setq org-link-frame-setup
+      (quote
+       ((file . find-file))))
