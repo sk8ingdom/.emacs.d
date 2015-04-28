@@ -75,6 +75,7 @@
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
   :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
@@ -90,6 +91,7 @@
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
   :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
@@ -105,6 +107,7 @@
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
   :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
@@ -120,6 +123,7 @@
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
   :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
@@ -135,6 +139,7 @@
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
   :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
@@ -151,6 +156,7 @@
     :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
   :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
@@ -167,6 +173,7 @@
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
   :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
@@ -183,6 +190,7 @@
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
   :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
@@ -200,6 +208,7 @@
   :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Merchant:
   :Link:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
@@ -216,6 +225,7 @@
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
   :Merchant: [[peo:%^{Merchant}][%\\2]]
   :Link:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
