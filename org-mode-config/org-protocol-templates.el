@@ -77,19 +77,19 @@
   ;; Some domains have specific json URLs
   ;; If the domain doesn't have a specific json URL, it uses the readability API
   (cond ((string-match "imdb\.com" url)
-         (concat "https://www.kimonolabs.com/api/5havjcjc?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+         (concat "https://www.kimonolabs.com/api/ondemand/5havjcjc?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1"))
         ((string-match "stackoverflow\.com" url)
-         (concat "https://www.kimonolabs.com/api/6a74l7lo?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+         (concat "https://www.kimonolabs.com/api/ondemand/6a74l7lo?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1"))
         ((string-match "gmane\.org" url)
-         (concat "https://www.kimonolabs.com/api/9oqm87li?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+         (concat "https://www.kimonolabs.com/api/ondemand/9oqm87li?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1"))
         ((string-match "amazon\.com" url)
-         (concat "https://www.kimonolabs.com/api/8shfuve2?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+         (concat "https://www.kimonolabs.com/api/ondemand/8shfuve2?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1"))
         (t
