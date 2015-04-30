@@ -92,6 +92,12 @@
          (concat "https://www.kimonolabs.com/api/ondemand/8shfuve2?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1"))
+        ((string-match "boardgamegeek\.com" url)
+         (concat "https://www.kimonolabs.com/api/ondemand/4iotky3s?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+                 (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
+                 "&kimpath3="
+                 (car (last (split-string (url-filename (url-generic-parse-url url)) "/")))
+                 "&kimwithurl=1"))
         (t
          (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))))
 
