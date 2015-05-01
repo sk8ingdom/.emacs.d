@@ -98,6 +98,10 @@
                  "&kimpath3="
                  (car (last (split-string (url-filename (url-generic-parse-url url)) "/")))
                  "&kimwithurl=1"))
+        ((string-match "youtube\.com" url)
+         (concat "https://www.kimonolabs.com/api/ondemand/5qmwewqs?apikey=8d576e98db81c2d0b94202953e69b591&kimpath1=watch&"
+                 (cadr (split-string (url-filename (url-generic-parse-url "https://www.youtube.com/watch?v=-4EDhdAHrOg")) "?"))
+                 "&kimwithurl=1"))
         (t
          (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))))
 
