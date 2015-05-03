@@ -82,6 +82,9 @@ prompt the user for a coding system."
 ;; Enable follow link bindings
 (ffap-bindings)
 
+;; Don't ignore hidden matches
+(setq search-invisible t)
+
 ;; Plugins
 
 ;; Enable winner-mode
