@@ -95,7 +95,16 @@ prompt the user for a coding system."
 (package-initialize)
 
 ;; Enable nastran-mode
-;; (load "~/.emacs.d/plugins/nastran-mode")
+;; (load "~/.emacs.d/plugins/nastran")
+
+;; Enable abaqus-mode
+;; (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
+;; (load "~/.emacs.d/plugins/abaqus")
+(autoload 'abaqus-mode "~/.emacs.d/plugins/abaqus" "Major mode for editing Abaqus files." t)
+(add-to-list 'auto-mode-alist '("\\.inp$" . abaqus-mode))
+(add-hook 'abaqus-mode-hook 'turn-on-font-lock)
+;; This is currently required because the top link doesn't currently work in Emacs 24.4
+(add-hook 'find-file-hooks (lambda () (font-lock-mode 1)))
 
 ;; Enable htmlize
 (load "~/.emacs.d/plugins/htmlize")
