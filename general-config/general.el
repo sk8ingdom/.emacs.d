@@ -4,6 +4,9 @@
 ;; Enable transient mark mode
 (transient-mark-mode t)
 
+;; Set truncate lines to default
+(set-default 'truncate-lines t)
+
 ;; Tabs
 
 ;; Disable tabs by default
