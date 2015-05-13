@@ -84,6 +84,10 @@
          (concat "https://www.kimonolabs.com/api/ondemand/6a74l7lo?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1"))
+        ((string-match "emacs\.stackexchange\.com" url)
+         (concat "https://www.kimonolabs.com/api/ondemand/b15iltrs?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+                 (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
+                 "&kimwithurl=1"))
         ((string-match "gmane\.org" url)
          (concat "https://www.kimonolabs.com/api/ondemand/9oqm87li?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
@@ -98,9 +102,21 @@
                  "&kimpath3="
                  (car (last (split-string (url-filename (url-generic-parse-url url)) "/")))
                  "&kimwithurl=1"))
+        ((string-match "reddit\.com" url)
+         (print (concat "https://www.kimonolabs.com/api/ondemand/d2griemi?apikey=8d576e98db81c2d0b94202953e69b591&kimpath1=r&kimpath2="
+                 (nth 2 (split-string (url-filename (url-generic-parse-url url)) "/"))
+                 "&kimpath3=comments&kimpath4="
+                 (nth 4 (split-string (url-filename (url-generic-parse-url url)) "/"))
+                 "&kimpath5="
+                 (nth 5 (split-string (url-filename (url-generic-parse-url url)) "/"))
+                 "&kimwithurl=1")))
         ((string-match "youtube\.com" url)
          (concat "https://www.kimonolabs.com/api/ondemand/5qmwewqs?apikey=8d576e98db81c2d0b94202953e69b591&kimpath1=watch&"
-                 (cadr (split-string (url-filename (url-generic-parse-url "https://www.youtube.com/watch?v=-4EDhdAHrOg")) "?"))
+                 (cadr (split-string (url-filename (url-generic-parse-url url)) "?"))
+                 "&kimwithurl=1"))
+        ((string-match "news\.ycombinator\.com" url)
+         (concat "https://www.kimonolabs.com/api/ondemand/25bk4kv2?apikey=8d576e98db81c2d0b94202953e69b591&kimpath1=item&"
+                 (cadr (split-string (url-filename (url-generic-parse-url url)) "?"))
                  "&kimwithurl=1"))
         (t
          (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))))

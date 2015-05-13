@@ -16,6 +16,8 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 (define-key global-map "\C-cc" 'org-capture)
+;; (global-set-key "\C-ci" (lambda () (interactive) (org-id-get-with-outline-path-completion)))
+;; (global-set-key "\C-cd" (lambda () (interactive) (org-id-get-with-outline-drilling)))
 
 ;; Property inheritance
 (setq org-use-property-inheritance nil)
