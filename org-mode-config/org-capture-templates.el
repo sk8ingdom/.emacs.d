@@ -599,7 +599,7 @@
 
    ;;          (j) Journal template
    ("nj" "          (j) Journal" entry (file+headline "org.org" "Journal")
-    "* Journal %^{YYYY-MM-DD} :org:
+    "* Journal %(org-read-date) :org:
   :PROPERTIES:
   :Via:
   :Note:
@@ -610,13 +610,13 @@
 
    ;;          (p) Paycheck template
    ("np" "          (p) Paycheck" entry (file+headline "fin.org" "Paycheck")
-    "* Paycheck %^{YYYY-MM-DD} :fin:
+    "* Paycheck %(org-read-date) :fin:
   :PROPERTIES:
   :Cost:     -%^{Amount}
-  :Paid:     -%\\2
+  :Paid:     -%\\1
   :Method:   [[fin:Wells Fargo Debit Account][Wells Fargo Debit Account]]
   :Merchant: [[peo:General Atomics Aeronautical Systems Inc.][General Atomics Aeronautical Systems Inc.]]
-  :Link:     [[val:fin/Banking/Work/General Atomics Aeronautical Systems Inc./Paycheck/%\\1.pdf][%\\1.pdf]]
+  :Link:     [[val:fin/Banking/Work/General Atomics Aeronautical Systems Inc./Paycheck/%(org-read-date).pdf][%(org-read-date).pdf]]
   :Note:     %?
   :END:
   :LOGBOOK:
@@ -626,14 +626,14 @@
 
    ;;          (s) Shopping template
    ("ns" "          (s) Shopping" entry (file "ref.org")
-    "* Shop at %^{Merchant|Sprouts Hillcrest San Diego|Trader Joe's Hillcrest San Diego|Trader Joe's Mira Mesa San Diego|Farmer's Market Hillcrest San Diego|Costco Poway|Costco Mission Valley San Diego|Target Mission Valley San Diego|Poncho Villa North Park San Diego|VONS Poway|Ralphs Hillcrest San Diego|Whole Foods Hillcrest San Diego} %^{YYYY-MM-DD} :fin:
+    "* Shop at %^{Merchant|Sprouts Hillcrest San Diego|Trader Joe's Hillcrest San Diego|Trader Joe's Mira Mesa San Diego|Farmer's Market Hillcrest San Diego|Costco Poway|Costco Mission Valley San Diego|Target Mission Valley San Diego|Poncho Villa North Park San Diego|VONS Poway|Ralphs Hillcrest San Diego|Whole Foods Hillcrest San Diego} %(org-read-date) :fin:
   :PROPERTIES:
   :Cost:     %^{Cost}
-  :Paid:     %\\3
-  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\4]]
+  :Paid:     %\\2
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\3]]
   :Merchant: [[peo:%\\1][%\\1]]
   :Note:     %?
-  :Link:     [[val:fin/Receipts/%\\2 %^{Merchant Short Name}.pdf][%\\2 %\\5.pdf]]
+  :Link:     [[val:fin/Receipts/%(org-read-date) %^{Merchant Short Name}.pdf][%(org-read-date) %\\4.pdf]]
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U

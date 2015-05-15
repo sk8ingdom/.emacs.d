@@ -16,7 +16,7 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 (define-key global-map "\C-cc" 'org-capture)
-;; (global-set-key "\C-ci" (lambda () (interactive) (org-id-get-with-outline-path-completion)))
+(global-set-key "\C-ci" (lambda () (interactive) (org-id-get-with-outline-path-completion '((org-agenda-files :maxlevel . 9)))))
 ;; (global-set-key "\C-cd" (lambda () (interactive) (org-id-get-with-outline-drilling)))
 
 ;; Property inheritance
@@ -43,8 +43,7 @@
 ;;    (add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local)))
 
 ;; Targets include this file and any file contributing to the agenda - up to 9 levels deep
-(setq org-refile-targets (quote ((nil :maxlevel . 9)
-                                 (org-agenda-files :maxlevel . 9))))
+(setq org-refile-targets '((org-agenda-files :maxlevel . 9)))
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps t)
 (setq org-refile-allow-creating-parent-nodes t)
