@@ -16,8 +16,6 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 (define-key global-map "\C-cc" 'org-capture)
-(global-set-key "\C-ci" (lambda () (interactive) (org-id-get-with-outline-path-completion '((org-agenda-files :maxlevel . 9)))))
-;; (global-set-key "\C-cd" (lambda () (interactive) (org-id-get-with-outline-drilling)))
 
 ;; Property inheritance
 (setq org-use-property-inheritance nil)
@@ -55,3 +53,10 @@
 (setq org-link-frame-setup
       (quote
        ((file . find-file))))
+
+;; Prompt for path completion when an id type link when org-insert-link is called
+;; Use with C-c C-l id: RET
+(defun org-id-complete-link (&optional arg)
+  "Create an id: link using completion"
+  (concat "id:"
+          (org-id-get-with-outline-path-completion org-refile-targets)))
