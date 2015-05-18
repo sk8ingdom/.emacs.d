@@ -12,6 +12,14 @@
 ;; Show times with AM/PM rather than 24 hours
 (setq org-agenda-timegrid-use-ampm t)
 
+;; Show agenda on startup
+(add-hook 'after-init-hook 'my/org-agenda-startup)
+
+(defun my/org-agenda-startup ()
+  (org-agenda-list)
+  (org-agenda-earlier 1)
+  (org-agenda-fortnight-view))
+
 ;; Custom agenda commands to quickly view lists of relevent data
 (setq org-agenda-custom-commands
       '(
