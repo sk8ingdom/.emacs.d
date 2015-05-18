@@ -3,7 +3,15 @@
 (require 'org-crypt)
 
 ;; Remove trailing whitespace
-(add-hook 'org-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+
+;; Enable intelligent text wrapping
+(add-hook 'org-mode-hook
+          (lambda ()
+            (visual-line-mode)
+            (adaptive-wrap-prefix-mode)))
 
 ;; Enable syntax-highlighting
 (setq org-src-fontify-natively t)
