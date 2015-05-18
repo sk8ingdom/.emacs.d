@@ -21,9 +21,9 @@
 
 ;; Set the frame size and location
 (interactive)
-(set-frame-position (selected-frame) 1600 200)
-;; (set-frame-height (selected-frame) 69)
-;; (set-frame-width (selected-frame) 164)
 (set-frame-size (selected-frame) 164 69)
 ;; (add-to-list 'default-frame-alist '(height . 164))
 ;;(add-to-list 'default-frame-alist '(width . 69))
+(set-frame-position (selected-frame) 1600 -812)
+;; (set-frame-height (selected-frame) 69)
+;; (set-frame-width (selected-frame) 164)

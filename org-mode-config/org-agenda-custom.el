@@ -39,7 +39,7 @@
         ("1p" agenda "Possessions agenda (active and inactive)"
          (
           (org-agenda-skip-function
-           '(org-agenda-skip-entry-if 'nottodo '("PURCHASE" "TRANSIT" "SELL" "LOANED" "UNWANTED" "OWN" "GIFTED" "SOLD" "DISCARDED")))
+           '(org-agenda-skip-entry-if 'nottodo '("PURCHASE" "PURCHASED" "TRANSIT" "SELL" "LOANED" "UNWANTED" "OWN" "GIFTED" "SOLD" "DISCARDED")))
           (org-agenda-include-inactive-timestamps 't)
           )
          )
@@ -48,7 +48,7 @@
         ("1m" agenda "Multimedia agenda (active and inactive)"
          (
           (org-agenda-skip-function
-           '(org-agenda-skip-entry-if 'nottodo '("CONSUME" "SUBSCRIBE" "SHARE" "IGNORE" "REFERENCE")))
+           '(org-agenda-skip-entry-if 'nottodo '("CONSUME" "CONSUMING" "SUBSCRIBE" "SHARE" "IGNORE" "REFERENCE")))
           (org-agenda-include-inactive-timestamps 't)
           )
          )
@@ -57,7 +57,7 @@
         ("1e" agenda "Events agenda (active)"
          (
           (org-agenda-skip-function
-           '(org-agenda-skip-entry-if 'nottodo '("VISIT" "PLANNED" "DIDNOTGO" "MEETING" "VISITED")))
+           '(org-agenda-skip-entry-if 'nottodo '("VISIT" "DIDNOTGO" "MEETING" "VISITED")))
           ;; (org-agenda-include-inactive-timestamps 't)
           )
          )
