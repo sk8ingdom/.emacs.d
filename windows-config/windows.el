@@ -2,7 +2,9 @@
 (tool-bar-mode nil)
 
 ;; Set ssl client
+;;(setq tls-program '("\"C:/Program Files (x86)/Git/bin/openssl.exe\" s_client -connect %h:%p -no_ssl2 -ign_eof -crlf"))
 (setq tls-program '("\"C:/Program Files (x86)/Git/bin/openssl.exe\" s_client -connect %h:%p -no_ssl2 -ign_eof"))
+;;(load "~/.emacs.d/plugins/smtp-openssl.el")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
