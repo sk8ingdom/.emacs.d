@@ -519,7 +519,7 @@
     :END:
 
 **** TODO Buy %\\1 %\\2 a Birthday Gift
-     DEADLINE: %^{Birthday}t
+     SCHEDULED: %^{Buy Gift By}t DEADLINE: %\\9
      :PROPERTIES:
      :Via:
      :Note:
@@ -529,7 +529,7 @@
      :END:
 
 *** TODO Buy %\\1 %\\2 a Christmas Gift
-    DEADLINE: <2015-12-25 Fri +1y>
+    SCHEDULED: <2015-12-01 Tue +1y> DEADLINE: <2015-12-25 Fri +1y>
     :PROPERTIES:
     :Via:
     :Note:
@@ -606,7 +606,7 @@
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
-  :END:\n\n   %?")
+  :END:\n\n  %?")
 
    ;;          (p) Paycheck template
    ("np" "          (p) Paycheck" entry (file+headline "fin.org" "Paycheck")
@@ -649,7 +649,25 @@
   | Tax                            |           |         1 |           |
   | Total                          |           |           |           |
   #+TBLFM: $4=$2*$3;%.2f::@>$4=vsum(@3..@-1);%.2f
-  ")))
+  ")
+
+   ;;          (t) Transfer template
+   ("ne" "          (t) Transfer" entry (file "ref.org")
+    "* Transferred %? :fin:
+  :PROPERTIES:
+  :Cost:     %^{Cost}
+  :Paid:     0.00
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\3]]
+  :Merchant: [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\3]]
+  :Link:
+  :Note:
+  :END:
+  :LOGBOOK:
+  - State \"\"           from \"\"           %U
+  :END:
+  %t")
+
+   ))
 
 ;; Add ID automatically on capture
 (add-hook 'org-capture-prepare-finalize-hook 'org-id-store-link)
