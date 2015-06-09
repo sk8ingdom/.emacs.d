@@ -2,6 +2,11 @@
 (require 'json)
 (require 'url)
 
+(defvar org-kimono-api-url "https://www.kimonolabs.com/api/ondemand/")
+(defvar org-kimono-api-key "8d576e98db81c2d0b94202953e69b591")
+(defvar org-readability-api-url "http://www.readability.com/api/content/v1/parser?url=")
+(defvar org-readability-api-key "b661b54be0fbd228e0bad2854238a3eec30e96b1")
+
 (defun org-multimedia-capture (&optional goto)
   (interactive "P")
   ;; Used to capture multimedia links using Kimono and Readability APIs
@@ -90,33 +95,33 @@
   ;; Some domains have specific json URLs
   ;; If the domain doesn't have a specific json URL, it uses the readability API
   (cond ((string-match "imdb\.com" url)
-         (concat "https://www.kimonolabs.com/api/ondemand/5havjcjc?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+         (concat org-kimono-api-url "5havjcjc?apikey=" org-kimono-api-key "&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1"))
         ((string-match "stackoverflow\.com" url)
-         (concat "https://www.kimonolabs.com/api/ondemand/6a74l7lo?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+         (concat org-kimono-api-url "6a74l7lo?apikey=" org-kimono-api-key "&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1"))
         ((string-match "emacs\.stackexchange\.com" url)
-         (concat "https://www.kimonolabs.com/api/ondemand/b15iltrs?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+         (concat org-kimono-api-url "b15iltrs?apikey=" org-kimono-api-key "&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1"))
         ((string-match "gmane\.org" url)
-         (concat "https://www.kimonolabs.com/api/ondemand/9oqm87li?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+         (concat org-kimono-api-url "9oqm87li?apikey=" org-kimono-api-key "&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1"))
         ((string-match "amazon\.com" url)
-         (concat "https://www.kimonolabs.com/api/ondemand/8shfuve2?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+         (concat org-kimono-api-url "8shfuve2?apikey=" org-kimono-api-key "&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1"))
         ((string-match "boardgamegeek\.com" url)
-         (concat "https://www.kimonolabs.com/api/ondemand/4iotky3s?apikey=8d576e98db81c2d0b94202953e69b591&kimpath2="
+         (concat org-kimono-api-url "4iotky3s?apikey=" org-kimono-api-key "&kimpath2="
                  (caddr (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimpath3="
                  (car (last (split-string (url-filename (url-generic-parse-url url)) "/")))
                  "&kimwithurl=1"))
         ((string-match "reddit\.com" url)
-         (print (concat "https://www.kimonolabs.com/api/ondemand/d2griemi?apikey=8d576e98db81c2d0b94202953e69b591&kimpath1=r&kimpath2="
+         (print (concat org-kimono-api-url "d2griemi?apikey=" org-kimono-api-key "&kimpath1=r&kimpath2="
                  (nth 2 (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimpath3=comments&kimpath4="
                  (nth 4 (split-string (url-filename (url-generic-parse-url url)) "/"))
@@ -124,15 +129,15 @@
                  (nth 5 (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimwithurl=1")))
         ((string-match "youtube\.com" url)
-         (concat "https://www.kimonolabs.com/api/ondemand/5qmwewqs?apikey=8d576e98db81c2d0b94202953e69b591&kimpath1=watch&"
+         (concat org-kimono-api-url "5qmwewqs?apikey=" org-kimono-api-key "&kimpath1=watch&"
                  (cadr (split-string (url-filename (url-generic-parse-url url)) "?"))
                  "&kimwithurl=1"))
         ((string-match "news\.ycombinator\.com" url)
-         (concat "https://www.kimonolabs.com/api/ondemand/25bk4kv2?apikey=8d576e98db81c2d0b94202953e69b591&kimpath1=item&"
+         (concat org-kimono-api-url "25bk4kv2?apikey=" org-kimono-api-key "&kimpath1=item&"
                  (cadr (split-string (url-filename (url-generic-parse-url url)) "?"))
                  "&kimwithurl=1"))
         (t
-         (concat "http://www.readability.com/api/content/v1/parser?url=" url "&token=b661b54be0fbd228e0bad2854238a3eec30e96b1"))))
+         (concat org-readability-api-url url "&token=" org-readability-api-key))))
 
 (defun get-json-date-from-org (date)
   ;; Attempts to build the org-date from parsed website data
