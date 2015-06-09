@@ -1,18 +1,30 @@
-;; Require json and url packages
+;; Requires json and url packages
 (require 'json)
 (require 'url)
 
-(defun org-chrome-multimedia-capture (&optional goto)
+(defun org-multimedia-capture (&optional goto)
   (interactive "P")
-  ;; Used to capture multimedia links using the readability API
-  ;; Should be invoked interactively with M-x org-protocol-capture-readability
+  ;; Used to capture multimedia links using Kimono and Readability APIs
+  ;; Should be invoked interactively with M-x org-multimedia-capture
   ;; The prompt should be answered with either an encoded link such as:
   ;;     http%3A%2F%2Fwww.wired.com%2F2014%2F10%2Fvolvo-turbo-engine-concept%2F/
   ;; or a Link / quote pair such as:
   ;;     http%3A%2F%2Fwww.wired.com%2F2014%2F10%2Fvolvo-turbo-engine-concept%2F/quote
   ;; This is likely easiest accomplished by creating a javascript bookmarklet such as:
-  ;;     javascript:(function(s){try{s=document.selection.createRange().text}catch(_){s=document.getSelection()}prompt('',encodeURIComponent(location.href)+'/'+encodeURIComponent(s))})()
-  ;; and copying the text
+  ;; javascript:(
+  ;;     function(s){
+  ;;         try{
+  ;;             s=document.selection.createRange().text
+  ;;         }
+  ;;         catch(_){
+  ;;             s=document.getSelection()
+  ;;         }
+  ;;         prompt('',encodeURIComponent(location.href)+
+  ;;                '/'+
+  ;;                encodeURIComponent(s)
+  ;;               )
+  ;;     }
+  ;; )()
   ;; Like org-capture, using the C-0, C-1, etc. goto prefix arguments work
   ;; The keys prefix argument is not implemented because I don't use it.
   (let* (
@@ -38,7 +50,8 @@
          (date (plist-get json-data :date))
          (note (plist-get json-data :note))
          ;; Prompt for the via link; orglink is created automatically from the link and description prompt
-         (via (or (concat "[[" (read-string "Via link: ") "][" (read-string "Via description: ") "]]") ""))
+         (via (replace-regexp-in-string
+               (regexp-quote "[[][]]") "" (concat "[[" (read-string "Via link: ") "][" (read-string "Via description: ") "]]")))
          ;; Get source from json object
          ;; (source (or (fix-encoding (plist-get json :domain)) ""))
          (source (url-host (url-generic-parse-url link)))
@@ -127,7 +140,7 @@
     (insert
      (replace-regexp-in-string
       (regexp-quote "[]") ""
-      (concat "[" date "]")))
+      (concat "[" (org-read-date nil nil date) "]")))
     (point-min)
     (org-time-stamp-inactive)
     (buffer-string)))
