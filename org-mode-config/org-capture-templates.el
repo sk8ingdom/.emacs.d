@@ -519,7 +519,7 @@
     :END:
 
 **** TODO Buy %\\1 %\\2 a Birthday Gift
-     SCHEDULED: %^{Buy Gift By}t DEADLINE: %\\9
+     SCHEDULED: %^{Buy Gift By}t DEADLINE: %^{Birthday}t
      :PROPERTIES:
      :Via:
      :Note:
