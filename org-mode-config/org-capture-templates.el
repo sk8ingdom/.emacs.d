@@ -358,7 +358,7 @@
   :LOGBOOK:
   - State \"VISIT\"      from \"\"           %U
   :END:
-  %^T--%^T")
+  %^t--%^t")
 
    ;; DIDNOTGO (z) Didnotgo template
    ("ez" "DIDNOTGO  (z) Didnotgo" entry (file "ref.org")
@@ -373,7 +373,7 @@
   :LOGBOOK:
   - State \"DIDNOTGO\"   from \"\"           %U
   :END:
-  %^T--%^T")
+  %^t--%^t")
 
    ;; MEETING  (m) Meeting template
    ("em" "MEETING   (m) Meeting" entry (file "ref.org")
@@ -409,7 +409,7 @@
   :LOGBOOK:
   - State \"VISITED\"    from \"\"           %U
   :END:
-  %^T--%^T")
+  %^t--%^t")
 
    ("n" "Non-to-do States")
    ;;          (a) Account template
@@ -652,13 +652,13 @@
   ")
 
    ;;          (t) Transfer template
-   ("ne" "          (t) Transfer" entry (file "ref.org")
+   ("nt" "          (t) Transfer" entry (file "ref.org")
     "* Transferred %? :fin:
   :PROPERTIES:
   :Cost:     %^{Cost}
   :Paid:     0.00
-  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\3]]
-  :Merchant: [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\3]]
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|Wells Fargo Savings Account|GE Capital Credit Card}][%\\3]]
+  :Merchant: [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|Wells Fargo Savings Account|GE Capital Credit Card}][%\\3]]
   :Link:
   :Note:
   :END:
