@@ -4,13 +4,6 @@ Archive/
 elpa/
 server/
 auto-save-list/
-eshell/history
-eshell/lastdir
-url/cookies
-
-tramp
-
-url/cache/sk8ingdom/http/com/gravatar/www/009de4838f9d330c7954dc90110b788d
-url/cache/surano/http/com/gravatar/www/009de4838f9d330c7954dc90110b788d
-
-url/cache/sk8ingdom/http/com/gravatar/www/960d396e82a622b41edd78cda6f8c6c7
+eshell/
+tramp/
+url/
