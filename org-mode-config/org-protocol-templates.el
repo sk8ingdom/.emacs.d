@@ -58,7 +58,6 @@
          (via (replace-regexp-in-string
                (regexp-quote "[[][]]") "" (concat "[[" (read-string "Via link: ") "][" (read-string "Via description: ") "]]")))
          ;; Get source from json object
-         ;; (source (or (fix-encoding (plist-get json :domain)) ""))
          (source (url-host (url-generic-parse-url link)))
          (orglink (org-make-link-string
                    link (if (string-match "[^[:space:]]" created) created link)))
@@ -177,13 +176,13 @@
 
 (defun get-json-data-readability (json)
   (let (;; Get creator from json object
-        (creator (or (fix-encoding (plist-get json :author)) ""))
+        (creator (fix-encoding (plist-get json :author)))
         ;; Get created from json object
-        (created (or (fix-encoding (plist-get json :title)) ""))
+        (created (fix-encoding (plist-get json :title)))
         ;; Get date from json object; if doesn't exist, set it to nothing
-        (date (or (get-json-date-from-org (plist-get json :date_published)) ""))
+        (date (get-json-date-from-org (plist-get json :date_published)))
         ;; Get note from json object
-        (note (or (fix-encoding (plist-get json :excerpt)) "")))
+        (note (fix-encoding (plist-get json :excerpt))))
     (setq json-data nil)
     (setq json-data (plist-put json-data :creator creator))
     (setq json-data (plist-put json-data :created created))
@@ -219,4 +218,6 @@
                (regexp-quote "&hellip;") "..."
                (replace-regexp-in-string
                 (regexp-quote "’") "'"
-               string))))))))))))))
+                (replace-regexp-in-string
+                 (regexp-quote "–") "--"
+               string)))))))))))))))
