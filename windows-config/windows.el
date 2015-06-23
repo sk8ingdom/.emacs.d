@@ -21,11 +21,17 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Courier New" :foundry "outline" :slant normal :weight normal :height 83 :width normal)))))
 
-;; Set the frame size and location
-(interactive)
-(set-frame-size (selected-frame) 164 69)
-;; (add-to-list 'default-frame-alist '(height . 164))
-;;(add-to-list 'default-frame-alist '(width . 69))
-(set-frame-position (selected-frame) 1600 -812)
-;; (set-frame-height (selected-frame) 69)
-;; (set-frame-width (selected-frame) 164)
+;; Initial frame size and location
+(setq initial-frame-alist
+      '((top . -812)
+        (left . 1600)
+        (width . 164)
+        (height . 69)))
+
+;; Subsequent frame size and location
+;; Call gnus with M-x gnus-other-frame
+(setq default-frame-alist
+      '((top . -235)
+        (left . 1600)
+        (width . 164)
+        (height . 37)))
