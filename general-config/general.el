@@ -98,7 +98,7 @@ prompt the user for a coding system."
 (package-initialize)
 
 ;; Enable nastran-mode
-;; (load "~/.emacs.d/plugins/nastran")
+(load "~/.emacs.d/plugins/nastran/nastran")
 
 ;; Enable abaqus-mode
 ;; (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
