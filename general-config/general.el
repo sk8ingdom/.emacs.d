@@ -98,7 +98,12 @@ prompt the user for a coding system."
 (package-initialize)
 
 ;; Enable nastran-mode
-(load "~/.emacs.d/plugins/nastran/nastran")
+;; (load "~/.emacs.d/plugins/nastran/nastran")
+(autoload 'nastran-mode "~/.emacs.d/plugins/nastran/nastran" "Major mode for editing Nastran files." t)
+(add-to-list 'auto-mode-alist '("\\.bdf$" . nastran-mode))
+(add-hook 'nastran-mode-hook 'turn-on-font-lock)
+;; This is currently required because the top link doesn't currently work in Emacs 24.4
+(add-hook 'find-file-hooks (lambda () (font-lock-mode 1)))
 
 ;; Enable abaqus-mode
 ;; (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
