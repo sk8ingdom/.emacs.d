@@ -68,3 +68,18 @@
   "Create an id: link using completion"
   (concat "id:"
           (org-id-get-with-outline-path-completion org-refile-targets)))
+
+;; Shorten dired links to file name
+;; Added for  [[id:2d61b197-2652-44e5-88f4-70f31e2bcf07]]
+(defun dired-store-link ()
+  (when (derived-mode-p 'dired-mode)
+    (let ((file (dired-get-filename nil t)))
+      (setf file (if file
+                     (abbreviate-file-name (expand-file-name file))
+                   default-directory))
+      (org-store-link-props :type        "dired"
+                            :link        file
+                            :description (file-name-nondirectory file))
+      file)))
+
+(add-to-list 'org-store-link-functions 'dired-store-link)
