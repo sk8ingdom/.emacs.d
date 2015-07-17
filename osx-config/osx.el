@@ -47,3 +47,6 @@
 (setq mac-option-modifier 'meta)
 ;; Sets the remapped control key to Control
 (setq mac-control-modifier 'control)
+
+;; Gnus
+(load "~/.emacs.d/osx-config/osx-gnus.el")
