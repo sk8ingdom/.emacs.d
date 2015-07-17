@@ -606,7 +606,8 @@
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
-  :END:\n\n  %?")
+  :END:
+   %t\n\n  %?")
 
    ;;          (p) Paycheck template
    ("np" "          (p) Paycheck" entry (file+headline "fin.org" "Paycheck")
