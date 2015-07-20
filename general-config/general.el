@@ -101,6 +101,7 @@ prompt the user for a coding system."
 ;; (load "~/.emacs.d/plugins/nastran/nastran")
 (autoload 'nastran-mode "~/.emacs.d/plugins/nastran/nastran" "Major mode for editing Nastran files." t)
 (add-to-list 'auto-mode-alist '("\\.bdf$" . nastran-mode))
+(add-to-list 'auto-mode-alist '("\\.dat$" . nastran-mode))
 (add-hook 'nastran-mode-hook 'turn-on-font-lock)
 ;; This is currently required because the top link doesn't currently work in Emacs 24.4
 (add-hook 'find-file-hooks (lambda () (font-lock-mode 1)))
