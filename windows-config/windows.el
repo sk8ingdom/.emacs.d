@@ -35,3 +35,6 @@
         (left . 1600)
         (width . 164)
         (height . 37)))
+
+;; Gnus
+(load "~/.emacs.d/windows-config/windows-gnus.el")

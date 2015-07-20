@@ -499,6 +499,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
+
 ** Wish List
    :LOGBOOK:
    - State \"TODO\"       from \"\"           %U
@@ -508,6 +509,7 @@
    :LOGBOOK:
    - State \"TODO\"       from \"\"           %U
    :END:
+
 *** TODO Wish %\\1 %\\2 a Happy Birthday
     DEADLINE: %^{Birthday}t
     :PROPERTIES:

@@ -10,6 +10,9 @@
 (load "~/.emacs.d/org-mode-config/org-agenda-custom")
 (load "~/.emacs.d/org-mode-config/org-abbreviations")
 
+;; Gnus
+(load "~/.emacs.d/.gnus")
+
 (cond
  ;; Windows
  ((string-equal system-type "windows-nt")
