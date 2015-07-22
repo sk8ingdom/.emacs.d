@@ -100,11 +100,11 @@ prompt the user for a coding system."
 ;; Enable nastran-mode
 ;; (load "~/.emacs.d/plugins/nastran/nastran")
 (autoload 'nastran-mode "~/.emacs.d/plugins/nastran/nastran" "Major mode for editing Nastran files." t)
-(add-to-list 'auto-mode-alist '("\\.bdf$" . nastran-mode))
-(add-to-list 'auto-mode-alist '("\\.dat$" . nastran-mode))
+;;(add-to-list 'auto-mode-alist '("\\.bdf$" . nastran-mode))
+;;(add-to-list 'auto-mode-alist '("\\.dat$" . nastran-mode))
 (add-hook 'nastran-mode-hook 'turn-on-font-lock)
 ;; This is currently required because the top link doesn't currently work in Emacs 24.4
-(add-hook 'find-file-hooks (lambda () (font-lock-mode 1)))
+(add-hook 'find-file-hooks (lambda () (font-lock-mode t)))
 
 ;; Enable abaqus-mode
 ;; (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
@@ -113,7 +113,7 @@ prompt the user for a coding system."
 (add-to-list 'auto-mode-alist '("\\.inp$" . abaqus-mode))
 (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
 ;; This is currently required because the top link doesn't currently work in Emacs 24.4
-(add-hook 'find-file-hooks (lambda () (font-lock-mode 1)))
+(add-hook 'find-file-hooks (lambda () (font-lock-mode t)))
 
 ;; Enable htmlize
 (load "~/.emacs.d/plugins/htmlize")
