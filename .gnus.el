@@ -10,6 +10,7 @@
 
 (setq gnus-secondary-select-methods
       '((nntp "news.gmane.org")
+        (nntp "news.gwene.org")
         (nntp "news.eternal-september.org")))
 
 (require 'smtpmail)

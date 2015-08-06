@@ -601,7 +601,7 @@
 
    ;;          (j) Journal template
    ("nj" "          (j) Journal" entry (file+headline "org.org" "Journal")
-    "* Journal %(org-read-date) :org:
+    "* Journal :org:
   :PROPERTIES:
   :Via:
   :Note:
@@ -661,7 +661,7 @@
   :Cost:     %^{Cost}
   :Paid:     0.00
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|Wells Fargo Savings Account|GE Capital Credit Card}][%\\3]]
-  :Merchant: [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|Wells Fargo Savings Account|GE Capital Credit Card}][%\\3]]
+  :Merchant: [[fin:%^{Merchant|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|Wells Fargo Savings Account|GE Capital Credit Card}][%\\3]]
   :Link:
   :Note:
   :END:
