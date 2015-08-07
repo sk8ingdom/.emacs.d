@@ -613,7 +613,7 @@
 
    ;;          (p) Paycheck template
    ("np" "          (p) Paycheck" entry (file+headline "fin.org" "Paycheck")
-    "* Paycheck %(org-read-date) :fin:
+    "* Paycheck :fin:
   :PROPERTIES:
   :Cost:     -%^{Amount}
   :Paid:     -%\\1
