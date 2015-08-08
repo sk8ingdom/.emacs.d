@@ -18,12 +18,12 @@
  ((string-equal system-type "windows-nt")
   (load "~/.emacs.d/windows-config/windows")
   (load "~/.emacs.d/org-mode-config/org-windows")
- )
+  )
  ;; OSX
  ((string-equal system-type "darwin")
   (load "~/.emacs.d/osx-config/osx")
   (load "~/.emacs.d/org-mode-config/org-osx")
- )
+  )
  ;; Linux
  ((string-equal system-type "gnu/linux")
   (load "~/.emacs.d/linux-config/linux")
