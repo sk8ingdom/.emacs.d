@@ -10,8 +10,8 @@
 
 (setq gnus-secondary-select-methods
       '((nntp "news.gmane.org")
-        (nntp "news.gwene.org")
-        (nntp "news.eternal-september.org")))
+        (nntp "news.eternal-september.org")
+        (nntp "news.gwene.org")))
 
 (require 'smtpmail)
 (setq send-mail-function 'smtpmail-send-it

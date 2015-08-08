@@ -278,7 +278,7 @@
   :END:%:quote")
 
    ;; CONSUMING(l) Consuming template
-   ("mr" "CONSUMING (l) Consuming org-protocol" entry (file "ref.org")
+   ("ml" "CONSUMING (l) Consuming org-protocol" entry (file "ref.org")
     "* CONSUMING [[%:link][%:created]]
   :PROPERTIES:
   :Creator:  %:creator

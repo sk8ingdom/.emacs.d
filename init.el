@@ -28,8 +28,11 @@
  ((string-equal system-type "gnu/linux")
   (load "~/.emacs.d/linux-config/linux")
   (load "~/.emacs.d/org-mode-config/org-linux")
+  )
  )
-)
+
+;; Gnus
+(setq gunus-init-file "~/.emacs.d/.gnus.el")
 
 ;; Plugins
 (load "~/.emacs.d/org-mode-config/org-plugins")
