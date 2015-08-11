@@ -3,7 +3,8 @@
 
 ;; Set ssl client
 ;;(setq tls-program '("\"C:/Program Files (x86)/Git/bin/openssl.exe\" s_client -connect %h:%p -no_ssl2 -ign_eof -crlf"))
-(setq tls-program '("\"C:/Program Files (x86)/Git/bin/openssl.exe\" s_client -connect %h:%p -no_ssl2 -ign_eof"))
+(setq tls-program '("\"C:/Program Files (x86)/Git/bin/openssl.exe\" s_client -connect %h:%p -no_ssl2 -ign_eof"
+                    "gnutls-cli -p %p %h"))
 ;;(load "~/.emacs.d/plugins/smtp-openssl.el")
 
 (custom-set-variables
