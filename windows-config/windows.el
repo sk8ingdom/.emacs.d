@@ -7,6 +7,15 @@
                     "gnutls-cli -p %p %h"))
 ;;(load "~/.emacs.d/plugins/smtp-openssl.el")
 
+;; Tramp configuration
+(require 'tramp)
+(set-default 'tramp-auto-save-directory "C:\\Users\\surano\\AppData\\Local\\Temp")
+;; Can alternatively be set to pscp
+(set-default 'tramp-default-method "plink")
+(defun my/comint-init ()
+  (setq comint-process-echoes t))
+(add-hook 'comint-mode-hook 'my/comint-init)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
