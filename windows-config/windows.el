@@ -35,7 +35,7 @@
 (setq initial-frame-alist
       '((top . -812)
         (left . 1600)
-        (width . 164)
+        (width . 166)
         (height . 69)))
 
 ;; Subsequent frame size and location
@@ -43,7 +43,7 @@
 (setq default-frame-alist
       '((top . -235)
         (left . 1600)
-        (width . 164)
+        (width . 166)
         (height . 37)))
 
 ;; Gnus

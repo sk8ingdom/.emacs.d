@@ -7,6 +7,11 @@
 ;; Set truncate lines to default
 (set-default 'truncate-lines t)
 
+;; Scrolling
+(set-scroll-bar-mode nil)
+(setq scroll-margin 0)
+(setq scroll-conservatively 10000000)
+
 ;; Tabs
 
 ;; Disable tabs by default
