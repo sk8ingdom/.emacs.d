@@ -558,11 +558,11 @@
 
    ;;          (f) Fuel template
    ("nf" "          (f) Fuel" entry (file+headline "fin.org" "Fuel Up")
-    "* Fuel Up at %^{Merchant|Costco Poway|Costco Mission Valley San Diego} %^{YYYY-MM-DD} :fin:
+    "* Fuel Up at %^{Merchant|Costco Poway|Costco Mission Valley San Diego} :fin:
   :PROPERTIES:
   :Cost:     %^{Cost}
-  :Paid:     %\\3
-  :Method:   [[fin:%^{Method|Wells Fargo Debit Account|Wells Fargo Credit Account}][%\\4]]
+  :Paid:     %\\2
+  :Method:   [[fin:%^{Method|Wells Fargo Debit Account|Wells Fargo Credit Account}][%\\3]]
   :Per_Gal:  %^{Per Gallon}
   :Gallons:  %^{Gallons}
   :Beg_Mil:  %?
@@ -571,7 +571,7 @@
   :MPG:
   :PPM:
   :Merchant: [[peo:%\\1][%\\1]]
-  :Link:     [[val:fin/Receipts/%\\2 %^{Merchant Short Name}.pdf][%\\2 %\\8.pdf]]
+  :Link:     [[val:fin/Receipts/%(org-read-date) %^{Merchant Short Name}.pdf][%(org-read-date) %\\7.pdf]]
   :Note:
   :END:
   :LOGBOOK:
