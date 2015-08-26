@@ -40,3 +40,6 @@
 ;;(add-hook 'gnus-group-mode-hook '(define-key gnus-topic-mode-map (kbd "<tab>") 'gnus-topic-fold-this-topic))
 (with-eval-after-load 'gnus-topic
   (define-key gnus-topic-mode-map (kbd "<tab>") 'gnus-topic-fold-this-topic))
+
+;; Highlight current line in summary mode
+(add-hook 'gnus-summary-prepare-hook 'hl-line-mode)
