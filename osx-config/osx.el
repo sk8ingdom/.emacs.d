@@ -48,5 +48,9 @@
 ;; Sets the remapped control key to Control
 (setq mac-control-modifier 'control)
 
+;; AucTeX
+(setenv "PATH" (concat (getenv "PATH") ":/usr/texbin"))
+(setq exec-path (append exec-path '("/usr/texbin")))
+
 ;; Gnus
 (load "~/.emacs.d/osx-config/osx-gnus.el")
