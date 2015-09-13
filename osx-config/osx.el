@@ -51,6 +51,7 @@
 ;; AucTeX
 (setenv "PATH" (concat (getenv "PATH") ":/usr/texbin"))
 (setq exec-path (append exec-path '("/usr/texbin")))
+(setq TeX-command-force "latex")
 
 ;; Gnus
 (load "~/.emacs.d/osx-config/osx-gnus.el")
