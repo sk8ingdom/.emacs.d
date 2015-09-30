@@ -120,13 +120,15 @@
                  (car (last (split-string (url-filename (url-generic-parse-url url)) "/")))
                  "&kimwithurl=1"))
         ((string-match "reddit\.com" url)
-         (print (concat org-kimono-api-url "d2griemi?apikey=" org-kimono-api-key "&kimpath1=r&kimpath2="
+         ;; (print
+         (concat org-kimono-api-url "9scn1mzk?apikey=" org-kimono-api-key "&kimpath1=r&kimpath2="
                  (nth 2 (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimpath3=comments&kimpath4="
                  (nth 4 (split-string (url-filename (url-generic-parse-url url)) "/"))
                  "&kimpath5="
                  (nth 5 (split-string (url-filename (url-generic-parse-url url)) "/"))
-                 "&kimwithurl=1")))
+                 "&kimwithurl=1"))
+        ;;)
         ((string-match "youtube\.com" url)
          (concat org-kimono-api-url "5qmwewqs?apikey=" org-kimono-api-key "&kimpath1=watch&"
                  (cadr (split-string (url-filename (url-generic-parse-url url)) "?"))
