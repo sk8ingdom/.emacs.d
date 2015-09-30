@@ -12,6 +12,10 @@
 ;; Show times with AM/PM rather than 24 hours
 (setq org-agenda-timegrid-use-ampm t)
 
+;; Only show agenda for current day
+(setq org-agenda-start-on-weekday nil)
+(setq org-agenda-span 1)
+
 ;; Show agenda on startup
 ;; (add-hook 'after-init-hook 'my/org-agenda-startup)
 
