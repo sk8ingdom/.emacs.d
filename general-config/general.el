@@ -93,6 +93,10 @@ prompt the user for a coding system."
 ;; Don't ignore hidden matches
 (setq search-invisible t)
 
+;; Display line and column numbers
+(setq line-number-mode t)
+(setq column-number-mode t)
+
 ;; Plugins
 
 ;; Enable winner-mode
