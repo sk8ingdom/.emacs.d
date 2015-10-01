@@ -28,6 +28,7 @@
          ("instagram"      . "https://www.instagram.com/")
          ("linkedin"       . "http://www.linkedin.com/")
          ("okcupid"        . "http://www.okcupid.com/profile/")
+         ("ontrac"         . "http://www.ontrac.com/trackingres.asp?tracking_number=")
          ("pinterest"      . "http://www.pinterest.com/")
          ("reddit"         . "http://reddit.com/user/")
          ("twitter"        . "https://www.twitter.com/")
