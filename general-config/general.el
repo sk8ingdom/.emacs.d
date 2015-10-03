@@ -97,6 +97,13 @@ prompt the user for a coding system."
 (setq line-number-mode t)
 (setq column-number-mode t)
 
+;; Ediff mode
+(custom-set-variables
+ ;; Puts buffers side by side
+ '(ediff-split-window-function (quote split-window-horizontally))
+ ;; Added ediff control buffer at bottom; activate with ?
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
+
 ;; Plugins
 
 ;; Enable winner-mode
