@@ -122,7 +122,7 @@
         ("2e" agenda "Events agenda table (active)"
          (
           (org-agenda-skip-function
-           '(org-agenda-skip-entry-if 'nottodo '("VISIT" "PLANNED" "DIDNOTGO" "MEETING" "VISITED")))
+           '(org-agenda-skip-entry-if 'nottodo '("VISIT" "DIDNOTGO" "VISITED")))
           ;; (org-agenda-include-inactive-timestamps 't)
           (org-agenda-overriding-columns-format "%50ITEM %50Attend %20Location %20Note")
           (org-agenda-view-columns-initially t)
