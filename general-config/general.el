@@ -25,12 +25,23 @@
 
 ;; Encoding
 
-;; Set encoding to us-ascii
+;; Set default encoding to us-ascii
 (prefer-coding-system       'us-ascii-unix)
 (set-default-coding-systems 'us-ascii-unix)
 (set-terminal-coding-system 'us-ascii-unix)
 (set-keyboard-coding-system 'us-ascii-unix)
 (setq default-buffer-file-coding-system 'us-ascii-unix)
+
+;; Switch file encodings
+(defun dos2unix ()
+  "Convert a DOS formatted text buffer to UNIX format"
+  (interactive)
+  (set-buffer-file-coding-system 'undecided-unix nil))
+
+(defun unix2dos ()
+  "Convert a UNIX formatted text buffer to DOS format"
+  (interactive)
+  (set-buffer-file-coding-system 'undecided-dos nil))
 
 ;; From http://www.emacswiki.org/emacs/FindingNonAsciiCharacters
 (defun find-next-unsafe-char (&optional coding-system)
