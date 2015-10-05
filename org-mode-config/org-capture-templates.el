@@ -660,7 +660,7 @@
   :PROPERTIES:
   :Cost:     %^{Cost}
   :Paid:     0.00
-  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|Wells Fargo Savings Account|GE Capital Credit Card}][%\\3]]
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|Wells Fargo Savings Account|GE Capital Credit Card}][%\\2]]
   :Merchant: [[fin:%^{Merchant|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|Wells Fargo Savings Account|GE Capital Credit Card}][%\\3]]
   :Link:
   :Note:
