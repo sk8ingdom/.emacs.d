@@ -32,7 +32,7 @@
  )
 
 ;; Gnus
-(setq gunus-init-file "~/.emacs.d/.gnus.el")
+(setq gnus-init-file "~/.emacs.d/.gnus.el")
 
 ;; Plugins
 (load "~/.emacs.d/org-mode-config/org-plugins")
