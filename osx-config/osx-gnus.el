@@ -4,3 +4,4 @@
 
 ;; Location of News, Mail, etc.
 (setq gnus-home-directory "~/Qsync/dev/Programs/Gnus/")
+;; (setq gnus-home-directory "/Volumes/sk8ingdom/Dropbox/dev/Programs/Gnus/")
