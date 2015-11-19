@@ -55,7 +55,10 @@
 (setq org-refile-allow-creating-parent-nodes t)
 
 ;; Export drawers
-(setq org-export-with-drawers t)
+;; (setq org-export-with-drawers t)
+
+;; Collapse plain lists
+(setq org-cycle-include-plain-lists 'integrate)
 
 ;; Force links to open in current window
 (setq org-link-frame-setup
