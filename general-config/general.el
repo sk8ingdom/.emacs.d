@@ -115,14 +115,17 @@ prompt the user for a coding system."
  ;; Added ediff control buffer at bottom; activate with ?
  '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
 
+;; Prefer vertical splits (mainly to fix org-agenda)
+(setq split-height-threshold nil)
+
 ;; Plugins
 
 ;; Enable winner-mode
 (winner-mode t)
 
 ;; Enable package
-(require 'package)
-(package-initialize)
+;; (require 'package)
+;; (package-initialize)
 
 ;; Enable nastran-mode
 ;; (load "~/.emacs.d/plugins/nastran/nastran")
