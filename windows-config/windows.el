@@ -33,7 +33,8 @@
 
 ;; Initial frame size and location
 (setq initial-frame-alist
-      '((top . -812)
+      '(;;(top . -812)
+        (top . -1288)
         (left . 1600)
         (width . 166)
         (height . 69)))
