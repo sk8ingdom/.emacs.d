@@ -7,6 +7,9 @@
 ;; Set truncate lines to default
 (set-default 'truncate-lines t)
 
+;; Display time
+(display-time-mode t)
+
 ;; Scrolling
 (set-scroll-bar-mode nil)
 (setq scroll-margin 0)
