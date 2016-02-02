@@ -571,7 +571,7 @@
   :MPG:
   :PPM:
   :Merchant: [[peo:%\\1][%\\1]]
-  :Link:     [[val:fin/Receipts/%(org-read-date) %^{Merchant Short Name}.pdf][%(org-read-date) %\\7.pdf]]
+  :Link:     [[val:fin/Receipts/%t %^{Merchant Short Name}.pdf][%t %\\7.pdf]]
   :Note:
   :END:
   :LOGBOOK:
@@ -619,7 +619,7 @@
   :Paid:     -%\\1
   :Method:   [[fin:Wells Fargo Debit Account][Wells Fargo Debit Account]]
   :Merchant: [[peo:General Atomics Aeronautical Systems Inc.][General Atomics Aeronautical Systems Inc.]]
-  :Link:     [[val:fin/Banking/Work/General Atomics Aeronautical Systems Inc./Paycheck/%(org-read-date).pdf][%(org-read-date).pdf]]
+  :Link:     [[val:fin/Banking/Work/General Atomics Aeronautical Systems Inc./Paycheck/%t.pdf][%t.pdf]]
   :Note:     %?
   :END:
   :LOGBOOK:
@@ -636,21 +636,21 @@
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\3]]
   :Merchant: [[peo:%\\1][%\\1]]
   :Note:     %?
-  :Link:     [[val:fin/Receipts/%(org-read-date) %^{Merchant Short Name}.pdf][%(org-read-date) %\\4.pdf]]
+  :Link:     [[val:fin/Receipts/%t %^{Merchant Short Name}.pdf][%t %\\4.pdf]]
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
   %t
 
-  | Item                                               | Price ($) |    Amount | Total ($) |
-  | <50>                                               |       <9> |       <9> |       <9> |
-  |----------------------------------------------------+-----------+-----------+-----------|
-  |                                                    |           |           |           |
-  |                                                    |           |           |           |
-  |----------------------------------------------------+-----------+-----------+-----------|
-  | Tax                                                |           |         1 |           |
-  | Total                                              |           |           |           |
+  | Item                           | Price ($) | Amount    | Total ($) |
+  |                                | <9>       | <9>       | <9>       |
+  |--------------------------------+-----------+-----------+-----------|
+  |                                |           |           |           |
+  |                                |           |           |           |
+  |--------------------------------+-----------+-----------+-----------|
+  | Tax                            |           | 1         |           |
+  | Total                          |           |           |           |
   #+TBLFM: $4=$2*$3;%.2f::@>$4=vsum(@3..@-1);%.2f
   ")
 
