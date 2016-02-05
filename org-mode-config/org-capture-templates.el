@@ -571,7 +571,7 @@
   :MPG:
   :PPM:
   :Merchant: [[peo:%\\1][%\\1]]
-  :Link:     [[val:fin/Receipts/%t %^{Merchant Short Name}.pdf][%t %\\7.pdf]]
+  :Link:     [[val:fin/Receipts/%<%Y-%m-%d> %^{Merchant Short Name}.pdf][%<%Y-%m-%d> %\\7.pdf]]
   :Note:
   :END:
   :LOGBOOK:
@@ -619,7 +619,7 @@
   :Paid:     -%\\1
   :Method:   [[fin:Wells Fargo Debit Account][Wells Fargo Debit Account]]
   :Merchant: [[peo:General Atomics Aeronautical Systems Inc.][General Atomics Aeronautical Systems Inc.]]
-  :Link:     [[val:fin/Banking/Work/General Atomics Aeronautical Systems Inc./Paycheck/%t.pdf][%t.pdf]]
+  :Link:     [[val:fin/Banking/Work/General Atomics Aeronautical Systems Inc./Paycheck/%<%Y-%m-%d>.pdf][%<%Y-%m-%d>.pdf]]
   :Note:     %?
   :END:
   :LOGBOOK:
@@ -636,7 +636,7 @@
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\3]]
   :Merchant: [[peo:%\\1][%\\1]]
   :Note:     %?
-  :Link:     [[val:fin/Receipts/%t %^{Merchant Short Name}.pdf][%t %\\4.pdf]]
+  :Link:     [[val:fin/Receipts/%<%Y-%m-%d> %^{Merchant Short Name}.pdf][%<%Y-%m-%d> %\\4.pdf]]
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
