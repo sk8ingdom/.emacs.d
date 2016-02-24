@@ -448,6 +448,7 @@
   :Instagram:
   :Linkedin:
   :Twitter:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
@@ -494,6 +495,7 @@
   :Twitter:
   :Yelp:
   :YouTube:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
