@@ -104,11 +104,13 @@
   "Freeze `current-time' at the given TIME"
   (interactive (list (org-read-date nil nil nil "Input freeze time:")))
   (eval (macroexpand `(defadvice current-time (around freeze activate)
-                        (setq ad-return-value ',(append (org-read-date nil t time) '(0 0)))))))
+                        (setq ad-return-value ',(append (org-read-date nil t time) '(0 0))))))
+  (set-face-background 'fringe "firebrick2"))
 
 ;; Release changed / frozen time
 (defun my/release-time ()
   "Release the time frozen by `freeze-time'."
   (interactive)
   (ad-remove-advice 'current-time 'around 'freeze)
-  (ad-activate 'current-time))
+  (ad-activate 'current-time)
+  (set-face-background 'fringe nil))
