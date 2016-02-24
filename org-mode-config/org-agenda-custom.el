@@ -24,6 +24,14 @@
 ;;   (org-agenda-earlier 1)
 ;;   (org-agenda-fortnight-view))
 
+;; Clock report agenda settings
+
+;; Set max level to 9
+(setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 9))
+
+;; Include currently clocked task
+(setq org-clock-report-include-clocking-task t)
+
 ;; Custom agenda commands to quickly view lists of relevent data
 (setq org-agenda-custom-commands
       '(
