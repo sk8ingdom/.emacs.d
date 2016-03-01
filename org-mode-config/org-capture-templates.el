@@ -14,7 +14,7 @@
   :END:
   :LOGBOOK:
   - State \"TODO\"       from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; WAITING  (w) Waiting template
    ("tw" "WAITING   (w) Waiting" entry (file "ref.org")
@@ -25,7 +25,7 @@
   :END:
   :LOGBOOK:
   - State \"WAITING\"    from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; CANCELLED(x) Cancelled template
    ("tx" "CANCELLED (x) Cancelled" entry (file "ref.org")
@@ -37,7 +37,7 @@
   :END:
   :LOGBOOK:
   - State \"TODO\"       from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; DELEGATED(e) Delegated template
    ("te" "DELEGATED (e) Delegated" entry (file "ref.org")
@@ -49,7 +49,7 @@
   :END:
   :LOGBOOK:
   - State \"DELEGATED\"  from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; DONE     (d) Done template
    ("td" "DONE      (d) Done" entry (file "ref.org")
@@ -61,7 +61,7 @@
   :END:
   :LOGBOOK:
   - State \"DONE\"       from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; Templates for the POSSESSIONS keyword sequence
    ("p" "Possessions")
@@ -98,7 +98,7 @@
   :END:
   :LOGBOOK:
   - State \"PURCHASED\"  from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; TRANSIT  (u) Transit template
    ("pu" "TRANSIT   (u) Transit" entry (file "ref.org")
@@ -115,7 +115,7 @@
   :END:
   :LOGBOOK:
   - State \"TRANSIT\"    from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; SELL     (k) Sell template
    ("pk" "SELL      (k) Sell" entry (file "ref.org")
@@ -132,7 +132,7 @@
   :END:
   :LOGBOOK:
   - State \"SELL\"       from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; LOANED   (n) Loaned template
    ("pj" "LOANED    (n) Loaned" entry (file "ref.org")
@@ -149,7 +149,7 @@
   :END:
   :LOGBOOK:
   - State \"LOANED\"     from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; UNWANTED (j) Unwanted template
    ("pa" "UNWANTED  (a) Unwanted" entry (file "ref.org")
@@ -167,7 +167,7 @@
   :END:
   :LOGBOOK:
   - State \"UNWANTED\"   from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; OWN      (o) Own template
    ("po" "OWN       (o) Own" entry (file "ref.org")
@@ -185,7 +185,7 @@
   :END:
   :LOGBOOK:
   - State \"OWN\"        from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; GIFTED   (g) Gifted template
    ("pg" "GIFTED    (g) Gifted" entry (file "ref.org")
@@ -203,7 +203,7 @@
   :END:
   :LOGBOOK:
   - State \"GIFTED\"     from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; SOLD     (k) Sold template
    ("pc" "SOLD      (c) Sold" entry (file "ref.org")
@@ -222,7 +222,7 @@
   :END:
   :LOGBOOK:
   - State \"SOLD\"       from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; DISCARDED(q) Purchased template
    ("pq" "DISCARDED (q) Purchased" entry (file "ref.org")
@@ -240,7 +240,7 @@
   :END:
   :LOGBOOK:
   - State \"DISCARDED\"  from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;; Templates for the MULTIMEDIA keyword sequence
    ("m" "Multimedia")
@@ -259,7 +259,7 @@
   :END:
   :LOGBOOK:
   - State \"CONSUME\"    from \"\"           %U
-  :END:%:quote")
+  :END:%:quote" :empty-lines 1)
 
    ;; SUBSCRIBE(r) Subscribe template
    ("mb" "SUBSCRIBE (b) Subscribe org-protocol" entry (file "ref.org")
@@ -275,7 +275,7 @@
   :END:
   :LOGBOOK:
   - State \"SUBSCRIBE\"  from \"\"           %U
-  :END:%:quote")
+  :END:%:quote" :empty-lines 1)
 
    ;; CONSUMING(l) Consuming template
    ("ml" "CONSUMING (l) Consuming org-protocol" entry (file "ref.org")
@@ -291,7 +291,7 @@
   :END:
   :LOGBOOK:
   - State \"CONSUMING\"  from \"\"           %U
-  :END:%:quote")
+  :END:%:quote" :empty-lines 1)
 
    ;; SHARE    (s) Share template
    ("ms" "SHARE     (s) Share org-protocol" entry (file "ref.org")
@@ -307,7 +307,7 @@
   :END:
   :LOGBOOK:
   - State \"SHARE\"      from \"\"           %U
-  :END:%:quote")
+  :END:%:quote" :empty-lines 1)
 
    ;; IGNORED  (r) Ignored template
    ("mi" "IGNORED   (i) Ignored org-protocol" entry (file "ref.org")
@@ -324,7 +324,7 @@
   :END:
   :LOGBOOK:
   - State \"IGNORED\"    from \"\"           %U
-  :END:%:quote")
+  :END:%:quote" :empty-lines 1)
 
    ;; REFERENCE(f) Reference template
    ("mf" "REFERENCE (b) Reference org-protocol" entry (file "ref.org")
@@ -341,7 +341,7 @@
   :END:
   :LOGBOOK:
   - State \"REFERENCE\"  from \"\"           %U
-  :END:%:quote")
+  :END:%:quote" :empty-lines 1)
 
    ;; These templates are used with the EVENTS TODO sequence
    ("e" "Events")
@@ -358,7 +358,7 @@
   :LOGBOOK:
   - State \"VISIT\"      from \"\"           %U
   :END:
-  %^t--%^t")
+  %^t--%^t" :empty-lines 1)
 
    ;; DIDNOTGO (z) Didnotgo template
    ("ez" "DIDNOTGO  (z) Didnotgo" entry (file "ref.org")
@@ -373,7 +373,7 @@
   :LOGBOOK:
   - State \"DIDNOTGO\"   from \"\"           %U
   :END:
-  %^t--%^t")
+  %^t--%^t" :empty-lines 1)
 
    ;; MEETING  (m) Meeting template
    ("em" "MEETING   (m) Meeting" entry (file "ref.org")
@@ -394,7 +394,7 @@
   -
 
   Tasks:
-  -")
+  -" :empty-lines 1)
 
    ;; VISITED  (y) Visited template
    ("ey" "VISITED   (y) Visited" entry (file "ref.org")
@@ -409,7 +409,7 @@
   :LOGBOOK:
   - State \"VISITED\"    from \"\"           %U
   :END:
-  %^t--%^t")
+  %^t--%^t" :empty-lines 1)
 
    ("n" "Non-to-do States")
    ;;          (a) Account template
@@ -424,7 +424,7 @@
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;;          (b) Business template
    ("nb" "          (b) Business" entry (file+headline "peo.org" "Businesses")
@@ -453,7 +453,7 @@
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;;          (c) Contact template
    ("nc" "          (c) Contact" entry (file+headline "peo.org" "People")
@@ -540,7 +540,7 @@
     :END:
     :LOGBOOK:
     - State \"TODO\"       from \"\"           %U
-    :END:")
+    :END:" :empty-lines 1)
 
    ;;          (e) Payment template
    ("ne" "          (e) Payment" entry (file "ref.org")
@@ -556,7 +556,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-  %t")
+  %t" :empty-lines 1)
 
    ;;          (f) Fuel template
    ("nf" "          (f) Fuel" entry (file+headline "fin.org" "Fuel Up")
@@ -579,7 +579,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-  %t")
+  %t" :empty-lines 1)
 
    ;;          (n) Note template
    ("nn" "          (n) Note" entry (file "ref.org")
@@ -590,7 +590,7 @@
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;;          (h) Heading template
    ("nh" "          (h) Heading" entry (file "ref.org")
@@ -599,7 +599,7 @@
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
-  :END:")
+  :END:" :empty-lines 1)
 
    ;;          (j) Journal template
    ("nj" "          (j) Journal" entry (file+headline "org.org" "Journal")
@@ -611,7 +611,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-   %t\n\n  %?")
+   %t\n\n  %?" :empty-lines 1)
 
    ;;          (p) Paycheck template
    ("np" "          (p) Paycheck" entry (file+headline "fin.org" "Paycheck")
@@ -627,7 +627,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-  %t")
+  %t" :empty-lines 1)
 
    ;;          (s) Shopping template
    ("ns" "          (s) Shopping" entry (file "ref.org")
@@ -654,7 +654,7 @@
   | Tax                            |           | 1         |           |
   | Total                          |           |           |           |
   #+TBLFM: $4=$2*$3;%.2f::@>$4=vsum(@3..@-1);%.2f
-  ")
+  " :empty-lines 1)
 
    ;;          (t) Transfer template
    ("nt" "          (t) Transfer" entry (file "ref.org")
@@ -670,7 +670,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-  %t")
+  %t" :empty-lines 1)
 
    ))
 
