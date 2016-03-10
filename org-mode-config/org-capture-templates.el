@@ -556,7 +556,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-  %t" :empty-lines 1)
+  %T" :empty-lines 1)
 
    ;;          (f) Fuel template
    ("nf" "          (f) Fuel" entry (file+headline "fin.org" "Fuel Up")
@@ -579,7 +579,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-  %t" :empty-lines 1)
+  %T" :empty-lines 1)
 
    ;;          (n) Note template
    ("nn" "          (n) Note" entry (file "ref.org")
@@ -611,7 +611,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-   %t\n\n  %?" :empty-lines 1)
+   %T\n\n  %?" :empty-lines 1)
 
    ;;          (p) Paycheck template
    ("np" "          (p) Paycheck" entry (file+headline "fin.org" "Paycheck")
@@ -627,7 +627,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-  %t" :empty-lines 1)
+  %T" :empty-lines 1)
 
    ;;          (s) Shopping template
    ("ns" "          (s) Shopping" entry (file "ref.org")
@@ -636,14 +636,14 @@
   :Cost:     %^{Cost}
   :Paid:     %^{Paid}
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\5]]
-  :Merchant: [[peo:%\\1][%\\1]]
+  :Merchant: [[peo:%\\2][%\\2]]
   :Note:     %?
   :Link:     [[val:fin/Receipts/%<%Y-%m-%d> %^{Merchant Short Name}.pdf][%<%Y-%m-%d> %\\6.pdf]]
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-  %t
+  %T
 
   | Item                           | Price ($) | Amount    | Total ($) |
   |                                | <9>       | <9>       | <9>       |
@@ -670,7 +670,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-  %t" :empty-lines 1)
+  %T" :empty-lines 1)
 
    ))
 
