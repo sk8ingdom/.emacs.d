@@ -11,9 +11,21 @@
 (display-time-mode t)
 
 ;; Scrolling
+
+;; Hides scroll bar
 (set-scroll-bar-mode nil)
+;; Removes margin
 (setq scroll-margin 0)
+;; Makes scrolling smoother
 (setq scroll-conservatively 10000000)
+ ;; One line at a time
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+;; Accelerate scrolling
+(setq mouse-wheel-progressive-speed t)
+;; Scroll window under mouse
+(setq mouse-wheel-follow-mouse 't)
+;; Keyboard scroll one line at a time
+(setq scroll-step 1)
 
 ;; Tabs
 
