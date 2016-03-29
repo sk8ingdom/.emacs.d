@@ -13,6 +13,10 @@
         (nntp "news.eternal-september.org")
         (nntp "news.gwene.org")))
 
+(require 'nnreddit "~/.emacs.d/plugins/nnreddit.el")
+(add-to-list 'gnus-secondary-select-methods
+             '(nnreddit ""))
+
 (require 'smtpmail)
 (setq send-mail-function 'smtpmail-send-it
       smtpmail-auth-credentials "~/.authinfo"
