@@ -141,6 +141,10 @@ prompt the user for a coding system."
 ;; Enable package
 ;; (require 'package)
 ;; (package-initialize)
+;; (add-to-list 'package-archives
+;;             '("melpa" . "https://melpa.org/packages") t)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;; Enable nastran-mode
 ;; (load "~/.emacs.d/plugins/nastran/nastran")
