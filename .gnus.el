@@ -8,14 +8,13 @@
                                   (nnimap-server-port 993)
                                   (nnimap-stream ssl)))
 
+(load "~/.emacs.d/plugins/nnreddit")
+
 (setq gnus-secondary-select-methods
       '((nntp "news.gmane.org")
         (nntp "news.eternal-september.org")
-        (nntp "news.gwene.org")))
-
-(require 'nnreddit "~/.emacs.d/plugins/nnreddit.el")
-(add-to-list 'gnus-secondary-select-methods
-             '(nnreddit ""))
+        (nntp "news.gwene.org")
+        (nnreddit "www.reddit.com")))
 
 (require 'smtpmail)
 (setq send-mail-function 'smtpmail-send-it
