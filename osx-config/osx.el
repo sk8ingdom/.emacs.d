@@ -53,5 +53,14 @@
 (setq exec-path (append exec-path '("/usr/texbin")))
 (setq TeX-command-force "latex")
 
+;; Doc-view
+(setq doc-view-ghostscript-program "/opt/local/bin/gs")
+
+;; Dired
+
+;; Default ls doesn't understand -X option
+(require 'ls-lisp)
+(setq ls-lisp-use-insert-directory-program nil)
+
 ;; Gnus
 (load "~/.emacs.d/osx-config/osx-gnus.el")
