@@ -173,5 +173,36 @@ prompt the user for a coding system."
 ;; Enable web-mode
 ;; (load "~/.emacs.d/plugins/web-mode")
 
+;; Enable popwin
+(load "~/.emacs.d/plugins/popwin")
+(popwin-mode t)
+(push '("*CAPTURE-ref.org*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
+(push '("*Org Agenda*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
+(push '("*Org Select*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
+(push '("*eshell*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
+(push '("^CAPTURE-.+\*.org$" :regexp t) popwin:special-display-config)
+(push '("Calendar" :height 0.1 :noselect nil :stick t) popwin:special-display-config)
+
+(push '("^\*helm.+\*$" :regexp t) popwin:special-display-config)
+(add-hook 'helm-after-initialize-hook (lambda ()
+                                        (popwin:display-buffer helm-buffer t)
+                                        (popwin-mode nil)))
+;; Fix for HELM?
+;; (setq popwin:special-display-config
+;;       (append
+;;        '(("^\*helm.+\*$" :regexp t)
+;;          ("*rspec-compilation*" :height 20)
+;;          ("^\*Man .+\*$" :regexp t)
+;;          ("*Clock Task Select*" :height 20)
+;;          ("^\*Org Agenda.+\*$" :regexp t)
+;;          ("*Agenda Commands*")
+;;          (org-agenda-mode :position bottom :height 15 :stick t)
+;;          ("^CAPTURE-.+$" :regexp t)
+;;          ("*Org Select*"))
+;;        popwin:special-display-config) )
+
+;;  Restore popwin-mode after a Helm session finishes.
+(add-hook 'helm-cleanup-hook (lambda () (popwin-mode t)))
+
 ;; Start Emacs server
 (server-start)

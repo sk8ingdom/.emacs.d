@@ -677,27 +677,26 @@
 ;; Add ID automatically on capture
 (add-hook 'org-capture-prepare-finalize-hook 'org-id-store-link)
 
-(defun my/make-capture-frame ()
-  "Create a new frame for org-capture to use."
-  (select-frame (make-frame '((name . "capture")
-                              (width . 115) (height . 15)
-                              (menu-bar-lines . 0) (tool-bar-lines . 0)))))
+;; Create separate frame for capture
+;; (defun my/make-capture-frame ()
+;;   "Create a new frame for org-capture to use."
+;;   (select-frame (make-frame '((name . "capture")))))
 
-(defadvice org-capture-finalize (after delete-capture-frame activate)
-  "Advise org-capture-finalize to close the frame if it is the capture frame"
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
+;; (defadvice org-capture-finalize (after delete-capture-frame activate)
+;;   "Advise org-capture-finalize to close the frame if it is the capture frame"
+;;   (if (equal "capture" (frame-parameter nil 'name))
+;;       (delete-frame)))
 
-(defadvice org-capture-destroy (after delete-capture-frame activate)
-  "Advise org-capture-destroy to close the frame if it is the capture frame"
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
+;; (defadvice org-capture-destroy (after delete-capture-frame activate)
+;;   "Advise org-capture-destroy to close the frame if it is the capture frame"
+;;   (if (equal "capture" (frame-parameter nil 'name))
+;;       (delete-frame)))
 
-(add-hook 'org-capture-mode-hook 'delete-other-windows)
-(add-hook 'org-capture-mode-hook '(lambda () (setq mode-line-format nil)))
+;; (add-hook 'org-capture-mode-hook 'delete-other-windows)
+;; (add-hook 'org-capture-mode-hook '(lambda () (setq mode-line-format nil)))
 
-(defun my/capture-todo ()
-  "Capture a TODO item"
-  (interactive)
-  (my/make-capture-frame)
-  (org-capture))
+;; (defun my/capture-todo ()
+;;   "Capture a TODO item"
+;;   (interactive)
+;;   (my/make-capture-frame)
+;;   (org-capture))
