@@ -457,7 +457,7 @@
 
    ;;          (c) Contact template
    ("nc" "          (c) Contact" entry (file+headline "peo.org" "People")
-    "* %^{First} %^{Last}%? %^g
+    "* %^{First} %^{Last}%?
   :PROPERTIES:
   :First:    %\\1
   :Middle:
@@ -533,7 +533,7 @@
      :END:
 
 *** TODO Buy %\\1 %\\2 a Christmas Gift
-    SCHEDULED: <2015-12-01 Tue +1y> DEADLINE: <2015-12-25 Fri +1y>
+    SCHEDULED: <2016-12-01 Tue +1y> DEADLINE: <2016-12-25 Fri +1y>
     :PROPERTIES:
     :Via:
     :Note:
