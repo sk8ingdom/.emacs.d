@@ -16,6 +16,7 @@
          ;; PURCHASE means to buy; it's functionally the wishlist
          ;; PURCHASED means it's been purcahsed, but not shipped yet
          ;; TRANSIT means it's in the mail but not here yet
+         ;; GIFT means it's in my posession but I still need to gift it
          ;; SELL means you want to get rid of it, put it up on Craigslist
          ;; LOANED means someone currently has it
          ;; UNWANTED is for no longer wanted
@@ -23,7 +24,7 @@
          ;; GIFTED is given to someone as a gift
          ;; SOLD is sold to someone
          ;; DISCARDED is for thrown out
-         (sequence "PURCHASE(p@/!)" "PURCHASED(j@/!)" "TRANSIT(u@/!)" "SELL(k@/!)" "LOANED(n@/!)" "|" "UNWANTED(a@/!)" "OWN(o@/!)" "GIFTED(g@/!)"  "SOLD(c@/!)" "DISCARDED(q@/!)")
+         (sequence "PURCHASE(p@/!)" "PURCHASED(j@/!)" "TRANSIT(u@/!)" "GIFT(h@/!)" "SELL(k@/!)" "LOANED(n@/!)" "|" "UNWANTED(a@/!)" "OWN(o@/!)" "GIFTED(g@/!)"  "SOLD(c@/!)" "DISCARDED(q@/!)")
 
          ;; Sequence for MULTIMEDIA
          ;; CONSUME means to read (articles, books, quote, etc.), play (games), listen (music), or watch (a series or movie)

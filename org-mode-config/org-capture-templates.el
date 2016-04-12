@@ -117,6 +117,23 @@
   - State \"TRANSIT\"    from \"\"           %U
   :END:" :empty-lines 1)
 
+   ;; GIFT     (h) Gift    template
+   ("ph" "GIFT      (h) Gift" entry (file "ref.org")
+    "* GIFT %?
+  :PROPERTIES:
+  :Cost:
+  :Paid:
+  :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\1]]
+  :Merchant: [[peo:%^{Merchant}][%\\2]]
+  :Link:
+  :Quantity:
+  :Via:
+  :Note:
+  :END:
+  :LOGBOOK:
+  - State \"GIFT\"       from \"\"           %U
+  :END:" :empty-lines 1)
+
    ;; SELL     (k) Sell template
    ("pk" "SELL      (k) Sell" entry (file "ref.org")
     "* SELL %?
