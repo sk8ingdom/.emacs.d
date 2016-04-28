@@ -62,18 +62,18 @@
 (setq default-buffer-file-coding-system 'us-ascii-unix)
 
 ;; Switch file encodings
-(defun dos2unix ()
+(defun my/dos2unix ()
   "Convert a DOS formatted text buffer to UNIX format"
   (interactive)
   (set-buffer-file-coding-system 'undecided-unix nil))
 
-(defun unix2dos ()
+(defun my/unix2dos ()
   "Convert a UNIX formatted text buffer to DOS format"
   (interactive)
   (set-buffer-file-coding-system 'undecided-dos nil))
 
 ;; From http://www.emacswiki.org/emacs/FindingNonAsciiCharacters
-(defun find-next-unsafe-char (&optional coding-system)
+(defun my/find-next-unsafe-char (&optional coding-system)
   "Find the next character in the buffer that cannot be encoded by
 coding-system. If coding-system is unspecified, default to the coding
 system that would be used to save this buffer. With prefix argument,
