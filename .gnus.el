@@ -8,7 +8,7 @@
                                   (nnimap-server-port 993)
                                   (nnimap-stream ssl)))
 
-(load "~/.emacs.d/plugins/nnreddit")
+(require 'nnreddit)
 
 (setq gnus-secondary-select-methods
       '((nntp "news.gmane.org")

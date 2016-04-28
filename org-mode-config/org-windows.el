@@ -13,4 +13,4 @@
 ;; Plugins
 
 ;; Enable org-outlook
-(load "~/.emacs.d/plugins/org-outlook")
+(require 'org-outlook)

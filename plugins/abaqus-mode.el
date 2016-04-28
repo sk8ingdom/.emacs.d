@@ -1,4 +1,4 @@
-;; abaqus.el
+;; abaqus-mode.el
 ;; $Id: abaqus.el,v 1.5 2002/07/03 12:13:43 jorgen Exp $
 ;;
 ;; Author:   Jorgen S Bergstrom <jorgen@polymerFEM.com>

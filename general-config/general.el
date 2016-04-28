@@ -1,3 +1,17 @@
+;; Enable package
+(require 'package)
+(package-initialize)
+(package-refresh-contents)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("org" . "http://orgmode.org/elpa/") t)
+
+;; Auto-update packages
+(add-to-list 'load-path "~/.emacs.d/plugins/auto-package-update.el")
+(require 'auto-package-update)
+(auto-package-update-maybe)
+
 ;; Disable the splash screen
 (setq inhibit-splash-screen t)
 
@@ -132,107 +146,6 @@ prompt the user for a coding system."
 
 ;; Prefer vertical splits (mainly to fix org-agenda)
 (setq split-height-threshold nil)
-
-;; Plugins
-
-;; Enable winner-mode
-(winner-mode t)
-
-;; Enable package
-;; (require 'package)
-;; (package-initialize)
-;; (add-to-list 'package-archives
-;;             '("melpa" . "https://melpa.org/packages") t)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-
-;; Enable nastran-mode
-;; (load "~/.emacs.d/plugins/nastran/nastran")
-(autoload 'nastran-mode "~/.emacs.d/plugins/nastran-mode/nastran" "Major mode for editing Nastran files." t)
-(add-to-list 'auto-mode-alist '("\\.bdf$" . nastran-mode))
-(add-to-list 'auto-mode-alist '("\\.dat$" . nastran-mode))
-(add-hook 'nastran-mode-hook 'turn-on-font-lock)
-;; This is currently required because the top link doesn't currently work in Emacs 24.4
-;; (add-hook 'find-file-hooks (lambda () (font-lock-mode t)))
-
-;; Enable abaqus-mode
-;; (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
-;; (load "~/.emacs.d/plugins/abaqus")
-(autoload 'abaqus-mode "~/.emacs.d/plugins/abaqus" "Major mode for editing Abaqus files." t)
-(add-to-list 'auto-mode-alist '("\\.inp$" . abaqus-mode))
-(add-hook 'abaqus-mode-hook 'turn-on-font-lock)
-;; This is currently required because the top link doesn't currently work in Emacs 24.4
-;; (add-hook 'find-file-hooks (lambda () (font-lock-mode t)))
-
-;; Enable htmlize
-(load "~/.emacs.d/plugins/htmlize")
-
-;; Enable request
-(load "~/.emacs.d/plugins/request")
-
-;; Enable web-mode
-;; (load "~/.emacs.d/plugins/web-mode")
-
-;; Enable popwin
-;; (load "~/.emacs.d/plugins/popwin")
-;; (popwin-mode t)
-;; (push '("*CAPTURE-ref.org*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
-;; (push '("*Org Agenda*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
-;; (push '("*Org Select*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
-;; (push '("*eshell*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
-;; (push '("^CAPTURE-.+\*.org$" :regexp t) popwin:special-display-config)
-;; (push '("Calendar" :height 0.1 :noselect nil :stick t) popwin:special-display-config)
-;; (push '(calc-mode :position bottom :height 10) popwin:special-display-config)
-
-;; (push '("^\*helm.+\*$" :regexp t) popwin:special-display-config)
-;; (add-hook 'helm-after-initialize-hook (lambda ()
-;;                                         (popwin:display-buffer helm-buffer t)
-;;                                         (popwin-mode nil)))
-;; ;; Fix for HELM?
-;; ;; (setq popwin:special-display-config
-;; ;;       (append
-;; ;;        '(("^\*helm.+\*$" :regexp t)
-;; ;;          ("*rspec-compilation*" :height 20)
-;; ;;          ("^\*Man .+\*$" :regexp t)
-;; ;;          ("*Clock Task Select*" :height 20)
-;; ;;          ("^\*Org Agenda.+\*$" :regexp t)
-;; ;;          ("*Agenda Commands*")
-;; ;;          (org-agenda-mode :position bottom :height 15 :stick t)
-;; ;;          ("^CAPTURE-.+$" :regexp t)
-;; ;;          ("*Org Select*"))
-;; ;;        popwin:special-display-config) )
-
-;; ;;  Restore popwin-mode after a Helm session finishes.
-;; (add-hook 'helm-cleanup-hook (lambda () (popwin-mode t)))
-
-;; Enable Shakle
-;; (require 'shackle)
-;; (setq shackle-default-rule '(:same t))
-;; (setq shackle-rules
-;;       '(
-;;         ;; Works
-;;         ("\\`\\*helm.*?\\*\\'" :regexp t :align below :ratio 0.20)
-;;         ;; Works
-;;         (compilation-mode                :align below :ratio 0.20)
-;;         ;; Doesn't work
-;;         (dired-mode                      :align below :ratio 0.20 :select t)
-;;         ;; Works
-;;         ("*Completions*"                 :align below :ratio 0.20)
-;;         ;; Works
-;;         ("*RE-Builder*"                  :align below :ratio 0.33 :select t)
-;;         ;; Works
-;;         ("*Help*"                        :align below :ratio 0.33 :select t)
-;;         ;; Works
-;;         ("*Buffer List*"                 :align below :ratio 0.33 :select t)
-;;         ;; Doesn't work
-;;         ("*Calculator*"                  :align below :ratio 0.33 :select t)
-;;         ;; Doesn't work
-;;         ("*eshell*"                      :align below :ratio 0.33 :select t)
-;;         ;; Doesn't work
-;;         ("*Org Select*"                  :align below :ratio 0.20)
-;;         ;; Doesn't work
-;;         ("\*CAPTURE.*"         :regexp t :align below :ratio 0.20)))
-;; (shackle-mode t)
 
 ;; Start Emacs server
 (server-start)
