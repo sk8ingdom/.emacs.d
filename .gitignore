@@ -8,6 +8,9 @@ eshell/
 tramp/
 url/
 plugins/nastran-mode/
+plugins/auto-package-update.el
+plugins/nnreddit
 tramp
 image-dired/
 network-security.data
+*.last-package-update-day
