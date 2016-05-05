@@ -8,6 +8,7 @@
 
 (load "~/.emacs.d/general-config/general")
 (load "~/.emacs.d/general-config/general-plugins")
+(load "~/.emacs.d/general-config/general-modes")
 
 ;; Org-mode
 (load "~/.emacs.d/org-mode-config/org-general")

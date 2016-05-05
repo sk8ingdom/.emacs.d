@@ -73,7 +73,7 @@
           (org-id-get-with-outline-path-completion org-refile-targets)))
 
 ;; Shorten dired links to file name
-;; Added for  [[id:2d61b197-2652-44e5-88f4-70f31e2bcf07]]
+;; Added for [[id:2d61b197-2652-44e5-88f4-70f31e2bcf07]]
 (defun dired-store-link ()
   (when (derived-mode-p 'dired-mode)
     (let ((file (dired-get-filename nil t)))
