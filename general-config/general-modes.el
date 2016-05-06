@@ -22,4 +22,4 @@
        ((string-equal system-type "darwin")
         (mapc (lambda (fPath) (shell-command (format "open \"%s\"" fPath)))  myFileList))
        ((string-equal system-type "gnu/linux")
-        (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath))) myFileList)))))
+        (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath))) myFileList))))))

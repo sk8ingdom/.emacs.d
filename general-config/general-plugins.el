@@ -26,36 +26,87 @@
 (require 'request)
 
 ;; Enable popwin
-;; (require 'popwin)
-;; (popwin-mode t)
-;; (push '("*CAPTURE-ref.org*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
-;; (push '("*Org Agenda*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
-;; (push '("*Org Select*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
-;; (push '("*eshell*" :height 0.2 :noselect nil :stick t) popwin:special-display-config)
-;; (push '("^CAPTURE-.+\*.org$" :regexp t) popwin:special-display-config)
-;; (push '("Calendar" :height 0.1 :noselect nil :stick t) popwin:special-display-config)
-;; (push '(calc-mode :position bottom :height 10) popwin:special-display-config)
+(require 'popwin)
+(popwin-mode t)
 
-;; (push '("^\*helm.+\*$" :regexp t) popwin:special-display-config)
-;; (add-hook 'helm-after-initialize-hook (lambda ()
-;;                                         (popwin:display-buffer helm-buffer t)
-;;                                         (popwin-mode nil)))
-;; ;; Fix for HELM?
-;; ;; (setq popwin:special-display-config
-;; ;;       (append
-;; ;;        '(("^\*helm.+\*$" :regexp t)
-;; ;;          ("*rspec-compilation*" :height 20)
-;; ;;          ("^\*Man .+\*$" :regexp t)
-;; ;;          ("*Clock Task Select*" :height 20)
-;; ;;          ("^\*Org Agenda.+\*$" :regexp t)
-;; ;;          ("*Agenda Commands*")
-;; ;;          (org-agenda-mode :position bottom :height 15 :stick t)
-;; ;;          ("^CAPTURE-.+$" :regexp t)
-;; ;;          ("*Org Select*"))
-;; ;;        popwin:special-display-config) )
+(setq popwin:popwin:popup-window-height 20)
 
-;; ;;  Restore popwin-mode after a Helm session finishes.
-;; (add-hook 'helm-cleanup-hook (lambda () (popwin-mode t)))
+(setq popwin:special-display-config
+      (append
+       '(;; Works
+         ("*Help*"                        :stick t)
+         ("*Completions*"                          :noselect t)
+         ("*Occur*"                       :stick t)
+         ("*Buffer List*")
+         ("*Messages*")
+         ;; ("*eshell*"                      :stick t)
+         ("*Warnings*")
+         (calendar-mode)
+         ;; Don't work
+         ;; ("^\*Org Agenda.+\*$"  :regexp t)
+         ;; ("*Agenda Commands*")
+         ;; (org-agenda-mode                 :stick t)
+         ;; ("^CAPTURE-.+$"        :regexp t)
+         ;; ("*Org Select*")
+         (".*Org todo.*"        :regexp t)
+         (".*Org Note.*"        :regexp t)
+         ;; ("^\*helm.+\*$"        :regexp t)
+         ;; (calc-mode)
+         ;; (dired-mode)
+         ;; (regexp-builder))
+         )
+       popwin:special-display-config))
+
+;;  Restore popwin-mode after a Helm session finishes.
+(add-hook 'helm-after-initialize-hook (lambda ()
+                                        (popwin:display-buffer helm-buffer t)
+                                        (popwin-mode nil)))
+(add-hook 'helm-cleanup-hook (lambda () (popwin-mode t)))
+
+;; Fix org-todo for use with popwin
+
+;; Macro which creates advice 'template'
+(defmacro my/with-advice (adlist &rest body)
+  "Execute BODY with temporary advice in ADLIST.
+
+Each element of ADLIST should be a list of the form
+  (SYMBOL WHERE FUNCTION [PROPS])
+suitable for passing to `advice-add'.  The BODY is wrapped in an
+`unwind-protect' form, so the advice will be removed even in the
+event of an error or nonlocal exit."
+  (declare (debug ((&rest (&rest form)) body))
+           (indent 1))
+  `(progn
+     ,@(mapcar (lambda (adform)
+                 (cons 'advice-add adform))
+               adlist)
+     (unwind-protect (progn ,@body)
+       ,@(mapcar (lambda (adform)
+                   `(advice-remove ,(car adform) ,(nth 2 adform)))
+                 adlist))))
+
+;;Function which replaces org-switch-to-buffer-other-window with emacs' original switch-to-buffer-other-window
+(defun my/org-todo-same-window (orig-fn)
+  "Advice to fix window placement in `org-fast-todo-selection'."
+  (let ((override
+      '("\\*Org todo\\*|\\*Org Note\\*"
+        (display-buffer-use-some-window)
+        (inhibit-same-window . nil)))) ;locally sets variable "override" as key-value pair for display-buffer-alist entry
+    (add-to-list 'display-buffer-alist override) ;adds the contents of the above defined variable to display-buffer-alist
+    (my/with-advice
+        ((#'org-switch-to-buffer-other-window :override #'switch-to-buffer-other-window))
+      (unwind-protect (funcall orig-fn)
+        (setq display-buffer-alist
+              (delete override display-buffer-alist))))))
+
+;; Injecting the relevant advice into the org-fast-todo-selection function
+(advice-add #'org-fast-todo-selection :around #'my/org-todo-same-window)
+
+;; This sort of works as intended
+;; (advice-add #'org-add-log-note :around #'my/org-todo-same-window)
+
+;; To fix capture templates--doesn't currently work
+;; (advice-add #'org-mks :around #'my/org-todo-same-window)
 
 ;; Enable Shakle
 ;; (require 'shackle)

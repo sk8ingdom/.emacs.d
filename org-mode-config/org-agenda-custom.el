@@ -32,6 +32,9 @@
 ;; Include currently clocked task
 (setq org-clock-report-include-clocking-task t)
 
+;; Show agenda in current window
+(setq org-agenda-window-setup 'current-window)
+
 ;; Custom agenda commands to quickly view lists of relevent data
 (setq org-agenda-custom-commands
       '(
