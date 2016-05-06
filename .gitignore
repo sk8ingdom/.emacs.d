@@ -7,7 +7,7 @@ auto-save-list/
 eshell/
 tramp/
 url/
-popwin/
+popwin-el/
 plugins/nastran-mode/
 plugins/auto-package-update.el
 plugins/nnreddit
