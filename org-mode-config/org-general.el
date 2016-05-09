@@ -114,3 +114,23 @@
   (ad-remove-advice 'current-time 'around 'freeze)
   (ad-activate 'current-time)
   (set-face-background 'fringe nil))
+
+;; Create abbreviations
+(defun my/create-org-link-abbreviations ()
+  "Replace all long form links in current file with their corresponding abbreviations in `org-link-abbrev-alist'."
+  (interactive)
+  (dolist (pair org-link-abbrev-alist)
+    (save-excursion
+      (replace-regexp (concat "\\[\\[" (cdr pair)) (concat "[[" (car pair) ":")))))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (add-to-list 'write-file-functions 'my/create-org-link-abbreviations)))
+
+;; Remove abbreviations
+(defun my/remove-org-link-abbreviations ()
+  "Replace all link abbreviations in current file with their long form counterparts in `org-link-abbrev-alist'."
+  (interactive)
+  (dolist (pair org-link-abbrev-alist)
+    (save-excursion
+      (replace-regexp (concat "\\[\\[" (car pair) ":") (concat "[[" (cdr pair))))))
