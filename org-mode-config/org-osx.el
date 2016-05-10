@@ -9,3 +9,6 @@
 (if (string-equal "[192 168 1 127 0]" (format "%s" (cdar (network-interface-list))))
     (add-to-list 'org-link-abbrev-alist '("val"     . "file+sys:/Volumes/home/"))
   (add-to-list 'org-link-abbrev-alist '("val"     . "file+sys:/Volumes/sk8ingdom/")))
+
+;; Org-mobile
+(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg/")
