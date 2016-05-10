@@ -7,10 +7,11 @@ auto-save-list/
 eshell/
 tramp/
 url/
-popwin-el/
+plugins/popwin-el/
 plugins/nastran-mode/
 plugins/auto-package-update.el
 plugins/nnreddit
+plugins/shackle
 tramp
 image-dired/
 network-security.data
