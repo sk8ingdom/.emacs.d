@@ -121,7 +121,9 @@
   (interactive)
   (dolist (pair org-link-abbrev-alist)
     (save-excursion
-      (replace-regexp (concat "\\[\\[" (cdr pair)) (concat "[[" (car pair) ":")))))
+      (goto-char (point-min))
+      (while (re-search-forward (regexp-quote (concat "[[" (cdr pair))) nil t)
+        (replace-match (concat "[[" (car pair) ":"))))))
 
 (add-hook 'org-mode-hook
           (lambda ()
@@ -133,4 +135,6 @@
   (interactive)
   (dolist (pair org-link-abbrev-alist)
     (save-excursion
-      (replace-regexp (concat "\\[\\[" (car pair) ":") (concat "[[" (cdr pair))))))
+      (goto-char (point-min))
+      (while (re-search-forward (regexp-quote (concat "[[" (car pair) ":")) nil t)
+        (replace-match (concat "[[" (cdr pair)))))))
