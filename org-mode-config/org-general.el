@@ -102,10 +102,12 @@
 ;; Change and freeze time
 (defun my/freeze-time (time)
   "Freeze `current-time' at the given TIME"
-  (interactive (list (org-read-date nil nil nil "Input freeze time:")))
+  (interactive (list (org-read-date t nil nil "Input freeze time:")))
   (eval (macroexpand `(defadvice current-time (around freeze activate)
                         (setq ad-return-value ',(append (org-read-date nil t time) '(0 0))))))
   (set-face-background 'fringe "firebrick2"))
+
+(global-set-key "\C-cf" 'my/freeze-time)
 
 ;; Release changed / frozen time
 (defun my/release-time ()
@@ -114,6 +116,8 @@
   (ad-remove-advice 'current-time 'around 'freeze)
   (ad-activate 'current-time)
   (set-face-background 'fringe nil))
+
+(global-set-key "\C-cr" 'my/release-time)
 
 ;; Create abbreviations
 (defun my/create-org-link-abbreviations ()
