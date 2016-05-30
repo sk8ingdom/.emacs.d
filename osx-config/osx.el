@@ -1,6 +1,9 @@
 ;; Disable toolbar (to enable it again, replace the -1 with 1)
 (tool-bar-mode nil)
 
+;; Disable bell / beep
+(setq visible-bell t)
+
 ;; Full screen by default
 ;; (set-frame-parameter nil 'fullscreen 'fullboth)
 
