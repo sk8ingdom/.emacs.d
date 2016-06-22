@@ -2,10 +2,14 @@
 (tool-bar-mode nil)
 
 ;; Set ssl client
-;;(setq tls-program '("\"C:/Program Files (x86)/Git/bin/openssl.exe\" s_client -connect %h:%p -no_ssl2 -ign_eof -crlf"))
-(setq tls-program '("\"C:/Program Files (x86)/Git/bin/openssl.exe\" s_client -connect %h:%p -no_ssl2 -ign_eof"
-                    "gnutls-cli -p %p %h"))
+;; (setq tls-program '("\"C:/Program Files (x86)/Git/bin/openssl.exe\" s_client -connect %h:%p -no_ssl2 -ign_eof -crlf"))
+;; (setq tls-program '("\"C:/Program Files (x86)/Git/bin/openssl.exe\" s_client -connect %h:%p -no_ssl2 -ign_eof"
+;;                     "gnutls-cli -p %p %h"))
 ;;(load "~/.emacs.d/plugins/smtp-openssl.el")
+;; (setq gnutls-trust-files '("C:/cygwin/usr/ssl/certs/ca-bundle.trust.crt" "C:/cygwin/usr/ssl/certs/ca-bundle.crt"))
+
+(setq tls-program '("openssl s_client -CApath C:\\cygwin\\usr\\ssl\\certs -connect imap.gmail.com:993"))
+(setq gnutls-trustfiles '("C:\\cygwin\\usr\\ssl\\certs\\ca-bundle.crt" "C:\\cygwin\\usr\\ssl\\certs\\ca-bundle.trust.crt" "C:\\cygwin\\usr\\ssl\\certs\\demo\\ca-cert.pem"))
 
 ;; Tramp configuration
 (require 'tramp)
