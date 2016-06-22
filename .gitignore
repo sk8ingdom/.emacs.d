@@ -12,6 +12,7 @@ plugins/nastran-mode/
 plugins/auto-package-update.el
 plugins/nnreddit
 plugins/shackle
+plugins/symon
 tramp
 image-dired/
 network-security.data

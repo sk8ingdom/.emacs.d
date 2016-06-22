@@ -54,6 +54,7 @@
          ;; (calc-mode)
          ;; (dired-mode)
          ;; (regexp-builder))
+         ("*Deletions*"                             :noselect t)
          )
        popwin:special-display-config))
 
@@ -136,3 +137,10 @@ event of an error or nonlocal exit."
 ;;         ;; Doesn't work
 ;;         ("\*CAPTURE.*"         :regexp t :align below :ratio 0.20)))
 ;; (shackle-mode t)
+
+;; Enable symon
+(require 'symon)
+(symon-mode)
+(setq symon-refresh-rate 1)
+(setq symon-delay 1)
+(setq symon-sparkline-type 'plain)
