@@ -2,7 +2,8 @@
 (tool-bar-mode nil)
 
 ;; Disable bell / beep
-(setq visible-bell t)
+(setq visible-bell nil)
+(setq ring-bell-function 'ignore)
 
 ;; Full screen by default
 ;; (set-frame-parameter nil 'fullscreen 'fullboth)
