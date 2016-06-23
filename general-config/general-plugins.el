@@ -42,6 +42,7 @@
          ;; ("*eshell*"                      :stick t)
          ("*Warnings*")
          (calendar-mode)
+         ("*Register Preview*")
          ;; Don't work
          ;; ("^\*Org Agenda.+\*$"  :regexp t)
          ;; ("*Agenda Commands*")
@@ -140,7 +141,8 @@ event of an error or nonlocal exit."
 
 ;; Enable symon
 (require 'symon)
+(setq symon-delay 5)
 (symon-mode)
 (setq symon-refresh-rate 1)
-(setq symon-delay 1)
 (setq symon-sparkline-type 'plain)
+(setq symon-sparkline-height 0)
