@@ -134,9 +134,9 @@
                  (cadr (split-string (url-filename (url-generic-parse-url url)) "?"))
                  "&kimwithurl=1"))
         ((string-match "news\.ycombinator\.com" url)
-         (concat org-kimono-api-url "25bk4kv2?apikey=" org-kimono-api-key "&kimpath1=item&"
-                 (cadr (split-string (url-filename (url-generic-parse-url url)) "?"))
-                 "&kimwithurl=1"))
+         (concat "https://hacker-news.firebaseio.com/v0/item/"
+                 (cadr (split-string (url-filename (url-generic-parse-url url)) "="))
+                 ".json?print=pretty"))
         (t
          (concat org-readability-api-url url "&token=" org-readability-api-key))))
 
