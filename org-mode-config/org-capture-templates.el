@@ -263,7 +263,7 @@
    ("m" "Multimedia")
 
    ;; CONSUME  (r) Consume template
-   ("mr" "CONSUME   (r) Consume org-protocol" entry (file "ref.org")
+   ("mr" "CONSUME   (r) Consume org-protocol" entry (file+datetree+prompt "jnl.org")
     "* CONSUME [[%:link][%:created]]
   :PROPERTIES:
   :Creator:  %:creator
@@ -279,7 +279,7 @@
   :END:%:quote" :empty-lines 1)
 
    ;; SUBSCRIBE(r) Subscribe template
-   ("mb" "SUBSCRIBE (b) Subscribe org-protocol" entry (file "ref.org")
+   ("mb" "SUBSCRIBE (b) Subscribe org-protocol" entry (file+datetree+prompt "jnl.org")
     "* SUBSCRIBE [[%:link][%:created]]
   :PROPERTIES:
   :Creator:  %:creator
@@ -295,7 +295,7 @@
   :END:%:quote" :empty-lines 1)
 
    ;; CONSUMING(l) Consuming template
-   ("ml" "CONSUMING (l) Consuming org-protocol" entry (file "ref.org")
+   ("ml" "CONSUMING (l) Consuming org-protocol" entry (file+datetree+prompt "jnl.org")
     "* CONSUMING [[%:link][%:created]]
   :PROPERTIES:
   :Creator:  %:creator
@@ -311,7 +311,7 @@
   :END:%:quote" :empty-lines 1)
 
    ;; SHARE    (s) Share template
-   ("ms" "SHARE     (s) Share org-protocol" entry (file "ref.org")
+   ("ms" "SHARE     (s) Share org-protocol" entry (file+datetree+prompt "jnl.org")
     "* SHARE [[%:link][%:created]]
   :PROPERTIES:
   :Creator:  %:creator
@@ -327,7 +327,7 @@
   :END:%:quote" :empty-lines 1)
 
    ;; IGNORED  (r) Ignored template
-   ("mi" "IGNORED   (i) Ignored org-protocol" entry (file "ref.org")
+   ("mi" "IGNORED   (i) Ignored org-protocol" entry (file+datetree+prompt "jnl.org")
     "* IGNORED [[%:link][%:created]]
   CLOSED: %U
   :PROPERTIES:
@@ -344,7 +344,7 @@
   :END:%:quote" :empty-lines 1)
 
    ;; REFERENCE(f) Reference template
-   ("mf" "REFERENCE (b) Reference org-protocol" entry (file "ref.org")
+   ("mf" "REFERENCE (b) Reference org-protocol" entry (file+datetree+prompt "jnl.org")
     "* REFERENCE [[%:link][%:created]]
   CLOSED: %U
   :PROPERTIES:
