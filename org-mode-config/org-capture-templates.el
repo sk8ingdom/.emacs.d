@@ -628,7 +628,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-  %T\n\n  %?" :empty-lines 1)
+   %T\n\n  %?" :empty-lines 1)
 
    ;;          (p) Paycheck template
    ("np" "          (p) Paycheck" entry (file+headline "fin.org" "Paycheck")
