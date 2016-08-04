@@ -142,3 +142,15 @@
       (goto-char (point-min))
       (while (search-forward (concat "[[" (car pair) ":") nil t)
         (replace-match (concat "[[" (cdr pair)))))))
+
+;; Re-define org-switch-to-buffer-other-window to NOT use org-no-popups.
+;; Primarily for compatibility with shackle.
+(defun org-switch-to-buffer-other-window (args)
+  "Switch to buffer in a second window on the current frame.
+In particular, do not allow pop-up frames.
+Returns the newly created buffer.
+
+Redefined to allow pop-up windows."
+  ;;  (org-no-popups
+  ;;     (apply 'switch-to-buffer-other-window args)))
+  (switch-to-buffer-other-window args))
