@@ -48,6 +48,7 @@
         ("*Org Select*"                  :align below :ratio 0.20)
         ("*Org Links*"                   :align below :ratio 0.20)
         (" *Agenda Commands*"            :align below)
+        (" *Deletions*"                  :align below)
 
         ;; Doesn't work
         ;; (dired-mode                      :align below :ratio 0.20 :select t)
