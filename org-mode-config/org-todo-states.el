@@ -59,5 +59,8 @@
 ;; Record time and note when a task is refiled
 (setq org-log-refile 'note)
 
+;; Record note when clocking out
+(setq org-log-note-clock-out t)
+
 ;; Log everything into the LOGBOOK drawer
 (setq org-log-into-drawer t)
