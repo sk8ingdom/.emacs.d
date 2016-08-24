@@ -49,6 +49,8 @@
         ("*Org Links*"                   :align below :ratio 0.20)
         (" *Agenda Commands*"            :align below)
         (" *Deletions*"                  :align below)
+        ("*Occur*"                       :align below :ratio 0.20)
+        ("*Warning*"                     :align below :ratio 0.20)
 
         ;; Doesn't work
         ;; (dired-mode                      :align below :ratio 0.20 :select t)
