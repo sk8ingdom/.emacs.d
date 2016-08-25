@@ -51,6 +51,7 @@
         (" *Deletions*"                  :align below)
         ("*Occur*"                       :align below :ratio 0.20)
         ("*Warning*"                     :align below :ratio 0.20)
+        ("*Backtrace*"                   :align below :ratio 0.20)
 
         ;; Doesn't work
         ;; (dired-mode                      :align below :ratio 0.20 :select t)
