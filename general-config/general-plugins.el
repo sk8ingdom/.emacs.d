@@ -82,3 +82,14 @@
 (setq symon-refresh-rate 1)
 (setq symon-sparkline-type 'plain)
 (setq symon-sparkline-height 0)
+
+;; Enable screenshot
+(require 'screenshot)
+(setq screenshot-schemes
+      '(;; To local image directory
+        ("local"
+         :dir "U:/mul/Images/GNU Emacs")
+        ;; To current directory
+        ("current-directory"
+         :dir default-directory)))
+(setq screenshot-default-scheme "local")
