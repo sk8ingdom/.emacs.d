@@ -35,30 +35,35 @@
 (setq shackle-default-rule '(:same t))
 (setq shackle-rules
       '(
-        ;; Works
+        ;; Work
         ("\\`\\*helm.*?\\*\\'" :regexp t :align below :ratio 0.20)
         (compilation-mode                :align below :ratio 0.20)
-        ("*Completions*"                 :align below :ratio 0.20)
-        ("*Help*"                        :align below :ratio 0.33 :select t)
         ("*Buffer List*"                 :align below :ratio 0.33 :select t)
-        (" *Org todo*"                   :align below :ratio 10   :select t)
-        ("*Org Note*"                    :align below :ratio 10   :select t)
         ("*Calendar*"                    :align below :ratio 10   :select t)
-        ("CAPTURE.*"           :regexp t :align below :ratio 0.20)
-        ("*Org Select*"                  :align below :ratio 0.20)
-        ("*Org Links*"                   :align below :ratio 0.20)
-        (" *Agenda Commands*"            :align below)
         (" *Deletions*"                  :align below)
         ("*Occur*"                       :align below :ratio 0.20)
-        ("*Warning*"                     :align below :ratio 0.20)
-        ("*Backtrace*"                   :align below :ratio 0.20)
+        ("*Completions*"                 :align below :ratio 0.20)
+        ("*Help*"                        :align below :ratio 0.33 :select t)
+        (" *Metahelp*"                   :align below :ratio 0.20 :select t)
+        ("*Messages*"                    :align below :ratio 0.20 :select t)
+        ("*Warning*"                     :align below :ratio 0.20 :select t)
+        ("*Backtrace*"                   :align below :ratio 0.20 :select t)
 
-        ;; Doesn't work
+        ;; Org-mode
+        (" *Org todo*"                   :align below :ratio 10   :select t)
+        ("*Org Note*"                    :align below :ratio 10   :select t)
+        ("CAPTURE.*"           :regexp t :align below :ratio 20)
+        ("*Org Select*"                  :align below :ratio 20)
+        ("*Org Links*"                   :align below :ratio 20)
+        (" *Agenda Commands*"            :align below)
+        ("*Org Clock*"                   :align below)
+
+        ;; Don't Work
         ;; (dired-mode                      :align below :ratio 0.20 :select t)
         ;; (calc-mode                       :align below :ratio 0.20 :select t)
         ;; ("*Calculator*"                  :align below :ratio 0.33 :select t)
         ;; ("*eshell*"                      :align below :ratio 0.33 :select t)
-        ;; ("*RE-Builder*"                  :align below :ratio 0.33 :select t)
+        ;; (" *RE-Builder*"                 :align below :ratio 0.33 :select t)
         ))
 (shackle-mode t)
 
