@@ -54,9 +54,10 @@
         ("*Org Note*"                    :align below :ratio 10   :select t)
         ("CAPTURE.*"           :regexp t :align below :ratio 20)
         ("*Org Select*"                  :align below :ratio 20)
-        ("*Org Links*"                   :align below :ratio 20)
+        ("*Org Links*"                   :align below :ratio 10)
         (" *Agenda Commands*"            :align below)
         ("*Org Clock*"                   :align below)
+        ("*Edit Formulas*"               :align below :ratio 10   :select t)
 
         ;; Don't Work
         ;; (dired-mode                      :align below :ratio 0.20 :select t)
