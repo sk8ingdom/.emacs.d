@@ -154,3 +154,28 @@ Redefined to allow pop-up windows."
   ;;  (org-no-popups
   ;;     (apply 'switch-to-buffer-other-window args)))
   (switch-to-buffer-other-window args))
+
+;; Org-toggle-latex-fragment options
+
+;; Make text bigger
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+
+;; Semi-center equations by moving number to the right using [leqno]
+(setq org-format-latex-header "\\documentclass[reqno]{article}
+\\usepackage[usenames]{color}
+[PACKAGES]
+[DEFAULT-PACKAGES]
+\\pagestyle{empty}             % do not remove
+% The settings below are copied from fullpage.sty
+\\setlength{\\textwidth}{\\paperwidth}
+\\addtolength{\\textwidth}{-3cm}
+\\setlength{\\oddsidemargin}{1.5cm}
+\\addtolength{\\oddsidemargin}{-2.54cm}
+\\setlength{\\evensidemargin}{\\oddsidemargin}
+\\setlength{\\textheight}{\\paperheight}
+\\addtolength{\\textheight}{-\\headheight}
+\\addtolength{\\textheight}{-\\headsep}
+\\addtolength{\\textheight}{-\\footskip}
+\\addtolength{\\textheight}{-3cm}
+\\setlength{\\topmargin}{1.5cm}
+\\addtolength{\\topmargin}{-2.54cm}")
