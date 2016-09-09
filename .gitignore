@@ -18,3 +18,5 @@ tramp
 image-dired/
 network-security.data
 *.last-package-update-day
+.DS_Store
+*/.DS_Store
