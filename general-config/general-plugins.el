@@ -58,6 +58,7 @@
         (" *Agenda Commands*"            :align below)
         ("*Org Clock*"                   :align below)
         ("*Edit Formulas*"               :align below :ratio 10   :select t)
+        ("\\*Org Src.*"        :regexp t :align below :ratio 10   :select t)
 
         ;; Don't Work
         ;; (dired-mode                      :align below :ratio 0.20 :select t)
@@ -80,6 +81,9 @@
 (advice-add 'org-capture-place-template :around #'my/suppress-delete-other-windows)
 (advice-add 'org-agenda :around #'my/suppress-delete-other-windows)
 (advice-add 'org-add-log-note :around #'my/suppress-delete-other-windows)
+
+;; Fix org-edit-src-code, called on a source block with C-c ' to work with shackle
+(setq org-src-window-setup 'other-window)
 
 ;; Enable symon
 (require 'symon)
