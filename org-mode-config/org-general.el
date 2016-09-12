@@ -120,7 +120,7 @@
 (global-set-key "\C-cr" 'my/release-time)
 
 ;; Change time-stamp increments to 1 minute
-(setq org-time-stamp-rounding-minutes (0 1))
+(setq org-time-stamp-rounding-minutes '(0 1))
 
 ;; Create abbreviations
 (defun my/create-org-link-abbreviations ()
