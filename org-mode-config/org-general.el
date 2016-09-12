@@ -119,6 +119,9 @@
 
 (global-set-key "\C-cr" 'my/release-time)
 
+;; Change time-stamp increments to 1 minute
+(setq org-time-stamp-rounding-minutes (0 1))
+
 ;; Create abbreviations
 (defun my/create-org-link-abbreviations ()
   "Replace all long form links in current file with their corresponding abbreviations in `org-link-abbrev-alist'."
