@@ -26,7 +26,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(menu-bar-mode nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -37,11 +38,10 @@
 
 ;; Initial frame size and location
 (setq initial-frame-alist
-      '(;;(top . -812)
-        (top . -1288)
+      '((top . -1310)
         (left . 1600)
         (width . 166)
-        (height . 69)))
+        (height . 72)))
 
 ;; Subsequent frame size and location
 ;; Call gnus with M-x gnus-other-frame
