@@ -1,8 +1,8 @@
 ;; Dired
 
 ;; Open file(s) in external application
-(defun my/open-in-external-app (&optional file)
-  "Open the current file or dired marked files in external application. The app is chosen from your OS's preference."
+(defun my/dired-open-in-external-application (&optional file)
+  "Open the current file or dired marked files in external application(s). The application is chosen from the OS's preference."
   (interactive)
   (let (doIt
         (myFileList
@@ -23,3 +23,9 @@
         (mapc (lambda (fPath) (shell-command (format "open \"%s\"" fPath)))  myFileList))
        ((string-equal system-type "gnu/linux")
         (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath))) myFileList))))))
+
+;; Copy full file path and filename to the kill ring
+(defun my/dired-copy-path-and-filename-as-kill ()
+  "Push the path and filename of the file under point to the kill ring."
+  (interactive)
+  (message "added %s to kill ring" (kill-new (dired-get-filename))))
