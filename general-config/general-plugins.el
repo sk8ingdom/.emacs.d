@@ -29,13 +29,13 @@
 ;; (require 'helm-config)
 ;; (helm-mode t)
 ;; (global-set-key (kbd "M-x") 'helm-M-x)
+;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 
 ;; Enable Shakle
 (require 'shackle)
 (setq shackle-default-rule '(:same t))
 (setq shackle-rules
-      '(
-        ;; Work
+      '(;; Work
         ("\\`\\*helm.*?\\*\\'" :regexp t :align below :ratio 0.20)
         (compilation-mode                :align below :ratio 0.20)
         ("*Buffer List*"                 :align below :ratio 0.33 :select t)
@@ -48,6 +48,9 @@
         ("*Messages*"                    :align below :ratio 0.20 :select t)
         ("*Warning*"                     :align below :ratio 0.20 :select t)
         ("*Backtrace*"                   :align below :ratio 0.20 :select t)
+        ("*Compile-Log*"                 :align below :ratio 0.20)
+        ("*package update results*"      :align below :ratio 0.20)
+        ("*Ediff Control Panel*"         :align below             :select t)
 
         ;; Org-mode
         (" *Org todo*"                   :align below :ratio 10   :select t)
@@ -88,18 +91,16 @@
 ;; Enable symon
 (require 'symon)
 (setq symon-delay 5)
-(symon-mode)
 (setq symon-refresh-rate 1)
+(symon-mode)
 (setq symon-sparkline-type 'plain)
 (setq symon-sparkline-height 0)
 
-;; Enable screenshot
-(require 'screenshot)
-(setq screenshot-schemes
-      '(;; To local image directory
-        ("local"
-         :dir "U:/mul/Images/GNU Emacs")
-        ;; To current directory
-        ("current-directory"
-         :dir default-directory)))
-(setq screenshot-default-scheme "local")
+;; Enable google-this-mode
+;; Available on MELPA
+;; (google-this-mode t)
+
+;; Enable google-maps-mode
+;; Available on MELPA
+;; https://julien.danjou.info/projects/emacs-packages#google-maps
+(require 'google-maps)
