@@ -13,7 +13,7 @@ plugins/auto-package-update.el
 plugins/nnreddit
 plugins/shackle
 plugins/symon
-plugins/screenshot
+plugins/org-windows-screenshot
 tramp
 image-dired/
 network-security.data

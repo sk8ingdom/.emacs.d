@@ -15,3 +15,10 @@
 
 ;; Enable org-outlook
 (require 'org-outlook)
+
+;; Enable org-screentshot
+(require 'org-windows-screenshot)
+(setq org-windows-screenshot-command
+      "U:/dev/Programs/Batch/Scripts/npocmaka-scripts/hybrids/.net/c/screenCapture.bat")
+(setq org-windows-screenshot-directory "U:/mul/Images/Screenshots/")
+(global-set-key "\C-cs" 'org-windows-screenshot)
