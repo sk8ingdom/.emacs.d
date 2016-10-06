@@ -147,5 +147,8 @@ prompt the user for a coding system."
 ;; Prefer vertical splits (mainly to fix org-agenda)
 (setq split-height-threshold nil)
 
+;; Enable narrowing to region (detault is C-x n n)
+(put 'narrow-to-region 'disabled nil)
+
 ;; Start Emacs server
 (server-start)
