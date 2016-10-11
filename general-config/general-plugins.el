@@ -12,6 +12,7 @@
 (require 'nastran-mode)
 (add-to-list 'auto-mode-alist '("\\.bdf$" . nastran-mode))
 (add-to-list 'auto-mode-alist '("\\.dat$" . nastran-mode))
+(add-to-list 'auto-mode-alist '("\\.inp$" . nastran-mode))
 (add-hook 'nastran-mode-hook 'turn-on-font-lock)
 
 ;; Enable abaqus-mode
