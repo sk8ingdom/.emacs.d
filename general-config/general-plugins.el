@@ -104,3 +104,9 @@
 ;; Available on MELPA
 ;; https://julien.danjou.info/projects/emacs-packages#google-maps
 (require 'google-maps)
+
+;; Enable dired-quick-sort
+;; In dired buffer, activate with S
+(require 'dired-quick-sort)
+(setq ls-lisp-use-insert-directory-program "ls")
+(dired-quick-sort-setup)
