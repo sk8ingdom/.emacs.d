@@ -263,3 +263,99 @@
          )
         )
       )
+
+;; File specific agendas
+;; Only works in the following configuration
+;;
+;; | Call       | Current    |
+;; | from       | Org-mode   |
+;; | this       | Agenda     |
+;; | window     |            |
+;; |------------+------------|
+;; | Dired or other buffer   |
+;; |                         |
+
+;; dev.org agenda
+(global-set-key (kbd "C-c <f1>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "dev.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
+
+;; edu.org agenda
+(global-set-key (kbd "C-c <f2>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "edu.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
+
+;; fin.org agenda
+(global-set-key (kbd "C-c <f3>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "fin.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
+
+;; hea.org agenda
+(global-set-key (kbd "C-c <f4>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "hea.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
+
+;; hob.org agenda
+(global-set-key (kbd "C-c <f5>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "hob.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
+
+;; mul.org agenda
+(global-set-key (kbd "C-c <f6>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "mul.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
+
+;; org.org agenda
+(global-set-key (kbd "C-c <f7>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "org.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
+
+;; peo.org agenda
+(global-set-key (kbd "C-c <f8>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "peo.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
+
+;; pos.org agenda
+(global-set-key (kbd "C-c <f9>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "pos.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
+
+;; ref.org agenda
+(global-set-key (kbd "C-c <f10>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "ref.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
+
+
+;; soc.org agenda
+(global-set-key (kbd "C-c <f11>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "soc.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
+
+;; wrk.org agenda
+(global-set-key (kbd "C-c <f12>")
+                (lambda ()
+                  (interactive)
+                  (switch-to-buffer "wrk.org")
+                  (execute-kbd-macro (kbd "C-c a < a"))))
