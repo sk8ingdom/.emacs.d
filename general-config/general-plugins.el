@@ -17,7 +17,7 @@
 
 ;; Enable abaqus-mode
 (require 'abaqus-mode)
-(add-to-list 'auto-mode-alist '("\\.inp$" . abaqus-mode))
+;; (add-to-list 'auto-mode-alist '("\\.inp$" . abaqus-mode))
 (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
 
 ;; Enable htmlize
