@@ -29,3 +29,9 @@
   "Push the path and filename of the file under point to the kill ring."
   (interactive)
   (message "added %s to kill ring" (kill-new (dired-get-filename))))
+
+;; Advise quit-window (q) to kill buffer instead of bury
+(defadvice quit-window (before quit-window-always-kill)
+  "When running `quit-window', always kill the buffer."
+  (ad-set-arg 0 t))
+(ad-activate 'quit-window)
