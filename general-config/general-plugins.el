@@ -48,6 +48,7 @@
         (" *Metahelp*"                   :align below :ratio 0.20 :select t)
         ("*Messages*"                    :align below :ratio 0.20 :select t)
         ("*Warning*"                     :align below :ratio 0.20 :select t)
+        ("*Warnings*"                    :align below :ratio 0.20 :select t)
         ("*Backtrace*"                   :align below :ratio 0.20 :select t)
         ("*Compile-Log*"                 :align below :ratio 0.20)
         ("*package update results*"      :align below :ratio 0.20)
