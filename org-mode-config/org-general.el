@@ -85,7 +85,7 @@
                             :description (file-name-nondirectory file))
       file)))
 
-(add-to-list 'org-store-link-functions 'dired-store-link)
+;; (add-to-list 'org-store-link-functions 'dired-store-link)
 
 ;; Remove link and retain description
 (defun my/org-replace-link-by-link-description ()
