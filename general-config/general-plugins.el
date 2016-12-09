@@ -32,6 +32,10 @@
 ;; (global-set-key (kbd "M-x") 'helm-M-x)
 ;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 
+;; Enable undo-tree-mode
+(require 'undo-tree)
+(global-undo-tree-mode t)
+
 ;; Enable Shakle
 (require 'shackle)
 (setq shackle-default-rule '(:same t))
@@ -53,6 +57,7 @@
         ("*Compile-Log*"                 :align below :ratio 0.20)
         ("*package update results*"      :align below :ratio 0.20)
         ("*Ediff Control Panel*"         :align below             :select t)
+        (" *undo-tree*"                  :align left :ratio 0.10 :select t)
 
         ;; Org-mode
         (" *Org todo*"                   :align below :ratio 10   :select t)
