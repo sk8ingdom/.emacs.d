@@ -38,9 +38,9 @@
 
 ;; Initial frame size and location
 (setq initial-frame-alist
-      '((top . -1310)
+      '((top . -555)
         (left . 1600)
-        (width . 166)
+        (width . 167)
         (height . 72)))
 
 ;; Subsequent frame size and location
