@@ -104,6 +104,7 @@ prompt the user for a coding system."
     (and found (goto-char (1+ (car found))))
     found))
 
+;; Saving
 
 ;; Disable git
 (setq vc-handled-backends ())
@@ -138,6 +139,9 @@ prompt the user for a coding system."
 
 ;; Enable narrowing to region (detault is C-x n n)
 (put 'narrow-to-region 'disabled nil)
+
+;; Enable upcase-region
+(put 'upcase-region 'disabled nil)
 
 ;; Start Emacs server
 (server-start)
