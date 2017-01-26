@@ -35,3 +35,22 @@
   "When running `quit-window', always kill the buffer."
   (ad-set-arg 0 t))
 (ad-activate 'quit-window)
+
+;; Doc-view
+
+;; Doesn't currently work; trouble with M-x toggle-debug-on-error
+;; http://emacs.stackexchange.com/questions/7540/doc-view-mode-hook
+;; (add-hook 'doc-view-mode-hook 'doc-view-fit-width-to-window)
+
+;; Ediff mode
+
+(custom-set-variables
+ ;; Puts buffers side by side
+ '(ediff-split-window-function (quote split-window-horizontally))
+ ;; Added ediff control buffer at bottom; activate with ?
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
+
+;; Calc mode
+
+;; Disable multiplication having precedence over division
+(setq calc-multiplication-has-precedence nil)

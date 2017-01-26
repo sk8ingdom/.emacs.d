@@ -104,10 +104,6 @@ prompt the user for a coding system."
     (and found (goto-char (1+ (car found))))
     found))
 
-;; Calc mode
-
-;; Disable multiplication having precedence over division
-(setq calc-multiplication-has-precedence nil)
 
 ;; Disable git
 (setq vc-handled-backends ())
@@ -136,13 +132,6 @@ prompt the user for a coding system."
 ;; Display line and column numbers
 (setq line-number-mode t)
 (setq column-number-mode t)
-
-;; Ediff mode
-(custom-set-variables
- ;; Puts buffers side by side
- '(ediff-split-window-function (quote split-window-horizontally))
- ;; Added ediff control buffer at bottom; activate with ?
- '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
 
 ;; Prefer vertical splits (mainly to fix org-agenda)
 (setq split-height-threshold nil)
