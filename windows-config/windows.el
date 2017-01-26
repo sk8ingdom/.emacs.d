@@ -51,5 +51,14 @@
         (width . 166)
         (height . 37)))
 
+;; Map server
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (call-process-shell-command "U:/dev/Programs/Batch/Scripts/webdav/webdav-connect.bat")))
+
+(add-hook 'kill-emacs-hook
+          (lambda ()
+            (call-process-shell-command "U:/dev/Programs/Batch/Scripts/webdav/webdav-disconnect.bat")))
+
 ;; Gnus
 (load "~/.emacs.d/windows-config/windows-gnus.el")
