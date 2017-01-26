@@ -56,8 +56,9 @@
         ("*Backtrace*"                   :align below :ratio 0.20 :select t)
         ("*Compile-Log*"                 :align below :ratio 0.20)
         ("*package update results*"      :align below :ratio 0.20)
-        ("*Ediff Control Panel*"         :align below             :select t)
-        (" *undo-tree*"                  :align left :ratio 0.10 :select t)
+        ("*Ediff Control Panel*"         :align below              :select t)
+        (" *undo-tree*"                  :align left  :ratio 0.10  :select t)
+        ("*tex-shell*"                   :align below :ratio 0.20  :select t)
 
         ;; Org-mode
         (" *Org todo*"                   :align below :ratio 10   :select t)
