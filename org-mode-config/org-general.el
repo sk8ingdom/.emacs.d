@@ -74,7 +74,7 @@
 
 ;; Shorten dired links to file name
 ;; Added for [[id:2d61b197-2652-44e5-88f4-70f31e2bcf07]]
-(defun dired-store-link ()
+(defun org-dired-store-link ()
   (when (derived-mode-p 'dired-mode)
     (let ((file (dired-get-filename nil t)))
       (setf file (if file
@@ -85,7 +85,8 @@
                             :description (file-name-nondirectory file))
       file)))
 
-;; (add-to-list 'org-store-link-functions 'dired-store-link)
+;; Adds dired link to org-link-parameters variable, replaces org-add-link-type
+(org-link-set-parameters "dired" :store 'org-dired-store-link)
 
 ;; Remove link and retain description
 (defun my/org-replace-link-by-link-description ()
