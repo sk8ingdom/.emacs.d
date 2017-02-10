@@ -118,3 +118,7 @@
 (require 'dired-quick-sort)
 (setq ls-lisp-use-insert-directory-program "ls")
 (dired-quick-sort-setup)
+
+;; Enable elmacro
+(require 'elmacro)
+(elmacro-mode)

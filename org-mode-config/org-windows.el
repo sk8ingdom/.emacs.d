@@ -22,3 +22,23 @@
       "U:/dev/Programs/Batch/Scripts/npocmaka-scripts/hybrids/.net/c/screenCapture.bat")
 (setq org-windows-screenshot-directory "U:/mul/Images/Screenshots/")
 (global-set-key "\C-cs" 'org-windows-screenshot)
+
+;; Windows layout
+(defun my/org-windows-layout ()
+  (interactive)
+  (split-window-below nil)
+  (other-window 1)
+  (split-window-below nil)
+  (delete-window)
+  (split-window-right nil)
+  (find-file (concat org-directory "/wrk.org"))
+  (other-window 1)
+  (other-window 1)
+  (dired-at-point "r:/")
+  (other-window 1)
+  (other-window 1)
+  (switch-to-buffer "wrk.org" nil 'force-same-window)
+  ;; (execute-kbd-macro (kbd "C-c a < a")
+  (org-agenda nil "a" "<"))
+
+(my/org-windows-layout)
