@@ -70,6 +70,7 @@
         ("*Org Clock*"                   :align below)
         ("*Edit Formulas*"               :align below :ratio 10   :select t)
         ("\\*Org Src.*"        :regexp t :align below :ratio 10   :select t)
+        ("*Org Attach*"                  :align below             :select t)
 
         ;; Don't Work
         ;; (dired-mode                      :align below :ratio 0.20 :select t)

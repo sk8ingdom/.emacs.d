@@ -24,6 +24,7 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cv" 'org-reveal)
 
 ;; Property inheritance
 (setq org-use-property-inheritance nil)
