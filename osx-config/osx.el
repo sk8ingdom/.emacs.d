@@ -57,6 +57,12 @@
 (setq exec-path (append exec-path '("/usr/texbin")))
 (setq TeX-command-force "latex")
 
+;; Spell Checking
+;; (setenv "DICTIONARY" "en_GB")
+;; (setq ispell-program-name "/usr/local/bin/aspell")
+(setq exec-path (append "/usr/local/bin/" exec-path))
+(setq ispell-program-name "aspell")
+
 ;; Doc-view
 (setq doc-view-ghostscript-program "/opt/local/bin/gs")
 
@@ -68,3 +74,6 @@
 
 ;; Gnus
 (load "~/.emacs.d/osx-config/osx-gnus.el")
+
+(setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin/"))
+(setq exec-path (append exec-path '("/Library/TeX/texbin/")))
