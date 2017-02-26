@@ -59,6 +59,8 @@
         ("*Ediff Control Panel*"         :align below              :select t)
         (" *undo-tree*"                  :align left  :ratio 0.10  :select t)
         ("*tex-shell*"                   :align below :ratio 0.20  :select t)
+        ("*Marked Files*"                :align below              :select t)
+        (" *Choices*"                    :align below              :select t)
 
         ;; Org-mode
         (" *Org todo*"                   :align below :ratio 10   :select t)
