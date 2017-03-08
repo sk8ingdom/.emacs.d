@@ -46,9 +46,9 @@
 ;; Subsequent frame size and location
 ;; Call gnus with M-x gnus-other-frame
 (setq default-frame-alist
-      '((top . -235)
+      '((top . -1)
         (left . 1600)
-        (width . 166)
+        (width . 165)
         (height . 37)))
 
 ;; Map server
