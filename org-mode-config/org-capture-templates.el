@@ -654,8 +654,8 @@
   :Paid:     %^{Paid}
   :Method:   [[fin:%^{Method|Wells Fargo Credit Account|Wells Fargo Checking Account|Wells Fargo Debit Account|GE Capital Credit Card}][%\\5]]
   :Merchant: [[peo:%\\2][%\\2]]
-  :Note:     %?
   :Link:     [[val:fin/Receipts/%<%Y-%m-%d> %^{Merchant Short Name}.pdf][%<%Y-%m-%d> %\\6.pdf]]
+  :Note:     %?
   :END:
   :LOGBOOK:
   - State \"\"           from \"\"           %U

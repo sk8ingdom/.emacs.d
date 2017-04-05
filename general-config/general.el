@@ -1,5 +1,7 @@
 ;; Enable package
 (require 'package)
+;; Used to overcome bad-signature errors.
+;; (setq package-check-signature nil)
 (package-initialize)
 (package-refresh-contents)
 (add-to-list 'package-archives
