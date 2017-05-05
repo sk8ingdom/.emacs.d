@@ -57,7 +57,7 @@
         ("*Compile-Log*"                 :align below :ratio 0.20)
         ("*package update results*"      :align below :ratio 0.20)
         ("*Ediff Control Panel*"         :align below              :select t)
-        (" *undo-tree*"                  :align left  :ratio 0.10  :select t)
+        (" *undo-tree*"                  :align right :ratio 0.10  :select t)
         ("*tex-shell*"                   :align below :ratio 0.20  :select t)
         ("*Marked Files*"                :align below              :select t)
         (" *Choices*"                    :align below              :select t)
