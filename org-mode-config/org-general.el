@@ -89,6 +89,13 @@
 ;; Adds dired link to org-link-parameters variable, replaces org-add-link-type
 (org-link-set-parameters "dired" :store 'org-dired-store-link)
 
+;; Have dired store org-link when a file or files(s) are renamed
+(defun my/dired-rename-file (file newname ok-if-already-exists)
+  "Store org-link to the renamed file."
+  (push (list newname (file-name-nondirectory newname)) org-stored-links))
+
+(advice-add #'dired-rename-file :after #'my/dired-rename-file)
+
 ;; Remove link and retain description
 (defun my/org-replace-link-by-link-description ()
   "Replace an org link by its description or if empty its address"
