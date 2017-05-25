@@ -62,6 +62,7 @@
         ("*Marked Files*"                :align below              :select t)
         (" *Choices*"                    :align below              :select t)
         ("*Register Preview*"            :align below              :select t)
+        ("*Finder*"                      :align below              :select t)
 
         ;; Org-mode
         (" *Org todo*"                   :align below :ratio 10   :select t)
