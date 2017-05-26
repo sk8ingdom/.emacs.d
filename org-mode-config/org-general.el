@@ -109,12 +109,22 @@
         (insert description))))
 
 ;; Change and freeze time
-(defun my/freeze-time (time)
-  "Freeze `current-time' at the given TIME"
-  (interactive (list (org-read-date t nil nil "Input freeze time:")))
-  (eval (macroexpand `(defadvice current-time (around freeze activate)
-                        (setq ad-return-value ',(append (org-read-date nil t time) '(0 0))))))
-  (set-face-background 'fringe "firebrick2"))
+(defun my/freeze-time ()
+  "Freeze `current-time' at the current active or inactive timestamp. If point
+is not on a timestamp, the function prompts for one. If time is not specified,
+either by the timstamp under point or prompt, the time defaults to the
+current HH:MM of today at the selected date."
+  (interactive)
+  (let ((time
+         (cond ((org-at-timestamp-p t)
+                (match-string 0))
+               (t
+                (org-read-date t nil nil "Input freeze time:")))))
+    (eval (macroexpand
+           `(defadvice current-time (around freeze activate)
+              (setq ad-return-value ',
+                    (append (org-read-date nil t time) '(0 0))))))
+    (set-face-background 'fringe "firebrick2")))
 
 (global-set-key "\C-cf" 'my/freeze-time)
 
