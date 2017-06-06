@@ -36,7 +36,7 @@
   (ad-set-arg 0 t))
 (ad-activate 'quit-window)
 
-;; Doc-view
+;; Doc-view mode
 
 ;; Doesn't currently work; trouble with M-x toggle-debug-on-error
 ;; http://emacs.stackexchange.com/questions/7540/doc-view-mode-hook
@@ -54,3 +54,20 @@
 
 ;; Disable multiplication having precedence over division
 (setq calc-multiplication-has-precedence nil)
+
+;; eshell mode
+
+(setq eshell-prompt-function
+      (lambda ()
+        (concat
+         (propertize "┌─[" 'face `(:foreground "black"))
+         (propertize (user-login-name) 'face `(:foreground "red"))
+         (propertize "@" 'face `(:foreground "black"))
+         (propertize (system-name) 'face `(:foreground "blue"))
+         (propertize "]──[" 'face `(:foreground "black"))
+         (propertize (format-time-string "%H:%M" (current-time)) 'face `(:foreground "red"))
+         (propertize "]──[" 'face `(:foreground "black"))
+         (propertize (concat (eshell/pwd)) 'face `(:foreground "blue"))
+         (propertize "]\n" 'face `(:foreground "black"))
+         (propertize "└─>" 'face `(:foreground "black"))
+         (propertize (if (= (user-uid) 0) " # " " $ ") 'face `(:foreground "black")))))
