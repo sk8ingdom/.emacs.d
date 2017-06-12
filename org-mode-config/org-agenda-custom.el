@@ -362,3 +362,36 @@
 
 ;; Show ancestors after using org-agenda-goto
 (advice-add #'org-agenda-goto :after #'org-reveal)
+
+;; Switch left window to appropriate buffer prior to org-agenda-goto
+(defun my/org-agenda-correct-buffer ()
+  (interactive)
+  (save-excursion
+    (let ((marker (org-get-at-bol 'org-marker)))
+      (other-window -1)
+      (switch-to-buffer (marker-buffer marker))
+      (other-window 1))))
+
+;; Alternative version
+;; (defun my/org-agenda-correct-buffer ()
+;;   (interactive)
+;;   (save-excursion
+;;     (move-beginning-of-line 1)
+;;     (forward-word 1)
+;;     (backward-word 1)
+;;     (let (my/org-buffer)
+;;       (setq my/org-buffer (thing-at-point 'word))
+;;       (other-window -1)
+;;       (switch-to-buffer (concat my/org-buffer ".org") nil 'force-same-window)
+;;       (other-window 1))))
+
+;; Add advice before org-agenda-goto
+(advice-add #'org-agenda-goto :before #'my/org-agenda-correct-buffer)
+
+;; Advice breaks org-agenda-show-mouse so unbind
+(eval-after-load "org-agenda"
+  (progn
+    '(define-key org-agenda-mode-map (kbd "<mouse-1>") nil)
+    ;; This one doesn't work for some reason
+    '(define-key org-agenda-mode-map (kbd "<mouse-2>") nil)
+    '(define-key org-agenda-mode-map (kbd "<mouse-3>") nil)))
