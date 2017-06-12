@@ -359,3 +359,6 @@
                   (interactive)
                   (switch-to-buffer "wrk.org")
                   (execute-kbd-macro (kbd "C-c a < a"))))
+
+;; Show ancestors after using org-agenda-goto
+(advice-add #'org-agenda-goto :after #'org-reveal)
