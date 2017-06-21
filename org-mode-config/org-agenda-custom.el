@@ -395,3 +395,23 @@
     ;; This one doesn't work for some reason
     '(define-key org-agenda-mode-map (kbd "<mouse-2>") nil)
     '(define-key org-agenda-mode-map (kbd "<mouse-3>") nil)))
+
+;; Function to kill current line in agenda but not modify org file
+(defun my/org-agenda-kill-line ()
+  " Remove line / item at point from current org-agenda. Does not currently
+work with `undo'. To remove multiple items, mark with `org-agenda-bulk-mark'
+and run `org-agenda-bulk-action' with this function. Do NOT confused with
+`org-agenda-kill'."
+  (interactive)
+  (let ((home (point)))
+    (read-only-mode 0)
+    (move-beginning-of-line nil)
+    (kill-line)
+    (delete-char 1)
+    (read-only-mode 1)
+    (goto-char home)))
+
+;; add my/org-agenda-kill-line to key-map
+(eval-after-load "org-agenda"
+  (progn
+    '(define-key org-agenda-mode-map (kbd "M-k") nil)))
