@@ -1,7 +1,7 @@
 ;;; org-outlook.el --- Outlook org
-;; 
+;;
 ;; Filename: org-outlook.el
-;; Description: 
+;; Description:
 ;; Author: Matthew L. Fidler
 ;; Maintainer:
 ;; Created: Mon May 10 09:44:59 2010 (-0500)
@@ -10,126 +10,126 @@
 ;;           By: Matthew L. Fidler
 ;;     Update #: 166
 ;; URL: https://github.com/mlf176f2/org-outlook.el
-;; Keywords: Org-outlook 
+;; Keywords: Org-outlook
 ;; Compatibility:
-;; 
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
-;;; Commentary: 
-;; 
+;;
+;;; Commentary:
+;;
 ;; * Introduction:
 ;; Org mode lets you organize your tasks. However, sometimes you may wish
 ;; to integrate org-mode with outlook since your company forces you to
-;; use Microsoft Outlook.  [[file:org-outlook.el][org-outlook.el]] allows: 
-;; 
+;; use Microsoft Outlook.  [[file:org-outlook.el][org-outlook.el]] allows:
+;;
 ;; - Creating Tasks from outlook items:
 ;;   - org-outlook-task. All selected items in outlook will be added to a
-;;     task-list at current point. This version requires org-protocol and   
+;;     task-list at current point. This version requires org-protocol and
 ;;     org-protocol.vbs.  The org-protocol.vbs has can be generated with
 ;;     the interactive function `org-outlook-create-vbs'.
-;; 
+;;
 ;;   - If your organization has blocked all macro access OR you want to
 ;;     have an action for a saved =.msg= email, org-outlook also adds
 ;;     drag and drop support allowing =.msg= files to become org tasks.
 ;;     This is enabled by default, but can be disabled by
 ;;     `org-outlook-no-dnd'
-;; 
+;;
 ;;   - With blocked emails, you may wish to delete the emails in a folder
 ;;     after the task is completed.  This can be accomplished with
 ;;     `org-protocol-delete-msgs'.  If you use it frequently, you may
 ;;     wish to bind it to a key, like
-;; 
-;; 
+;;
+;;
 ;;   (define-key org-mode-map (kbd "C-c d") 'org-protocol-delete-msgs)
-;; 
-;; 
-;; 
+;;
+;;
+;;
 ;; - Open Outlook Links in org-mode
-;; 
+;;
 ;;   - Requires org-outlook-location to be customized when using Outlook
 ;;     2007 (this way you don’t have to edit the registry).
-;; 
+;;
 ;; This is based loosely on:
 ;; http://superuser.com/questions/71786/can-i-create-a-link-to-a-specific-email-message-in-outlook
-;; 
-;; 
+;;
+;;
 ;; Note that you may also add tasks using visual basic directly. The script below performs the following actions:
-;; 
+;;
 ;;    - Move email to Personal Folders under folder "@ActionTasks" (changes GUID)
 ;;    - Create a org-mode task under heading "* Tasks" for the file `f:\Documents\org\gtd.org'
 ;;    - Note by replacing "@ActionTasks", "* Tasks" and
 ;;      `f:\Documents\org\gtd.org' you can modify this script to your
 ;;      personal needs.
-;; 
+;;
 ;; The visual basic script for outlook can be created by calling `M-x org-outlook-create-vbs'
-;; 
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;;; Change log:
-;; 7-Aug-2014    Matthew L. Fidler  
+;; 7-Aug-2014    Matthew L. Fidler
 ;;    Last-Updated: Tue May 29 22:21:06 2012 (-0500) #166 (Matthew L. Fidler)
 ;;    Add autoload cookie for org-outlook-enable-msg-dnd
-;; 1-Jul-2014    Matthew L. Fidler  
+;; 1-Jul-2014    Matthew L. Fidler
 ;;    Last-Updated: Tue May 29 22:21:06 2012 (-0500) #166 (Matthew L. Fidler)
 ;;    Add delete msg files support
-;; 24-Jun-2014    Matthew L. Fidler  
+;; 24-Jun-2014    Matthew L. Fidler
 ;;    Last-Updated: Tue May 29 22:21:06 2012 (-0500) #166 (Matthew L. Fidler)
 ;;    Bugfix for Drag and Drop Support
-;; 24-Jun-2014    Matthew L. Fidler  
+;; 24-Jun-2014    Matthew L. Fidler
 ;;    Last-Updated: Tue May 29 22:21:06 2012 (-0500) #166 (Matthew L. Fidler)
 ;;    Add Drag and drop support for tasks
-;; 12-Dec-2012    Matthew L. Fidler  
+;; 12-Dec-2012    Matthew L. Fidler
 ;;    Last-Updated: Tue May 29 22:21:06 2012 (-0500) #166 (Matthew L. Fidler)
 ;;    Updated Visual Basic Script to be more robust, and have more options.
-;; 07-Dec-2012    Matthew L. Fidler  
+;; 07-Dec-2012    Matthew L. Fidler
 ;;    Last-Updated: Tue May 29 22:21:06 2012 (-0500) #166 (Matthew L. Fidler)
 ;;    Should fix Issue #1.  Also added org-outlook-create-vbs to create the
 ;;    VBS code based on a user's setup.
-;; 26-May-2012    Matthew L. Fidler  
+;; 26-May-2012    Matthew L. Fidler
 ;;    Last-Updated: Sat May 26 11:13:22 2012 (-0500) #163 (Matthew L. Fidler)
 ;;    Added (require 'cl), Thanks Robert Pluim
-;; 21-Feb-2012    Matthew L. Fidler  
+;; 21-Feb-2012    Matthew L. Fidler
 ;;    Last-Updated: Tue Feb 21 11:15:02 2012 (-0600) #160 (Matthew L. Fidler)
 ;;    Bug fix for opening files.
-;; 21-Feb-2012      
+;; 21-Feb-2012
 ;;    Last-Updated: Tue Dec 13 08:41:29 2011 (-0600) #156 (Matthew L. Fidler)
 ;;    Bug fix.
-;; 13-Dec-2011    Matthew L. Fidler  
+;; 13-Dec-2011    Matthew L. Fidler
 ;;    Last-Updated: Tue Dec 13 08:41:10 2011 (-0600) #155 (Matthew L. Fidler)
 ;;    Added more autoload cookies.
-;; 08-Apr-2011      
+;; 08-Apr-2011
 ;;    Last-Updated: Fri Apr  8 08:49:38 2011 (-0500) #151 (US041375)
 ;;    Added some autoload cookies.
-;; 15-Feb-2011    Matthew L. Fidler  
+;; 15-Feb-2011    Matthew L. Fidler
 ;;    Last-Updated: Tue Jan 11 12:21:26 2011 (-0600) #147 (Matthew L. Fidler)
 ;;    Changed outlook-org to org-outlook.el
-;; 11-Jan-2011    Matthew L. Fidler  
+;; 11-Jan-2011    Matthew L. Fidler
 ;;    Last-Updated: Tue Jan 11 00:21:21 2011 (-0600) #140 (Matthew L. Fidler)
 ;;    Finalized interface with org-protocol
-;; 05-Jan-2011    Matthew L. Fidler  
+;; 05-Jan-2011    Matthew L. Fidler
 ;;    Last-Updated: Wed Jan  5 12:39:59 2011 (-0600) #42 (Matthew L. Fidler)
 ;;    Removed outlook copy.  I only use from outlook now.
-;; 
-;; 
+;;
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
 ;; published by the Free Software Foundation; either version 3, or
 ;; (at your option) any later version.
-;; 
+;;
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 ;; General Public License for more details.
-;; 
+;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 ;; Floor, Boston, MA 02110-1301, USA.
-;; 
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;;; Code:
 (eval-when-compile (require 'cl))
 (require 'org)
@@ -140,8 +140,8 @@
   "Org Outlook"
   :group 'org-mode)
 
-(defcustom org-outlook-location (w32-short-file-name "C:/Program Files (x86)/Microsoft Office/Office14/OUTLOOK.EXE")
-  "* Microsoft Outlook 2007 location."
+(defcustom org-outlook-location (w32-short-file-name "C:/Program Files (x86)/Microsoft Office/Office16/OUTLOOK.EXE")
+  "* Microsoft Outlook 2016 location."
   :type 'string
   :group 'org-outlook)
 
@@ -180,7 +180,7 @@
          (move-to-subfolder (if (not move-to-folder)
                                 (yes-or-no-p "Would you like to move the emails to a subfolder?")
                               nil))
-         (script (concat 
+         (script (concat
                   "'**************************************
 ' Name: URLEncode Function
 ' Description:Encodes a string to create legally formatted
@@ -284,7 +284,7 @@ Sub CreateTaskFromItem()
     Dim allPersonalFolders As Outlook.MAPIFolder
     " (if (not (or move-to-folder move-to-subfolder)) ""
         (concat "Dim taskf As Object
-    
+
     Set myNamespace = Outlook.GetNamespace(\"MAPI\")
 "
                 (if move-to-folder
@@ -295,20 +295,20 @@ Sub CreateTaskFromItem()
     Set allPersonalFolders = myPersonalFolder")
                   "Set allPersonalFolders = myNamespace.GetDefaultFolder(olFolderInbox)")
                 "
-    
+
     T = \"\"
     Set taskf = OutlookFolderNames(allPersonalFolders,\""
                 (read-from-minibuffer "Subfolder to put tasks in: " "@ActionTasks") "\")\n")) "
-    
+
     ' Send selected text to clipboard.
     ' SendKeys (\"%E\")
     ' SendKeys (\"C\")
     ' DoEvents
-    
-    
+
+
     Set objWeb = CreateObject(\"InternetExplorer.Application\")
-    
-        
+
+
     If Outlook.Application.ActiveExplorer.Selection.Count > 0 Then
         For i = 1 To Outlook.Application.ActiveExplorer.Selection.Count
             Set objMail = Outlook.ActiveExplorer.Selection.Item(i)
@@ -383,10 +383,10 @@ To use this plugin:
 
 You may also use the following placeholders
 
-Placeholders Replacement 
+Placeholders Replacement
 %:link URL of the email
 %:description The title of the message
-%:title The title of the message 
+%:title The title of the message
 %:initial Selected text.
 %:sender Sender's name
 %:sender-email Sender's Email
@@ -504,7 +504,7 @@ CAPTURE-FUNC is either the symbol `org-remember' or `org-capture'."
 
 ;;;###autoload
 (eval-after-load "org-protocol"
-  '(progn 
+  '(progn
      (if (not (boundp 'org-protocol-protocol-alist))
          (setq org-protocol-protocol-alist nil))
      (add-to-list 'org-protocol-protocol-alist
