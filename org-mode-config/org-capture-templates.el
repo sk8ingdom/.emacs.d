@@ -437,6 +437,7 @@
   :Username:
   :Email:
   :Password:
+  :Via:
   :Note:
   :END:
   :LOGBOOK:
