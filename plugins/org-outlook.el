@@ -109,7 +109,8 @@
 ;; 05-Jan-2011    Matthew L. Fidler
 ;;    Last-Updated: Wed Jan  5 12:39:59 2011 (-0600) #42 (Matthew L. Fidler)
 ;;    Removed outlook copy.  I only use from outlook now.
-;;
+;; 18-Oct-2017    Dominic Surano
+;;    Changed org-outlook-location to outlook 2010.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -140,8 +141,8 @@
   "Org Outlook"
   :group 'org-mode)
 
-(defcustom org-outlook-location (w32-short-file-name "C:/Program Files (x86)/Microsoft Office/Office16/OUTLOOK.EXE")
-  "* Microsoft Outlook 2016 location."
+(defcustom org-outlook-location (w32-short-file-name "C:/Program Files (x86)/Microsoft Office/Office14/OUTLOOK.EXE")
+  "* Microsoft Outlook 2010 location."
   :type 'string
   :group 'org-outlook)
 

@@ -1,21 +1,38 @@
-;; Enable package
+;;; -*- lexical-binding: t -*-
+
+;; ;; Enable package
 (require 'package)
 ;; Used to overcome bad-signature errors.
-;; (setq package-check-signature nil)
+(setq package-check-signature nil)
 (package-initialize)
-(package-refresh-contents)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("org" . "http://orgmode.org/elpa/") t)
 
-;; Auto-update packages
+;; Only do if connected to the internet
+;; (package-refresh-contents)
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa"        . "http://www.melpa.org/packages/") t)
+;; (add-to-list 'package-archives
+;;             '("org"          . "http://orgmode.org/elpa/") t)
+
+;; ;; Auto-update packages
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-package-update.el")
 (require 'auto-package-update)
-(auto-package-update-maybe)
+
+;; Only do if connecte to the internet
+;; (auto-package-update-maybe)
 
 ;; Disable the splash screen
 (setq inhibit-splash-screen t)
+
+;; Turn off blinking cursor
+(blink-cursor-mode -1)
+
+;; Turn off tool-bar
+(tool-bar-mode -1)
+
+;; Turn off menu-bar
+(menu-bar-mode -1)
 
 ;; Enable transient mark mode
 (transient-mark-mode t)
@@ -23,13 +40,20 @@
 ;; Set truncate lines to default
 (set-default 'truncate-lines t)
 
-;; Display time
-(display-time-mode t)
+;; Font
+(set-face-attribute 'default nil
+                    :family "Courier New"
+                    :foundry "outline"
+                    :slant 'normal
+                    :weight 'normal
+                    :height 83
+                    :width 'normal)
 
 ;; Scrolling
 
 ;; Hides scroll bar
 (set-scroll-bar-mode nil)
+
 ;; Removes margin
 (setq scroll-margin 0)
 ;; Makes scrolling smoother
@@ -42,6 +66,8 @@
 (setq mouse-wheel-follow-mouse 't)
 ;; Keyboard scroll one line at a time
 (setq scroll-step 1)
+;; Increase 10X via https://www.reddit.com/r/emacs/comments/819v0h/how_to_speed_up_cursor_movement_by_10x/
+(setq auto-window-vscroll nil)
 
 ;; Tabs
 
@@ -114,7 +140,7 @@ prompt the user for a coding system."
 ;; Disable backup
 (setq backup-inhibited t)
 
-;; Disable auto-save
+;; ;; Disable auto-save
 (setq auto-save-default nil)
 
 ;; Automatically convert line endings to unix
@@ -144,6 +170,24 @@ prompt the user for a coding system."
 
 ;; Enable upcase-region
 (put 'upcase-region 'disabled nil)
+
+;; Reduce and re-colorfringe
+(set-fringe-mode '(3 . 3))
+(set-face-background 'fringe nil)
+
+;; Replace audio bell with visual bell
+(setq visible-bell nil
+      ring-bell-function 'my/flash-fringe)
+
+(defun my/flash-fringe ()
+  (let ((fringe (face-background 'fringe)))
+    (set-face-background 'fringe "gray95")
+    (run-with-idle-timer 0.05 nil
+                         (lambda ()
+                           (set-face-background 'fringe fringe)))))
+
+;; Turn off dialog-boxes
+(setq use-dialog-box nil)
 
 ;; Start Emacs server
 (server-start)

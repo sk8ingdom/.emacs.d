@@ -16,15 +16,38 @@
 ;; Enable syntax-highlighting
 (setq org-src-fontify-natively t)
 
+;;;; Export Options
+
 ;; Disable subscripts on export
 (setq org-export-with-sub-superscripts nil)
+
+;; Disable table of contents on export
+(setq org-export-with-toc nil)
+
+;; Export drawers
+;; (setq org-export-with-drawers t)
+
+;; Export to clipboard to paste in other pgorams
+(defun my/org-export-region-html ()
+  "Export region to HTML, and copy it to the clipboard."
+  (interactive)
+  (save-window-excursion
+    (let* ((buf (org-export-to-buffer 'html "*Formatted Copy*" nil nil t t))
+           (html (with-current-buffer buf (buffer-string))))
+      (with-current-buffer buf
+        (shell-command-on-region
+         (point-min)
+         (point-max)
+         "clip"))
+      (kill-buffer buf))))
 
 ;; Shortcuts
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-cv" 'org-reveal)
+(define-key org-mode-map "\C-cv" 'org-reveal)
+(define-key org-mode-map "\C-cn" 'org-next-link)
+(define-key org-mode-map "\C-cp" 'org-property-action)
 
 ;; Property inheritance
 (setq org-use-property-inheritance nil)
@@ -49,77 +72,71 @@
 ;;  (lambda ()
 ;;    (add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local)))
 
+
+;; Org-refile
+
 ;; Targets include this file and any file contributing to the agenda - up to 9 levels deep
 (setq org-refile-targets '((org-agenda-files :maxlevel . 9)))
 (setq org-refile-use-outline-path 'file)
-(setq org-outline-path-complete-in-steps t)
+(setq org-outline-path-complete-in-steps nil)
 (setq org-refile-allow-creating-parent-nodes t)
 
-;; Export drawers
-;; (setq org-export-with-drawers t)
+;; Add previous heading to refile note automatically
+(defun my/org-refile-with-note-parent-link ()
+  "Wrapper for `org-refile' which automatically adds the previous
+parent org-link to the note in the form \"From [[id:hash][Heading]].\"
+
+Requires `org-log-refile' to be set to 'note."
+  (interactive)
+  (save-excursion
+    (let ((start-level (funcall outline-level)))
+      (if (<= start-level 1)
+          ;; Remember that org-make-link-string exists
+          (push (list (buffer-file-name)
+                      (file-name-nondirectory (buffer-file-name)))
+                      org-stored-links)
+        (progn
+          (outline-up-heading 1 t)
+          (call-interactively 'org-store-link)))))
+  (org-refile)
+  (with-simulated-input "RET RET"
+    (org-insert-link))
+  (insert ".")
+  (beginning-of-line nil)
+  (insert "From ")
+  (org-ctrl-c-ctrl-c))
+
+(define-key org-mode-map "\C-c\C-w" 'my/org-refile-with-note-parent-link)
+
+;; ;; Has not been implemented for org-agenda-mode-map
+;; (define-key org-agenda-mode-map "\C-c\C-w" 'my/org-refile-with-note-parent-link)
+
+(defun my/org-copy-outline-path ()
+  "Function to copy outline path of current org-item (agenda or file) to clipboard."
+  (interactive)
+  (let ((m (org-get-at-bol 'org-marker)))
+    (kill-new (replace-regexp-in-string "//" "/" (org-with-point-at m (org-display-outline-path t t "/" nil))))))
+
+(define-key org-mode-map "\C-co" 'my/org-copy-outline-path)
 
 ;; Collapse plain lists
 (setq org-cycle-include-plain-lists 'integrate)
 
-;; Force links to open in current window
-(setq org-link-frame-setup
-      (quote
-       ((file . find-file))))
-
-;; Prompt for path completion when an id type link when org-insert-link is called
-;; Use with C-c C-l id: RET
-(defun org-id-complete-link (&optional arg)
-  "Create an id: link using completion"
-  (concat "id:"
-          (org-id-get-with-outline-path-completion org-refile-targets)))
-
-;; Shorten dired links to file name
-;; Added for [[id:2d61b197-2652-44e5-88f4-70f31e2bcf07]]
-(defun org-dired-store-link ()
-  (when (derived-mode-p 'dired-mode)
-    (let ((file (dired-get-filename nil t)))
-      (setf file (if file
-                     (abbreviate-file-name (expand-file-name file))
-                   default-directory))
-      (org-store-link-props :type        "dired"
-                            :link        file
-                            :description (file-name-nondirectory file))
-      file)))
-
-;; Adds dired link to org-link-parameters variable, replaces org-add-link-type
-(org-link-set-parameters "dired" :store 'org-dired-store-link)
-
-;; Have dired store org-link when a file or files(s) are renamed
-(defun my/dired-rename-file (file newname ok-if-already-exists)
-  "Store org-link to the renamed file."
-  (push (list newname (file-name-nondirectory newname)) org-stored-links))
-
-(advice-add #'dired-rename-file :after #'my/dired-rename-file)
-
-;; Remove link and retain description
-(defun my/org-replace-link-by-link-description ()
-  "Replace an org link by its description or if empty its address"
-  (interactive)
-  (if (org-in-regexp org-bracket-link-regexp 1)
-      (let ((remove (list (match-beginning 0) (match-end 0)))
-            (description (if (match-end 3)
-                             (org-match-string-no-properties 3)
-                           (org-match-string-no-properties 1))))
-        (apply 'delete-region remove)
-        (insert description))))
-
 ;; Change and freeze time
-(defun my/freeze-time ()
+(defun my/freeze-time (&optional freeze-time-time)
   "Freeze `current-time' at the current active or inactive timestamp. If point
 is not on a timestamp, the function prompts for one. If time is not specified,
 either by the timstamp under point or prompt, the time defaults to the
 current HH:MM of today at the selected date."
   (interactive)
   (let ((time
-         (cond ((org-at-timestamp-p t)
-                (match-string 0))
-               (t
-                (org-read-date t nil nil "Input freeze time:")))))
+         (cond
+          ((if (boundp 'freeze-time-time)
+               freeze-time-time))
+          ((if (org-at-timestamp-p 'lax) t)
+           (match-string 0))
+          (t
+           (org-read-date t nil nil "Input freeze time:")))))
     (eval (macroexpand
            `(defadvice current-time (around freeze activate)
               (setq ad-return-value ',
@@ -132,38 +149,17 @@ current HH:MM of today at the selected date."
 (defun my/release-time ()
   "Release the time frozen by `freeze-time'."
   (interactive)
-  (ad-remove-advice 'current-time 'around 'freeze)
-  (ad-activate 'current-time)
-  (set-face-background 'fringe nil))
+  (if (advice--p (advice--symbol-function 'current-time))
+      (progn
+        (ad-remove-advice 'current-time 'around 'freeze)
+        (ad-activate 'current-time)
+        (set-face-background 'fringe nil))
+    (message "Time is not currently frozen")))
 
 (global-set-key "\C-cr" 'my/release-time)
 
 ;; Change time-stamp increments to 1 minute
 (setq org-time-stamp-rounding-minutes '(0 1))
-
-;; Create abbreviations
-(defun my/create-org-link-abbreviations ()
-  "Replace all long form links in current file with their corresponding abbreviations in `org-link-abbrev-alist'."
-  (interactive)
-  (dolist (pair org-link-abbrev-alist)
-    (save-excursion
-      (goto-char (point-min))
-      (while (search-forward (concat "[[" (cdr pair)) nil t)
-        (replace-match (concat "[[" (car pair) ":"))))))
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (add-to-list 'write-file-functions 'my/create-org-link-abbreviations)))
-
-;; Remove abbreviations
-(defun my/remove-org-link-abbreviations ()
-  "Replace all link abbreviations in current file with their long form counterparts in `org-link-abbrev-alist'."
-  (interactive)
-  (dolist (pair org-link-abbrev-alist)
-    (save-excursion
-      (goto-char (point-min))
-      (while (search-forward (concat "[[" (car pair) ":") nil t)
-        (replace-match (concat "[[" (cdr pair)))))))
 
 ;; Re-define org-switch-to-buffer-other-window to NOT use org-no-popups.
 ;; Primarily for compatibility with shackle.
@@ -201,3 +197,176 @@ Redefined to allow pop-up windows."
 \\addtolength{\\textheight}{-3cm}
 \\setlength{\\topmargin}{1.5cm}
 \\addtolength{\\topmargin}{-2.54cm}")
+
+;; Go to the next indented paragraph when currently in a bulleted list.
+(defun my/org-next-paragraph ()
+  (interactive)
+  (move-end-of-line nil)
+  (org-return)
+  (org-return)
+  (org-return)
+  (indent-for-tab-command nil)
+  (org-cycle nil)
+  (org-self-insert-command 1)
+  (beginning-of-visual-line 1)
+  (previous-line 1 1)
+  (delete-forward-char 1 nil)
+  (end-of-visual-line 1)
+  (org-delete-backward-char 1))
+
+(define-key org-mode-map "\C-ci" 'my/org-next-paragraph)
+
+;; Add note on property change
+(add-to-list 'org-log-note-headings
+             '(property . "Property %-12s from %-12S %t"))
+
+(defcustom my/org-property-ignored-properties
+  '("ID" "LAST_REPEAT" "Via")
+  "List of properties to exclude from my/org-property-change-note."
+  :group 'org
+  :type 'list)
+
+(defun my/org-property-store-previous-val (property)
+  "Store previous property value prior to modifying it with `org-property-action'."
+  (setq my/org-property-previous-val
+        (org-entry-get nil property)))
+
+(advice-add #'org-read-property-value :before #'my/org-property-store-previous-val)
+
+(defun my/org-property-change-note (prop val)
+  "Add property changes to the logbook. Requires modifying `org-add-log-note'
+to include:
+
+((eq org-log-note-purpose 'property)
+ (format \"\\\"%s\\\" property change from \\\"%s\\\"\"
+         (or org-log-note-state \"\")
+         (or org-log-note-previous-state \"\")))
+
+or replacing the entire cond block with:
+
+(cond
+ ((member org-log-note-purpose (mapcar 'car org-log-note-headings))
+  \"changing property\")
+ (t (error \"This should not happen\")))
+
+and byte compiling org.el."
+  (message (concat "Changing " prop " from " val))
+  (if (not (member prop my/org-property-ignored-properties))
+      (org-add-log-setup 'property prop my/org-property-previous-val)))
+
+;; In the interim, I've just re-defined the function
+(defun org-add-log-note (&optional _purpose)
+  "Pop up a window for taking a note, and add this note later."
+  (remove-hook 'post-command-hook 'org-add-log-note)
+  (setq org-log-note-window-configuration (current-window-configuration))
+  (delete-other-windows)
+  (move-marker org-log-note-return-to (point))
+  (pop-to-buffer-same-window (marker-buffer org-log-note-marker))
+  (goto-char org-log-note-marker)
+  (org-switch-to-buffer-other-window "*Org Note*")
+  (erase-buffer)
+  (if (memq org-log-note-how '(time state))
+      (org-store-log-note)
+    (let ((org-inhibit-startup t)) (org-mode))
+    (insert (format "# Insert note for %s.
+# Finish with C-c C-c, or cancel with C-c C-k.\n\n"
+                    (cond
+                     ((eq org-log-note-purpose 'clock-out) "stopped clock")
+                     ((eq org-log-note-purpose 'done)  "closed todo item")
+                     ((eq org-log-note-purpose 'state)
+                      (format "state change from \"%s\" to \"%s\""
+                              (or org-log-note-previous-state "")
+                              (or org-log-note-state "")))
+                     ((eq org-log-note-purpose 'reschedule)
+                      "rescheduling")
+                     ((eq org-log-note-purpose 'delschedule)
+                      "no longer scheduled")
+                     ((eq org-log-note-purpose 'redeadline)
+                      "changing deadline")
+                     ((eq org-log-note-purpose 'deldeadline)
+                      "removing deadline")
+                     ((eq org-log-note-purpose 'refile)
+                      "refiling")
+                     ((eq org-log-note-purpose 'note)
+                      "this entry")
+                     ((eq org-log-note-purpose 'property)
+                      (format "\"%s\" property change from \"%s\""
+                              (or org-log-note-state "")
+                              (or org-log-note-previous-state "")))
+                     (t (error "This should not happen")))))
+    (when org-log-note-extra (insert org-log-note-extra))
+    (setq-local org-finish-function 'org-store-log-note)
+    (run-hooks 'org-log-buffer-setup-hook)))
+
+(add-hook 'org-property-changed-functions 'my/org-property-change-note)
+
+(defun my/org-link-copy (&optional arg)
+  "Copy the entire org-link (link and description) at point and put it on the killring.
+With prefix C-u, just copy the org-link link."
+  (interactive "P")
+  (when (org-in-regexp org-bracket-link-regexp 1)
+    (if (null arg)
+        (let ((link (match-string-no-properties 0)))
+          (kill-new link)
+          (message "Copied link: %s" link))
+      (let ((link (org-link-unescape (match-string-no-properties 1))))
+        (kill-new link)
+        (message "Copied link: %s" link)))))
+
+(define-key org-mode-map "\C-ch" 'my/org-link-copy)
+
+;; Add avility to move forward by timestamp
+(setq my/org-timestamp-search-failed nil)
+
+;; Note: Need to advise org-context since exiting the logbook doesn't collapse it.
+(defun my/org-next-timestamp (&optional search-backward)
+  "Move forward to the next timestamp.
+If the timestamp is in hidden text, expose it."
+  (interactive "P")
+  (when (and my/org-timestamp-search-failed (eq this-command last-command))
+    (goto-char (point-min))
+    (message "Timestamp search wrapped back to beginning of buffer"))
+  (setq my/org-timestamp-search-failed nil)
+  (let* ((pos (point))
+         (ct (org-context))
+         (a (assq :timestamp ct))
+         (srch-fun (if search-backward 're-search-backward 're-search-forward)))
+    (cond (a (goto-char (nth (if search-backward 1 2) a)))
+          ((looking-at org-element--timestamp-regexp)
+           ;; Don't stay stuck at timestamp without an org-link face
+           (forward-char (if search-backward -1 1))))
+    (if (funcall srch-fun org-element--timestamp-regexp nil t)
+        (progn
+          (goto-char (match-beginning 0))
+          (when (org-invisible-p) (org-show-context)))
+      (goto-char pos)
+      (setq my/org-timestamp-search-failed t)
+      (message "No further timestamps found"))))
+
+(define-key org-mode-map "\C-ct" 'my/org-next-timestamp)
+
+;; Have dired store org-link when a file or files(s) are renamed
+(defun my/dired-rename-file (file newname ok-if-already-exists)
+  "Store org-link to the renamed file."
+  (push (list newname (file-name-nondirectory newname)) org-stored-links))
+
+(advice-add #'dired-rename-file :after #'my/dired-rename-file)
+
+;; Org-mode Priorities
+;; Default highest is 65 (A)
+;; Default default is 66 (B)
+;; Default lowest is 65 (C)
+;; Default should be "C" - two levels of priority should be enough
+(setq org-default-priority 67)
+
+;; Insert Capture Template At End of Current
+(defun my/org-capture-after-current ()
+  (interactive)
+  (org-insert-heading-after-current)
+  (kill-line -1)
+  (org-return)
+  (delete-forward-char 1)
+  ;; This doesn't work for some reason
+  ;; (let ((current-prefix-arg (digit-argument 0)))
+  ;;   (call-interactively #'org-capture)))
+  (execute-kbd-macro (read-kbd-macro "C-u 0 C-c c")))

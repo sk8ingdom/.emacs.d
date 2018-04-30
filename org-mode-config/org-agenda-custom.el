@@ -1,10 +1,15 @@
 ;; Default agenda preferences
 
-;; Exclude SCHEDULED items from agenda view (does not work)
-;; (setq org-agenda-todo-ignore-scheduled 'all)
-;; (setq org-agenda-tags-todo-honor-ignore-options t)
-;; Exclude all non-deadline and timestamp entries from the agenda
-;; (setq org-agenda-entry-types '(:deadline :timestamp))
+; Toggle scheduled
+(defun my/org-agenda-scheduled-toggle ()
+  "Toggle inclusion of scheduled items in org-agenda"
+  (interactive)
+  (if org-agenda-skip-function-global
+      (setq org-agenda-skip-function-global nil)
+    (setq org-agenda-skip-function-global '(org-agenda-skip-entry-if 'scheduled)))
+  (org-agenda-redo))
+
+(define-key org-agenda-keymap (kbd "i") 'my/org-agenda-scheduled-toggle)
 
 ;; Only show deadlines if they're past due
 (setq org-deadline-warning-days 0)
@@ -15,14 +20,6 @@
 ;; Only show agenda for current day
 (setq org-agenda-start-on-weekday nil)
 (setq org-agenda-span 1)
-
-;; Show agenda on startup
-;; (add-hook 'after-init-hook 'my/org-agenda-startup)
-
-;; (defun my/org-agenda-startup ()
-;;   (org-agenda-list)
-;;   (org-agenda-earlier 1)
-;;   (org-agenda-fortnight-view))
 
 ;; Clock report agenda settings
 
@@ -360,8 +357,12 @@
                   (switch-to-buffer "wrk.org")
                   (execute-kbd-macro (kbd "C-c a < a"))))
 
-;; Show ancestors after using org-agenda-goto
+;; Show ancestors after switching from agenda
 (advice-add #'org-agenda-goto :after #'org-reveal)
+(advice-add #'org-agenda-switch-to :after #'org-reveal)
+
+;; Remap <RET> to org-agenda-godo
+(define-key org-agenda-mode-map (kbd "<return>") 'org-agenda-goto)
 
 ;; Switch left window to appropriate buffer prior to org-agenda-goto
 (defun my/org-agenda-correct-buffer ()
@@ -387,6 +388,8 @@
 
 ;; Add advice before org-agenda-goto
 (advice-add #'org-agenda-goto :before #'my/org-agenda-correct-buffer)
+;; Doesn't work
+;; (advice-add #'org-agenda-switch-to :before #'my/org-agenda-correct-buffer)
 
 ;; Advice breaks org-agenda-show-mouse so unbind
 (eval-after-load "org-agenda"
@@ -415,3 +418,6 @@ and run `org-agenda-bulk-action' with this function. Do NOT confused with
 (eval-after-load "org-agenda"
   (progn
     '(define-key org-agenda-mode-map (kbd "M-k") nil)))
+
+;; Change display of agenda
+(setf (alist-get 'todo org-agenda-prefix-format) " %i %-12:c %l")

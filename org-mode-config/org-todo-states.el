@@ -3,14 +3,14 @@
 ;; They are distinguished by their states and PROPERTIES data
 ;; There are subsets of the classes that don't have keywords and use tags instead because they don't change state
 (setq org-todo-keywords
-       '(
-         ;; Sequence for TASKS
+       '(;; Sequence for TASKS
          ;; TODO means it's an item that needs addressing
          ;; WAITING means it's dependent on something else happening
+         ;; DELEGATED means someone else is doing it and I need to follow up with them
+         ;; ASSIGNED means someone else has full, autonomous responsibility for it
          ;; CANCELLED means it's no longer necessary to finish
-         ;; DELEGATED means someone else is doing it
          ;; DONE means it's complete
-         (sequence "TODO(t@/!)" "WAITING(w@/!)" "|" "CANCELLED(x@/!)" "DELEGATED(e@/!)" "DONE(d@/!)")
+         (sequence "TODO(t@/!)" "WAITING(w@/!)" "DELEGATED(e@/!)" "|" "ASSIGNED(.@/!)" "CANCELLED(x@/!)" "DONE(d@/!)")
 
          ;; Sequence for POSSESSIONS
          ;; PURCHASE means to buy; it's functionally the wishlist
@@ -40,9 +40,7 @@
          ;; DIDNOTGO means the event was cancelled or I didn't go
          ;; MEETING means a real time meeting, i.e. at work, or on the phone for something official
          ;; VISITED means the event took place and is no longer scheduled
-         (sequence "VISIT(v@/!)" "|" "DIDNOTGO(z@/!)" "MEETING(m)" "VISITED(y@/!)")
-         )
-       )
+         (sequence "VISIT(v@/!)" "|" "DIDNOTGO(z@/!)" "MEETING(m@/!)" "VISITED(y@/!)")))
 
 ;; Record time and note when a task is completed
 (setq org-log-done 'note)
@@ -59,8 +57,22 @@
 ;; Record time and note when a task is refiled
 (setq org-log-refile 'note)
 
+;; Doesn't currently work
+;; ;; Disable when refiled from org-capture
+;; (add-hook 'org-capture-mode-hook (lambda ()
+;;                                   (setq-local org-log-refile nil)))
+
+;; Disable when refiled from org-capture
+(define-advice org-capture-refile (:around (oldfunc &rest args) org-disable-log-refile)
+  "Set `org-log-refile' to nil while capturing."
+  (let ((org-log-refile nil))
+    (apply oldfunc args)))
+
 ;; Record note when clocking out
 (setq org-log-note-clock-out t)
 
 ;; Log everything into the LOGBOOK drawer
 (setq org-log-into-drawer t)
+
+;; Log inserting a heading
+(setq org-trest-insert-todo-heading-as-state-change t)

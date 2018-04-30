@@ -27,6 +27,17 @@
   - State \"WAITING\"    from \"\"           %U
   :END:" :empty-lines 1)
 
+   ;; DELEGATED(e) Delegated template
+   ("te" "DELEGATED (e) Delegated" entry (file "ref.org")
+    "* DELEGATED %?
+  :PROPERTIES:
+  :Via:
+  :Note:
+  :END:
+  :LOGBOOK:
+  - State \"DELEGATED\"  from \"\"           %U
+  :END:" :empty-lines 1)
+
    ;; CANCELLED(x) Cancelled template
    ("tx" "CANCELLED (x) Cancelled" entry (file "ref.org")
     "* CANCELLED %
@@ -37,18 +48,6 @@
   :END:
   :LOGBOOK:
   - State \"TODO\"       from \"\"           %U
-  :END:" :empty-lines 1)
-
-   ;; DELEGATED(e) Delegated template
-   ("te" "DELEGATED (e) Delegated" entry (file "ref.org")
-    "* DELEGATED %?
-  CLOSED: %U
-  :PROPERTIES:
-  :Via:
-  :Note:
-  :END:
-  :LOGBOOK:
-  - State \"DELEGATED\"  from \"\"           %U
   :END:" :empty-lines 1)
 
    ;; DONE     (d) Done template
@@ -344,7 +343,7 @@
   :END:%:quote" :empty-lines 1)
 
    ;; REFERENCE(f) Reference template
-   ("mf" "REFERENCE (b) Reference org-protocol" entry (file "ref.org")
+   ("mf" "REFERENCE (f) Reference org-protocol" entry (file "ref.org")
     "* REFERENCE [[%:link][%:created]]
   CLOSED: %U
   :PROPERTIES:
@@ -405,13 +404,7 @@
   :LOGBOOK:
   - State \"MEETING\"    from \"\"           %U
   :END:
-  %^T--%^T
-
-  Notes:
-  -
-
-  Tasks:
-  -" :empty-lines 1)
+  %^T" :empty-lines 1)
 
    ;; VISITED  (y) Visited template
    ("ey" "VISITED   (y) Visited" entry (file "ref.org")
@@ -428,7 +421,7 @@
   :END:
   %^t--%^t" :empty-lines 1)
 
-   ("n" "Non-to-do States")
+   ("n" "Non-TODO States")
    ;;          (a) Account template
   ("na" "          (a) Account" entry (file+headline "org.org" "Accounts")
     "* %?
@@ -436,7 +429,7 @@
   :Website:
   :Username:
   :Email:
-  :Password:
+  :Password: %(my/generate-openssl-password)
   :Via:
   :Note:
   :END:
@@ -690,6 +683,34 @@
   :END:
   %T" :empty-lines 1)
 
+   ("o" "Org-Protocol")
+   ;; TODO     (t) Org-protocol todo template
+   ;; Alternatively use [[%:link][%:description]] for :Via:
+   ("ot" "TODO      (t) Org-Protocol Todo" entry (file "ref.org")
+    "* TODO %?
+  :PROPERTIES:
+  :Via:      %:annotation
+  :Note:
+  :END:
+  :LOGBOOK:
+  - State \"TODO\"       from \"\"           %U
+  :END:" :empty-lines 1)
+
+   ;; MEETING  (m) Meeting template
+   ("om" "MEETING   (m) Org-Protocol Meeting" entry (file "ref.org")
+    "* MEETING %:description
+  CLOSED: %^U
+  :PROPERTIES:
+  :Attend:   [[peo:Dominic Surano][Dominic Surano]]
+  :Location: %?
+  :Via:      %:annotation
+  :Note:
+  :END:
+  :LOGBOOK:
+  - State \"MEETING\"    from \"\"           %U
+  :END:
+  %^T" :empty-lines 1)
+
    ))
 
 ;; Add ID automatically on capture
@@ -718,3 +739,63 @@
 ;;   (interactive)
 ;;   (my/make-capture-frame)
 ;;   (org-capture))
+
+(defun my/org-capture-during-meeting (task)
+  "Capture todo task with or without deadline, populate task :Via: field with meeting task,
+and then insert a link in line of the new todo task."
+  (interactive "sTask: ")
+  (call-interactively 'org-store-link)
+  (save-excursion
+    (org-insert-heading-respect-content)
+    (org-return)
+    (org-capture 0)
+    (org-previous-visible-heading 1)
+    (org-cut-subtree)
+    (org-do-demote)
+    (org-end-of-line)
+    (insert task)
+    (let ((parent-task
+           ;; ;; This implementation prompts due to the use of 'org-insert-last-stored-link.
+           ;; (replace-regexp-in-string "\n" ""
+           ;;                           (with-temp-buffer
+           ;;                             (org-mode)
+           ;;                             (org-insert-last-stored-link 1)
+           ;;                             (buffer-string)))))
+           ;; ;; This implementation requires 'set-window-buffer due to 'execute-kbd-macro.
+           ;; ;; To prevent 'y-or-no-p dialog box, set use-dialog-box to nil.
+           (with-temp-buffer
+             (save-window-excursion
+               (set-window-buffer nil (current-buffer))
+               (org-mode)
+               (execute-kbd-macro [?\C-c ?\C-l return return]))
+             (buffer-string))))
+      (org-set-property "Via" parent-task))
+    (call-interactively 'org-store-link)
+    (if (y-or-n-p "Set deadline?")
+        (call-interactively 'org-deadline))
+    (if (y-or-n-p "Set scheduled?")
+        (call-interactively 'org-schedule))
+    (org-cycle))
+  ;; (org-insert-last-stored-link 1)
+  (execute-kbd-macro [?\C-c ?\C-l return return]))
+  ;;(org-delete-backward-char 1))
+
+(define-key org-mode-map "\C-cm" 'my/org-capture-during-meeting)
+
+;; Redefine org-cut-special to also exit org-capture
+(defun my/org-cut-special-and-exit-org-capture ()
+  (interactive)
+  (org-cut-special)
+  ;; ;; This doesn't work as intended
+  ;; (org-capture-kill)
+  (kill-buffer)
+  (delete-window))
+
+(require 'org-capture)
+(define-key org-capture-mode-map (kbd "C-c C-x C-w") 'my/org-cut-special-and-exit-org-capture)
+
+(defun my/generate-openssl-password ()
+  "Automatically generate a 15 character password using OpenSSL for the Account capture template."
+  (interactive)
+  (replace-regexp-in-string "\n\\'" ""
+                            (shell-command-to-string "openssl rand -base64 15")))

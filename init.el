@@ -16,6 +16,7 @@
 (load "~/.emacs.d/org-mode-config/org-capture-templates")
 (load "~/.emacs.d/org-mode-config/org-agenda-custom")
 (load "~/.emacs.d/org-mode-config/org-abbreviations")
+(load "~/.emacs.d/org-mode-config/org-hyperlinks")
 
 (cond
  ;; Windows
@@ -40,3 +41,6 @@
 
 ;; Org-mode Plugins
 (load "~/.emacs.d/org-mode-config/org-plugins")
+
+;; Work Functions and variables
+(load "~/.emacs.d/wrk/wrk.el")

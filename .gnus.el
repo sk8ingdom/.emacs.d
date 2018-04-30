@@ -3,24 +3,33 @@
 
 (setq gnus-ignored-newgroups "")
 
-(setq gnus-select-method '(nnimap "gmail"
-                                  (nnimap-address "imap.gmail.com")
-                                  (nnimap-server-port 993)
-                                  (nnimap-stream ssl)))
+;; (setq gnus-select-method '(nnimap "gmail"
+;;                                   (nnimap-address "imap.gmail.com")
+;;                                   (nnimap-server-port 993)
+;;                                   (nnimap-stream ssl)))
+
+(setq gnus-select-method '(nntp "news.gmane.org"))
 
 (require 'nnreddit)
 
 (setq gnus-secondary-select-methods
-      '((nntp "news.gmane.org")
-        (nntp "news.eternal-september.org")
-        (nntp "news.gwene.org")
-        (nnreddit "www.reddit.com")))
+;;       '((nntp "news.gmane.org")
+;;         (nntp "news.eternal-september.org")
+;;         (nntp "news.gwene.org")
+      '((nnreddit "")))
 
-(require 'smtpmail)
-(setq send-mail-function 'smtpmail-send-it
-      smtpmail-auth-credentials "~/.authinfo"
-      smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 587)
+;; (gnus-group-unsubscribe-group "nnreddit:emacs")
+
+;; Set parameters
+;; (setq gnus-parameters
+;;       '(("nnreddit nnreddit:emacs"
+;;          (display . all))))
+
+;; (require 'smtpmail)
+;; (setq send-mail-function 'smtpmail-send-it
+;;       smtpmail-auth-credentials "~/.authinfo"
+;;       smtpmail-smtp-server "smtp.gmail.com"
+;;       smtpmail-smtp-service 587)
 
 ;; Start in topic mode
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)

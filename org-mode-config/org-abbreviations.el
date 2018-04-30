@@ -34,4 +34,30 @@
         ("usps"           . "https://tools.usps.com/go/TrackConfirmAction.action?tRef=fullpage&tLc=1&text28777=&tLabels=")
         ("yelp-business"  . "http://www.yelp.com/biz/")
         ("yelp-user"      . "http://www.yelp.com/user_details?userid=")
-        ("youtube"        . "http://www.youtube.com/user/")))
+        ("youtube"        . "http://www.youtube.com/user/")
+        ;; Abbreviations for other protocols
+        ("tel"            . "tel:")))
+
+;; Create abbreviations
+(defun my/org-link-abbreviations-create ()
+  "Replace all long form links in current file with their corresponding abbreviations in `org-link-abbrev-alist'."
+  (interactive)
+  (dolist (pair org-link-abbrev-alist)
+    (save-excursion
+      (goto-char (point-min))
+      (while (search-forward (concat "[[" (cdr pair)) nil t)
+        (replace-match (concat "[[" (car pair) ":"))))))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (add-to-list 'write-file-functions 'my/org-link-abbreviations-create)))
+
+;; Remove abbreviations
+(defun my/org-link-abbreviations-remove ()
+  "Replace all link abbreviations in current file with their long form counterparts in `org-link-abbrev-alist'."
+  (interactive)
+  (dolist (pair org-link-abbrev-alist)
+    (save-excursion
+      (goto-char (point-min))
+      (while (search-forward (concat "[[" (car pair) ":") nil t)
+        (replace-match (concat "[[" (cdr pair)))))))
