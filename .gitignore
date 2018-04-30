@@ -12,6 +12,7 @@ elpa/
 eshell/
 history
 image-dired/
+plugins/auto-package-update.el
 plugins/nastran-mode/
 plugins/nnreddit/
 plugins/org-windows-screenshot/
