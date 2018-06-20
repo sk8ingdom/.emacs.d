@@ -366,6 +366,7 @@ text properties of buttons, use `text-properties-at'."
 ;; Ace advice for dired
 (defun my/dired-find-file-advice (orig-fun &rest args)
   "Use `ace-window' to choose window to open file."
+  (message prefix-arg)
   (let ((file (dired-get-file-for-visit)))
     (if (file-directory-p file)
         (apply orig-fun args)
@@ -377,6 +378,10 @@ text properties of buttons, use `text-properties-at'."
 (advice-add 'dired-find-file-other-window :around #'my/dired-find-file-advice)
 (advice-add 'dired-find-alternate-file :around #'my/dired-find-file-advice)
 (advice-add 'dired-mouse-find-file-other-window :around #'my/dired-find-file-advice)
+(advice-add 'dired-display-file :around #'my/dired-find-file-advice)
+
+;; Ace advice for org-open-at-point
+;; (defun my/org-open-at-point (orig-fun &rest args)
 
 ;; ;; Ace-isearch
 ;; (require 'ace-isearch)
@@ -404,10 +409,10 @@ text properties of buttons, use `text-properties-at'."
 ;;       (clm/open-command-log-buffer)
 ;;       (setq my/command-log-mode-on 1))))
 
-;;;; Which-key-mode configuration
-;; (require 'which-key)
-;; (which-key-mode)
-;;(setq which-key-idle-delay 1.0)
+;; Which-key-mode configuration
+(require 'which-key)
+(which-key-mode)
+(setq which-key-idle-delay 1.0)
 
 ;; Magit mode
 (require 'magit)
@@ -490,7 +495,7 @@ text properties of buttons, use `text-properties-at'."
   (mwe:log-keyboard-commands)
   (mwe:open-command-log-buffer))
 
-(global-set-key (kbd "C-x c") 'my/log-commands-print-strokes)
+(global-set-key (kbd "C-x f") 'my/log-commands-print-strokes)
 
 ;; Enable feebleline
 ;; (require 'feebleline)
@@ -502,7 +507,7 @@ text properties of buttons, use `text-properties-at'."
 (setq minibuffer-line-refresh-interval 10)
 
 ;; This doesn't currently work as intended
-(setq minibuffer-line-format '("" (:eval (format-time-string "%F %I:%M %p")) " | " (:eval (buffer-name))))
+(setq minibuffer-line-format '("" (:eval (format-time-string "%F %I:%M %p")) " | %b | %p"))
 (add-hook 'window-configuration-change-hook 'my/mode-line-update)
 ;; This is horseshit and doesn't work; the hook isn't even in the file.
 ;; (add-hook 'ace-window-display-mode-hook 'my/mode-line-update)

@@ -1,6 +1,6 @@
 ;; Capture Templates for TODO tasks
 (setq org-capture-templates
- '(
+      '(
 
    ;; Templates for the TASKS keyword sequence
    ("t" "Tasks")
@@ -263,10 +263,10 @@
 
    ;; CONSUME  (r) Consume template
    ("mr" "CONSUME   (r) Consume org-protocol" entry (file "ref.org")
-    "* CONSUME [[%:link][%:created]]
+    "* CONSUME [[%:link][%:description]]
   :PROPERTIES:
   :Creator:  %:creator
-  :Created:  %:created
+  :Created:  %:description
   :Source:   %:source
   :Via:      %:via
   :Link:     %:link
@@ -275,14 +275,16 @@
   :END:
   :LOGBOOK:
   - State \"CONSUME\"    from \"\"           %U
-  :END:%:quote" :empty-lines 1)
+  :END:
+
+  %:initial" :empty-lines 1)
 
    ;; SUBSCRIBE(r) Subscribe template
    ("mb" "SUBSCRIBE (b) Subscribe org-protocol" entry (file "ref.org")
-    "* SUBSCRIBE [[%:link][%:created]]
+    "* SUBSCRIBE [[%:link][%:description
   :PROPERTIES:
   :Creator:  %:creator
-  :Created:  %:created
+  :Created:  %:description
   :Source:   %:source
   :Via:      %:via
   :Link:     %:link
@@ -291,14 +293,16 @@
   :END:
   :LOGBOOK:
   - State \"SUBSCRIBE\"  from \"\"           %U
-  :END:%:quote" :empty-lines 1)
+  :END:
+
+  %:initial" :empty-lines 1)
 
    ;; CONSUMING(l) Consuming template
    ("ml" "CONSUMING (l) Consuming org-protocol" entry (file "ref.org")
-    "* CONSUMING [[%:link][%:created]]
+    "* CONSUMING [[%:link][%:description]]
   :PROPERTIES:
   :Creator:  %:creator
-  :Created:  %:created
+  :Created:  %:description
   :Source:   %:source
   :Via:      %:via
   :Link:     %:link
@@ -307,14 +311,16 @@
   :END:
   :LOGBOOK:
   - State \"CONSUMING\"  from \"\"           %U
-  :END:%:quote" :empty-lines 1)
+  :END:
+
+  %:initial" :empty-lines 1)
 
    ;; SHARE    (s) Share template
    ("ms" "SHARE     (s) Share org-protocol" entry (file "ref.org")
-    "* SHARE [[%:link][%:created]]
+    "* SHARE [[%:link][%:description
   :PROPERTIES:
   :Creator:  %:creator
-  :Created:  %:created
+  :Created:  %:description
   :Source:   %:source
   :Via:      %:via
   :Link:     %:link
@@ -323,15 +329,17 @@
   :END:
   :LOGBOOK:
   - State \"SHARE\"      from \"\"           %U
-  :END:%:quote" :empty-lines 1)
+  :END:
+
+  %:initial" :empty-lines 1)
 
    ;; IGNORED  (r) Ignored template
    ("mi" "IGNORED   (i) Ignored org-protocol" entry (file "ref.org")
-    "* IGNORED [[%:link][%:created]]
+    "* IGNORED [[%:link][%:description]]
   CLOSED: %U
   :PROPERTIES:
   :Creator:  %:creator
-  :Created:  %:created
+  :Created:  %:description
   :Source:   %:source
   :Via:      %:via
   :Link:     %:link
@@ -340,15 +348,17 @@
   :END:
   :LOGBOOK:
   - State \"IGNORED\"    from \"\"           %U
-  :END:%:quote" :empty-lines 1)
+  :END:
+
+  %:initial" :empty-lines 1)
 
    ;; REFERENCE(f) Reference template
    ("mf" "REFERENCE (f) Reference org-protocol" entry (file "ref.org")
-    "* REFERENCE [[%:link][%:created]]
+    "* REFERENCE [[%:link][%:description]]
   CLOSED: %U
   :PROPERTIES:
   :Creator:  %:creator
-  :Created:  %:created
+  :Created:  %:description
   :Source:   %:source
   :Via:      %:via
   :Link:     %:link
@@ -357,7 +367,9 @@
   :END:
   :LOGBOOK:
   - State \"REFERENCE\"  from \"\"           %U
-  :END:%:quote" :empty-lines 1)
+  :END:
+
+  %:initial" :empty-lines 1)
 
    ;; These templates are used with the EVENTS TODO sequence
    ("e" "Events")
@@ -796,6 +808,10 @@ and then insert a link in line of the new todo task."
 
 (defun my/generate-openssl-password ()
   "Automatically generate a 15 character password using OpenSSL for the Account capture template."
-  (interactive)
   (replace-regexp-in-string "\n\\'" ""
                             (shell-command-to-string "openssl rand -base64 15")))
+
+(defun my/insert-openssl-password ()
+  "Insert an OpenSSL password from `my/generate-openssl-password' as a string."
+  (interactive)
+  (insert (my/generate-openssl-password)))

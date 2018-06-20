@@ -7,20 +7,20 @@
 (package-initialize)
 
 ;; Only do if connected to the internet
-;; (package-refresh-contents)
-;; (add-to-list 'package-archives
-;;              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-;; (add-to-list 'package-archives
-;;              '("melpa"        . "http://www.melpa.org/packages/") t)
-;; (add-to-list 'package-archives
-;;             '("org"          . "http://orgmode.org/elpa/") t)
+(package-refresh-contents)
+(add-to-list 'package-archives
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa"        . "http://www.melpa.org/packages/") t)
+(add-to-list 'package-archives
+            '("org"          . "http://orgmode.org/elpa/") t)
 
 ;; ;; Auto-update packages
 (add-to-list 'load-path "~/.emacs.d/plugins/auto-package-update.el")
 (require 'auto-package-update)
 
 ;; Only do if connecte to the internet
-;; (auto-package-update-maybe)
+(auto-package-update-maybe)
 
 ;; Disable the splash screen
 (setq inhibit-splash-screen t)
@@ -140,8 +140,11 @@ prompt the user for a coding system."
 ;; Disable backup
 (setq backup-inhibited t)
 
-;; ;; Disable auto-save
+;; Disable auto-save
 (setq auto-save-default nil)
+
+;; Always refresh buffers if they change
+(global-auto-revert-mode t)
 
 ;; Automatically convert line endings to unix
 ;;(add-hook 'find-file-hook 'find-file-check-line-endings)

@@ -1,5 +1,7 @@
 ;; Dired
 
+;; (require 'dired+)
+
 ;; Add dot files and directories first
 (setq dired-listing-switches "-laGh1v")
 
@@ -9,6 +11,9 @@
 
 ;; For some reason dired-at-point seems to be broken
 ;; (global-set-key (kbd "C-x d") 'dired)
+
+;; Turn off details
+(setq dired-mode-hook 'dired-hide-details-mode)
 
 ;; Allow r and R to rename files
 (define-key dired-mode-map (kbd "r") 'dired-do-rename)
@@ -42,6 +47,10 @@
         (mapc (lambda (fPath) (shell-command (format "open \"%s\"" fPath)))  myFileList))
        ((string-equal system-type "gnu/linux")
         (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath))) myFileList))))))
+
+(define-key dired-mode-map (kbd "<C-return>") 'my/dired-open-in-external-application)
+(define-key dired-mode-map (kbd "<mouse-3>") 'my/dired-open-in-external-application)
+(define-key dired-mode-map (kbd "C-o") 'my/dired-open-in-external-application)
 
 ;; Copy full file path and filename to the kill ring
 (defun my/dired-copy-path-and-filename-as-kill ()
@@ -131,13 +140,35 @@ If arg > 0, move forward. If arg <0, move backwards."
   (let ((frame (make-frame)))
     (select-frame-set-input-focus frame)))
 
+;; Required since either ediff or a new frame turns on scroll bars...
+(defun my/fix-ediff-windows ()
+  (window-divider-mode)
+  (window-divider-mode)
+  (toggle-scroll-bar -1))
+
 ;; Delte frame and focus on previous
 (defun my/delete-frame-previous-focus ()
   (delete-frame)
   (other-frame 0))
 
 (add-hook 'ediff-before-setup-hook 'my/make-frame-with-focus)
-(add-hook 'ediff-quit-hook 'delete-frame-previous-focus)
+;; (add-hook 'ediff-after-setup-control-frame-hook 'my/fix-ediff-windows)
+(add-hook 'ediff-display-help-hook 'my/fix-ediff-windows)
+(add-hook 'ediff-quit-hook 'my/delete-frame-previous-focus)
+
+(defun my/dired-ediff-marked-files ()
+  "Run ediff on 2 or 3 marked dired files."
+  (interactive)
+  (let ((marked-files (dired-get-marked-files)))
+    (if (= (safe-length marked-files) 2)
+        (ediff-files (nth 0 marked-files) (nth 1 marked-files))
+      (if (= (safe-length marked-files) 3)
+          (ediff3 (nth 0 marked-files)
+                  (nth 1 marked-files)
+                  (nth 2 marked-files))
+        (error "mark either 2 or 3 files.")))))
+
+(define-key dired-mode-map "=" 'my/dired-ediff-marked-files)
 
 ;; Calc mode
 
@@ -171,3 +202,22 @@ If arg > 0, move forward. If arg <0, move backwards."
 ;; Emacs Lisp mode
 (define-key emacs-lisp-mode-map (kbd "C-c w") 'comment-region)
 (define-key emacs-lisp-mode-map (kbd "C-c u") 'uncomment-region)
+
+;; Python
+
+(require 'python-mode)
+(require 'python)
+
+(defun my/python-start-or-switch-repl (&optional msg)
+  "Start and/or switch to the REPL."
+  (interactive "p")
+  (if (python-shell-get-process)
+      (python-shell-switch-to-shell)
+    (progn
+      (run-python (python-shell-calculate-command) nil nil)
+      (python-shell-switch-to-shell))))
+
+(setq python-shell-completion-native-disabled-interpreters '("ipython" "python"))
+
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "--simple-prompt -i")

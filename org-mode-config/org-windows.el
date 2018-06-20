@@ -1,14 +1,15 @@
 ;; Capture
-(setq org-directory "C:/Users/dominics/Documents/org/")
+(setq org-directory "C:/Users/dominics/Dropbox/org")
 (setq org-default-notes-file (concat org-directory "/ref.org"))
 
 ;; Targets that contribute to the agenda view
-(setq org-agenda-files (quote ("C:/Users/dominics/Documents/org/")))
+(setq org-agenda-files (list org-directory))
 
 ;; Abbreviations
 (add-to-list 'org-link-abbrev-alist '("local"          . "C:/Users/dominics/Documents/"))
-(add-to-list 'org-link-abbrev-alist '("val"            . "https://dominicsurano.com:8081/homes/sk8ingdom/"))
-;; (add-to-list 'org-link-abbrev-alist '("val"            . "Z:/"))
+;; (add-to-list 'org-link-abbrev-alist '("val"            . "https://dominicsurano.com:8081/homes/sk8ingdom/"))
+(add-to-list 'org-link-abbrev-alist '("val"            . "Z:/"))
+;; (add-to-list 'org-link-abbrev-alist '("val"            . "/cygssh:admin@dominicsurano.com:/share/MD0_DATA/homes/sk8ingdom/"))
 (add-to-list 'org-link-abbrev-alist '("doors"          . "shell:\"C:/Program Files (x86)/IBM/Rational/DOORS/9.5/bin/protocolhandler.exe\" -r 240 -s 60 -url \"doors:%s\""))
 (add-to-list 'org-link-abbrev-alist '("outlook"        . "shell:\"C:/Program Files (x86)/Microsoft Office/Office14/OUTLOOK.EXE\" /select Outlook:"))
 (add-to-list 'org-link-abbrev-alist '("outlook-folder" . "shell:\"C:/Program Files (x86)/Microsoft Office/Office14/OUTLOOK.EXE\" /select \"Outlook:\\\\Dominic.Surano@insitu.com\\%s\""))
@@ -51,11 +52,13 @@
   (split-window-below nil)
   (delete-window)
   (split-window-right nil)
-  (find-file (concat org-directory "/wrk.org"))
+  ;; (find-file (concat org-directory "/wrk.org"))
+  (find-file (concat org-directory "/*.org") t)
+  (switch-to-buffer "wrk.org" nil 'force-same-window)
   (other-window 1)
   (other-window 1)
-  ;; (dired-at-point org-directory)
-  (dired-at-point "c:/Users/dominics/Documents/")
+  (dired-at-point org-directory)
+  ;; (dired-at-point "c:/Users/dominics/Documents/")
   (dired-at-point user-emacs-directory)
   (kill-buffer "*Messages*")
   (other-window 1)
@@ -65,3 +68,23 @@
   (org-agenda nil "a" "<"))
 
 (my/org-windows-layout)
+
+;; Insert Windows links
+(defun my/yank-convert-forward-slashes ()
+  "Escape doublequotes in car of kill-ring. Use with S-<MOUSE-3> to copy entire path."
+  (interactive)
+  (with-temp-buffer
+    (yank)
+    (goto-char (point-min))
+    (while (search-forward "\\" nil t 1)
+      (replace-match "/"))
+    (goto-char (point-min))
+    (while (search-forward "\"" nil t 1)
+      (replace-match ""))
+    (kill-new (buffer-substring-no-properties (point-min) (point-max)))))
+
+(defun my/org-insert-windows-link ()
+  (interactive)
+  (my/yank-convert-forward-slashes)
+  (let ((dir (car kill-ring)))
+    (insert "[[" dir "][" (file-name-nondirectory dir) "]]")))

@@ -35,6 +35,10 @@
 ;; Custom agenda commands to quickly view lists of relevent data
 (setq org-agenda-custom-commands
       '(
+        ;; Work
+        ("0" . "Work agenda views")
+        ("0t" todo "TODO|WAITING|DELEGATED|ASSIGNED|CANCELLED|DONE")
+
         ;; Automatically show agenda ordered by date
         ("1" . "Custom agenda views")
 

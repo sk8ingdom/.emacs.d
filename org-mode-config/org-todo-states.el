@@ -33,7 +33,8 @@
          ;; SHARE means to share on G+, Facebook, reddit, blog about, etc.
          ;; IGNORED means not read and no desire to read in the future
          ;; REFERENCE is for stuff you don't own but want to be available later
-         (sequence "CONSUME(r@/!)" "SUBSCRIBE(b@/!)" "CONSUMING(l@/!)" "SHARE(s@/!)" "|" "IGNORED(i@/!)" "REFERENCE(f@/!)")
+         ;; SHARED means sent to someone or posted
+         (sequence "CONSUME(r@/!)" "SUBSCRIBE(b@/!)" "CONSUMING(l@/!)" "SHARE(s@/!)" "|" "IGNORED(i@/!)" "REFERENCE(f@/!)" "SHARED(,@/!)")
 
          ;; Sequence for EVENTS
          ;; VISIT means that there is something you would physically like to do, no dates associated

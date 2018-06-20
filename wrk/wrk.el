@@ -42,5 +42,7 @@ Still to do:
 
   (interactive)
   (if (equal org-refile-targets '((org-agenda-files :maxlevel . 9)))
-      (setq org-refile-targets '(("c:/users/dominics/Documents/org/wrk.org" :maxlevel . 9)))
+      (setq org-refile-targets '(("C:/Users/dominics/Dropbox/org/wrk.org" :maxlevel . 9)))
     (setq org-refile-targets '((org-agenda-files :maxlevel . 9)))))
+
+(my/org-refile-targets-toggle)

@@ -88,23 +88,25 @@ parent org-link to the note in the form \"From [[id:hash][Heading]].\"
 
 Requires `org-log-refile' to be set to 'note."
   (interactive)
-  (save-excursion
-    (let ((start-level (funcall outline-level)))
-      (if (<= start-level 1)
-          ;; Remember that org-make-link-string exists
-          (push (list (buffer-file-name)
-                      (file-name-nondirectory (buffer-file-name)))
-                      org-stored-links)
-        (progn
-          (outline-up-heading 1 t)
-          (call-interactively 'org-store-link)))))
-  (org-refile)
-  (with-simulated-input "RET RET"
-    (org-insert-link))
-  (insert ".")
-  (beginning-of-line nil)
-  (insert "From ")
-  (org-ctrl-c-ctrl-c))
+  ;; (if (equal current-prefix-arg '(4))
+  ;;    (org-refile)
+    (save-excursion
+      (let ((start-level (funcall outline-level)))
+        (if (<= start-level 1)
+            ;; Remember that org-make-link-string exists
+            (push (list (buffer-file-name)
+                        (file-name-nondirectory (buffer-file-name)))
+                  org-stored-links)
+          (progn
+            (outline-up-heading 1 t)
+            (call-interactively 'org-store-link)))))
+    (org-refile)
+    (with-simulated-input "RET RET"
+      (org-insert-link))
+    (insert ".")
+    (beginning-of-line nil)
+    (insert "From ")
+    (org-ctrl-c-ctrl-c))
 
 (define-key org-mode-map "\C-c\C-w" 'my/org-refile-with-note-parent-link)
 
@@ -221,7 +223,7 @@ Redefined to allow pop-up windows."
              '(property . "Property %-12s from %-12S %t"))
 
 (defcustom my/org-property-ignored-properties
-  '("ID" "LAST_REPEAT" "Via")
+  '("ID" "LAST_REPEAT" "Via" "ARCHIVE_TIME" "ARCHIVE_FILE" "ARCHIVE_OLPATH" "ARCHIVE_CATEGORY" "ARCHIVE_TODO" "Effort" "EFFORT")
   "List of properties to exclude from my/org-property-change-note."
   :group 'org
   :type 'list)
@@ -370,3 +372,13 @@ If the timestamp is in hidden text, expose it."
   ;; (let ((current-prefix-arg (digit-argument 0)))
   ;;   (call-interactively #'org-capture)))
   (execute-kbd-macro (read-kbd-macro "C-u 0 C-c c")))
+
+(defun my/org-backup-files ()
+  "Create backup of entire org-mode directory in the archive directory. I really need to start
+using git for this instead."
+  (interactive)
+  (let* ((date-time (format-time-string "%Y-%m-%d %H.%M.%S"))
+         (org-backup-directory
+          (concat (cdr (assoc "val" org-link-abbrev-alist)) "org/Archive/" date-time)))
+    (copy-directory org-directory org-backup-directory)
+    (message "%s" (concat org-directory " copied to " org-backup-directory "!"))))
