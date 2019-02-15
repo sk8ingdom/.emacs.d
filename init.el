@@ -49,9 +49,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ispell-dictionary "american")
+ '(ispell-program-name "C:/cygwin64/bin/aspell.exe")
  '(package-selected-packages
    (quote
-    (org-journal calfw-org calfw python-mode with-simulated-input which-key use-package undo-tree symon sx shackle org-plus-contrib org-pdfview mwe-log-commands minimap minibuffer-line magithub helm-youtube helm-w32-launcher helm-swoop helm-spotify-plus helm-spotify helm-org-rifle helm-google google-maps elmacro dired-quick-sort dedicated counsel-spotify counsel command-log-mode auto-package-update adaptive-wrap ace-window ace-link ace-isearch))))
+    (fireplace csv-mode org-noter org-journal calfw-org calfw python-mode with-simulated-input which-key use-package undo-tree symon sx shackle org-plus-contrib org-pdfview mwe-log-commands minimap minibuffer-line magithub helm-youtube helm-w32-launcher helm-swoop helm-spotify-plus helm-spotify helm-org-rifle helm-google google-maps elmacro dired-quick-sort dedicated counsel-spotify counsel command-log-mode auto-package-update adaptive-wrap ace-window ace-link ace-isearch))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

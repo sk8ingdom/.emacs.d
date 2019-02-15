@@ -1,6 +1,12 @@
 ;; Enable org-mode
 (require 'org)
+
+;; For encrypting files
 (require 'org-crypt)
+
+;; For template expansion
+;; https://www.reddit.com/r/orgmode/comments/7jedp0/easy_templates_expansion_not_working/
+(require 'org-tempo)
 
 ;; Remove trailing whitespace
 (add-hook 'org-mode-hook
@@ -12,6 +18,9 @@
           (lambda ()
             (visual-line-mode)
             (adaptive-wrap-prefix-mode)))
+
+;; Prevent extra spaces from showing up after headings
+(setq org-cycle-separator-lines 0)
 
 ;; Enable syntax-highlighting
 (setq org-src-fontify-natively t)
@@ -27,12 +36,12 @@
 ;; Export drawers
 ;; (setq org-export-with-drawers t)
 
-;; Export to clipboard to paste in other pgorams
+;; Export to clipboard to paste in other programs
 (defun my/org-export-region-html ()
   "Export region to HTML, and copy it to the clipboard."
   (interactive)
   (save-window-excursion
-    (let* ((buf (org-export-to-buffer 'html "*Formatted Copy*" nil nil t t))
+    (let* ((buf (org-export-to-buffer 'html "*Formatted Copy*" nil t nil t))
            (html (with-current-buffer buf (buffer-string))))
       (with-current-buffer buf
         (shell-command-on-region
@@ -223,7 +232,7 @@ Redefined to allow pop-up windows."
              '(property . "Property %-12s from %-12S %t"))
 
 (defcustom my/org-property-ignored-properties
-  '("ID" "LAST_REPEAT" "Via" "ARCHIVE_TIME" "ARCHIVE_FILE" "ARCHIVE_OLPATH" "ARCHIVE_CATEGORY" "ARCHIVE_TODO" "Effort" "EFFORT")
+  '("ID" "LAST_REPEAT" "Via" "ARCHIVE_TIME" "ARCHIVE_FILE" "ARCHIVE_OLPATH" "ARCHIVE_CATEGORY" "ARCHIVE_TODO" "Effort" "EFFORT" "NOTER_DOCUMENT" "NOTER_PAGE")
   "List of properties to exclude from my/org-property-change-note."
   :group 'org
   :type 'list)
@@ -236,25 +245,26 @@ Redefined to allow pop-up windows."
 (advice-add #'org-read-property-value :before #'my/org-property-store-previous-val)
 
 (defun my/org-property-change-note (prop val)
-  "Add property changes to the logbook. Requires modifying `org-add-log-note'
-to include:
+;;   "Add property changes to the logbook. Requires modifying `org-add-log-note'
+;; to include:
 
-((eq org-log-note-purpose 'property)
- (format \"\\\"%s\\\" property change from \\\"%s\\\"\"
-         (or org-log-note-state \"\")
-         (or org-log-note-previous-state \"\")))
+;; ((eq org-log-note-purpose 'property)
+;;  (format \"\\\"%s\\\" property change from \\\"%s\\\"\"
+;;          (or org-log-note-state \"\")
+;;          (or org-log-note-previous-state \"\")))
 
-or replacing the entire cond block with:
+;; or replacing the entire cond block with:
 
-(cond
- ((member org-log-note-purpose (mapcar 'car org-log-note-headings))
-  \"changing property\")
- (t (error \"This should not happen\")))
+;; (cond
+;;  ((member org-log-note-purpose (mapcar 'car org-log-note-headings))
+;;   \"changing property\")
+;;  (t (error \"This should not happen\")))
 
-and byte compiling org.el."
+;; and byte compiling org.el."
   (message (concat "Changing " prop " from " val))
-  (if (not (member prop my/org-property-ignored-properties))
-      (org-add-log-setup 'property prop my/org-property-previous-val)))
+  (if (not 'my/org-property-previous-val)
+      (if (not (member prop my/org-property-ignored-properties))
+      (org-add-log-setup 'property prop my/org-property-previous-val))))
 
 ;; In the interim, I've just re-defined the function
 (defun org-add-log-note (&optional _purpose)
@@ -317,7 +327,7 @@ With prefix C-u, just copy the org-link link."
 
 (define-key org-mode-map "\C-ch" 'my/org-link-copy)
 
-;; Add avility to move forward by timestamp
+;; Add ability to move forward by timestamp
 (setq my/org-timestamp-search-failed nil)
 
 ;; Note: Need to advise org-context since exiting the logbook doesn't collapse it.
@@ -346,6 +356,14 @@ If the timestamp is in hidden text, expose it."
       (message "No further timestamps found"))))
 
 (define-key org-mode-map "\C-ct" 'my/org-next-timestamp)
+
+(defun my/org-timestamp-convert-dirty-regexp-hack ()
+  "Convert all org-mode timestamps in buffer from the
+form <2019-01-04 08:00-10:00> to <2019-01-04 08:00>--<2019-01-04 10:00>"
+  (interactive)
+  (goto-char (point-min))
+  (while (re-search-forward "<\\([0-9- A-z]\\{15\\}\\)\\([0-9]\\{2\\}:[0-9]\\{2\\}\\)-\\([0-9]\\{2\\}:[0-9]\\{2\\}\\)>" nil t)
+    (replace-match "<\\1\\2>--<\\1\\3>" t nil)))
 
 ;; Have dired store org-link when a file or files(s) are renamed
 (defun my/dired-rename-file (file newname ok-if-already-exists)

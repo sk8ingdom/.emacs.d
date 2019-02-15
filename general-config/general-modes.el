@@ -1,5 +1,7 @@
 ;; Dired
 
+(require 'dired)
+
 ;; (require 'dired+)
 
 ;; Add dot files and directories first
@@ -17,6 +19,9 @@
 
 ;; Allow r and R to rename files
 (define-key dired-mode-map (kbd "r") 'dired-do-rename)
+
+;; Allow E to "edit" / toggle read only mode
+(define-key dired-mode-map (kbd "E") 'dired-toggle-read-only)
 
 ;; Allow dired to delete or copy directories
 (setq dired-recursive-copies 'always)
@@ -124,6 +129,9 @@ If arg > 0, move forward. If arg <0, move backwards."
 (define-key dired-mode-map (kbd "<backtab>") (lambda () (interactive) (my/dired-next-or-previous-line -1)))
 (define-key dired-mode-map (kbd "p") (lambda () (interactive) (my/dired-next-or-previous-line -1)))
 
+;; Open directory on kill-ring
+(global-set-key (kbd "C-x g") (lambda () (interactive) (dired (car kill-ring))))
+
 ;; Doc-view mode
 
 ;; Doesn't currently work; trouble with M-x toggle-debug-on-error
@@ -146,7 +154,7 @@ If arg > 0, move forward. If arg <0, move backwards."
   (window-divider-mode)
   (toggle-scroll-bar -1))
 
-;; Delte frame and focus on previous
+;; Delete frame and focus on previous
 (defun my/delete-frame-previous-focus ()
   (delete-frame)
   (other-frame 0))
@@ -155,6 +163,8 @@ If arg > 0, move forward. If arg <0, move backwards."
 ;; (add-hook 'ediff-after-setup-control-frame-hook 'my/fix-ediff-windows)
 (add-hook 'ediff-display-help-hook 'my/fix-ediff-windows)
 (add-hook 'ediff-quit-hook 'my/delete-frame-previous-focus)
+
+(global-set-key (kbd "C-x d") 'ediff-buffers)
 
 (defun my/dired-ediff-marked-files ()
   "Run ediff on 2 or 3 marked dired files."
@@ -221,3 +231,13 @@ If arg > 0, move forward. If arg <0, move backwards."
 
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "--simple-prompt -i")
+
+;; Ispell
+
+(require 'ispell)
+
+(setq-default ispell-program-name "aspell")
+(setq ispell-dictionary "american")
+(setq ispell-program-name "C:/cygwin64/bin/aspell.exe")
+
+(global-set-key (kbd "C-x j") 'ispell)

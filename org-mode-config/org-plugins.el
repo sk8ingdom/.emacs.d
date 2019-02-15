@@ -54,3 +54,14 @@
 (setq cfw:org-overwrite-default-keybinding t)
 
 (global-set-key (kbd "C-x c") 'cfw:open-org-calendar)
+
+;; Org-journal
+(require 'org-journal)
+;; (setq org-journal-dir "~/org/journal")
+(setq org-journal-dir "C:/Users/dominics/Dropbox/org/journal")
+;; (setq org-journal-enable-agenda-integration t)
+
+;; Swiper/Counsel/Ivy
+(define-key org-mode-map (kbd "C-c j") 'counsel-org-goto-all)
+
+(require 'counsel-imdb)

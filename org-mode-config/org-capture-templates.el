@@ -416,7 +416,7 @@
   :LOGBOOK:
   - State \"MEETING\"    from \"\"           %U
   :END:
-  %^T" :empty-lines 1)
+  %^T--%^T" :empty-lines 1)
 
    ;; VISITED  (y) Visited template
    ("ey" "VISITED   (y) Visited" entry (file "ref.org")
@@ -625,7 +625,7 @@
   :END:" :empty-lines 1)
 
    ;;          (j) Journal template
-   ("nj" "          (j) Journal" entry (file+headline "org.org" "Journal")
+   ("nj" "          (j) Journal" entry (file+datetree "jnl.org")
     "* Journal :org:
   :PROPERTIES:
   :Via:
@@ -634,7 +634,7 @@
   :LOGBOOK:
   - State \"\"           from \"\"           %U
   :END:
-  %T\n\n  %?" :empty-lines 1)
+  %t\n\n  %?" :empty-lines 1)
 
    ;;          (p) Paycheck template
    ("np" "          (p) Paycheck" entry (file+headline "fin.org" "Paycheck")
@@ -722,6 +722,11 @@
   - State \"MEETING\"    from \"\"           %U
   :END:
   %^T" :empty-lines 1)
+
+   ;; REFERENCE(f) Reference template
+   ("ow" "Web site" entry
+    (file "ref.org")
+    "* %a :website:\n\n%U %?\n\n%:initial")
 
    ))
 

@@ -26,142 +26,154 @@
 ;; Enable request
 (require 'request)
 
-;; Enable helm
-(require 'helm-config)
-(helm-mode t)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-(define-key helm-map (kbd "M-x") 'helm-select-action)
-(global-set-key (kbd "C-c q") 'helm-mini)
-;; Replace list-buffers
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
-;; Replace list-buffers
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-;; Replace find-file-at point
-;; https://github.com/emacs-helm/helm/issues/984
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
+;; ;; Enable helm
+;; (require 'helm-config)
+;; (helm-mode t)
+;; (global-set-key (kbd "M-x") 'helm-M-x)
+;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+;; (define-key helm-map (kbd "M-x") 'helm-select-action)
+;; (global-set-key (kbd "C-c q") 'helm-mini)
 
-(recentf-mode t)
-(setq helm-ff-file-name-history-use-recentf t)
-;; (helm-source-buffers-list helm-source-recentf helm-source-buffer-not-found)
-;; Modifying helm-find-files-1 to the following didn't work.
-;; (helm :sources '(helm-source-find-files helm-source-recentf) ...
+;; ;; Replace list-buffers
+;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
-;; Color map
-(eval-after-load 'helm
-  (lambda ()
-    (set-face-attribute 'helm-selection nil
-                        :background "lightgoldenrod2")
-    (set-face-attribute 'helm-source-header nil
-                        :background "gray75"
-                        :family "Courier New"
-                        :foundry "outline"
-                        :slant 'normal
-                        :weight 'bold
-                        :height 83
-                        :width 'normal
-                        :box 1)
-    (set-face-attribute 'helm-header nil
-                        ;; Inherits header-line
-                        :background "white")
-    (set-face-attribute 'helm-candidate-number nil
-                        :background "white")
-    (set-face-attribute 'helm-ff-dotted-directory nil
-                        :background "white")
-    (set-face-attribute 'helm-ff-directory nil
-                        :background "white")
-    (set-face-attribute 'helm-ff-executable nil
-                        :foreground nil
-                        :inherit 'font-lock-comment-face)
-    (set-face-attribute 'helm-buffer-directory nil
-                        :background "white")
-    (set-face-attribute 'helm-visible-mark nil
-                        :background "gray75")))
+;; ;; Replace list-buffers
+;; (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 
-;; Eshell history
-(require 'helm-eshell)
+;; ;; Replace find-file-at point
+;; ;; https://github.com/emacs-helm/helm/issues/984
+;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-(eval-after-load 'eshell-mode
-          #'(lambda ()
-              (define-key eshell-mode-map (kbd "C-c C-l")  'helm-eshell-history)))
+;; (recentf-mode t)
+;; (setq helm-ff-file-name-history-use-recentf t)
+;; ;; (helm-source-buffers-list helm-source-recentf helm-source-buffer-not-found)
 
-;; Minibuffer history
-(define-key minibuffer-local-map (kbd "C-c C-l") 'helm-minibuffer-history)
+;; ;; Modifying helm-find-files-1 to the following didn't work.
+;; ;; (helm :sources '(helm-source-find-files helm-source-recentf) ...
 
-;; Doesn't currently work
-;;;; Enable helm-swoop
-;; (require 'helm-swoop)
+;; ;; Enable completion by default
+;; (setq helm-ff-auto-update-initial-value t)
 
-(eval-after-load 'helm-swoop
-  (lambda ()
+;; ;; (setq helm-display-function
+;; ;;       'helm-display-buffer-in-own-frame
+;; ;;       helm-display-buffer-reuse-frame t
+;; ;;       helm-use-undecorated-frame-option t)
 
-    ;; Color Map
-    (set-face-attribute 'helm-swoop-target-line-face nil
-                        :background "lightgoldenrod2")
-    (set-face-attribute 'helm-swoop-target-word-face nil
-                        :background "lightgoldenrod2"
-                        ;; :foreground "violetred4")))
-                        :foreground "#b00000")
-    (global-set-key (kbd "C-s") 'helm-swoop)
-    (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
-    (define-key helm-swoop-map (kbd "C-S-s") 'helm-previous-line)
-
-    ;; Disable initial input
-    ;; https://github.com/ShingoFukuyama/helm-swoop/issues/25
-    (setq helm-swoop-pre-input-function (lambda () nil))
-    ;; ;; Trim unwanted characters
-    ;; (setq helm-swoop-pre-input-function
-    ;;       (lambda ()
-    ;;         (let* ((text (thing-at-point 'symbol))
-    ;;                (input (if text (format "%s" (read text)) "")))
-    ;;           (setq input (replace-regexp-in-string "^[^a-zA-Z0-9]+" "" input))
-    ;;           (setq input (replace-regexp-in-string "[^a-zA-Z0-9]+$" "" input))
-    ;;           input)))
-
-    ;; Swoop window isn't properly managed by shackle/popwin
-    ;; https://github.com/ShingoFukuyama/helm-swoop/issues/62
-    ;; Set to nil initially per http://ergoemacs.org/emacs/elisp_defvar_problem.html
-    (defvar helm-swoop-split-window-function nil)
-    (setq helm-swoop-split-window-function
-          (lambda ($buf)
-            (display-buffer $buf)))))
-
-;; Disable swoop in certain modes
-(eval-after-load 'dired
-  (lambda ()
-    (define-key dired-mode-map (kbd "C-s") 'isearch-forward)))
-;; (define-key dired-mode-map (kbd "C-s") 'isearch-forward)
-
-(eval-after-load 'org
-  (lambda ()
-    (define-key org-agenda-mode-map (kbd "C-s") 'isearch-forward)))
-;; (define-key org-agenda-mode-map (kbd "C-s") 'isearch-forward)
-
-;; This doesn't seem to work, the helm buffer still comes up
-;; ;; Org-mode preferences
-;; (eval-after-load 'org-mode
+;; ;; Color map
+;; (eval-after-load 'helm
 ;;   (lambda ()
-;;     ;; Helm defaults to helm-org-run-insert-link-to-heading-at-marker instead
+;;     (set-face-attribute 'helm-selection nil
+;;                         :background "lightgoldenrod2")
+;;     (set-face-attribute 'helm-source-header nil
+;;                         :background "gray75"
+;;                         :family "Courier New"
+;;                         :foundry "outline"
+;;                         :slant 'normal
+;;                         :weight 'bold
+;;                         :height 83
+;;                         :width 'normal
+;;                         :box 1)
+;;     (set-face-attribute 'helm-header nil
+;;                         ;; Inherits header-line
+;;                         :background "white")
+;;     (set-face-attribute 'helm-candidate-number nil
+;;                         :background "white")
+;;     (set-face-attribute 'helm-ff-dotted-directory nil
+;;                         :background "white")
+;;     (set-face-attribute 'helm-ff-directory nil
+;;                         :background "white")
+;;     (set-face-attribute 'helm-ff-executable nil
+;;                         :foreground nil
+;;                         :inherit 'font-lock-comment-face)
+;;     (set-face-attribute 'helm-buffer-directory nil
+;;                         :background "white")
+;;     (set-face-attribute 'helm-visible-mark nil
+;;                         :background "gray75")))
+
+;; ;; Eshell history
+;; (require 'helm-eshell)
+
+;; (eval-after-load 'eshell-mode
+;;           #'(lambda ()
+;;               (define-key eshell-mode-map (kbd "C-c C-l")  'helm-eshell-history)))
+
+;; ;; Minibuffer history
+;; (define-key minibuffer-local-map (kbd "C-c C-l") 'helm-minibuffer-history)
+
+;; ;; Doesn't currently work
+;; ;;;; Enable helm-swoop
+;; ;; (require 'helm-swoop)
+
+;; (eval-after-load 'helm-swoop
+;;   (lambda ()
 ;;
-;;     (define-key org-mode-map (kbd "C-c C-l") 'org-insert-link)))
+;;     ;; Color Map
+;;     (set-face-attribute 'helm-swoop-target-line-face nil
+;;                         :background "lightgoldenrod2")
+;;     (set-face-attribute 'helm-swoop-target-word-face nil
+;;                         :background "lightgoldenrod2"
+;;                         ;; :foreground "violetred4")))
+;;                         :foreground "#b00000")
+;;     (global-set-key (kbd "C-s") 'helm-swoop)
+;;     (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+;;     (define-key helm-swoop-map (kbd "C-S-s") 'helm-previous-line)
 
-;; Enable helm-org-rifle
-(require 'helm-org-rifle)
-(setq helm-org-rifle-show-path t)
-(add-hook 'helm-org-rifle-after-command-hook 'org-reveal)
+;;     ;; Disable initial input
+;;     ;; https://github.com/ShingoFukuyama/helm-swoop/issues/25
+;;     (setq helm-swoop-pre-input-function (lambda () nil))
+;;     ;; ;; Trim unwanted characters
+;;     ;; (setq helm-swoop-pre-input-function
+;;     ;;       (lambda ()
+;;     ;;         (let* ((text (thing-at-point 'symbol))
+;;     ;;                (input (if text (format "%s" (read text)) "")))
+;;     ;;           (setq input (replace-regexp-in-string "^[^a-zA-Z0-9]+" "" input))
+;;     ;;           (setq input (replace-regexp-in-string "[^a-zA-Z0-9]+$" "" input))
+;;     ;;           input)))
 
-(global-set-key (kbd "C-c b") 'helm-org-rifle)
+;;     ;; Swoop window isn't properly managed by shackle/popwin
+;;     ;; https://github.com/ShingoFukuyama/helm-swoop/issues/62
+;;     ;; Set to nil initially per http://ergoemacs.org/emacs/elisp_defvar_problem.html
+;;     (defvar helm-swoop-split-window-function nil)
+;;     (setq helm-swoop-split-window-function
+;;           (lambda ($buf)
+;;             (display-buffer $buf)))))
 
-;; Fix for dired-do-rename
-(defun my/helm-ignore-error (orig-fun &rest args)
-  "Ignore error caused from exiting `dired-do-rename' command
-with `helm-mode' enabled"
-  (condition-case nil
-      (apply orig-fun args)
-    (error nil)
-    (keyboard-quit)))
+;; ;; Disable swoop in certain modes
+;; (eval-after-load 'dired
+;;   (lambda ()
+;;     (define-key dired-mode-map (kbd "C-s") 'isearch-forward)))
+;; ;; (define-key dired-mode-map (kbd "C-s") 'isearch-forward)
 
-(advice-add 'expand-file-name :around #'my/helm-ignore-error)
+;; (eval-after-load 'org
+;;   (lambda ()
+;;     (define-key org-agenda-mode-map (kbd "C-s") 'isearch-forward)))
+;; ;; (define-key org-agenda-mode-map (kbd "C-s") 'isearch-forward)
+
+;; ;; This doesn't seem to work, the helm buffer still comes up
+;; ;; ;; Org-mode preferences
+;; ;; (eval-after-load 'org-mode
+;; ;;   (lambda ()
+;; ;;     ;; Helm defaults to helm-org-run-insert-link-to-heading-at-marker instead
+;; ;;
+;; ;;     (define-key org-mode-map (kbd "C-c C-l") 'org-insert-link)))
+
+;; ;; Enable helm-org-rifle
+;; (require 'helm-org-rifle)
+;; (setq helm-org-rifle-show-path t)
+;; (add-hook 'helm-org-rifle-after-command-hook 'org-reveal)
+
+;; (global-set-key (kbd "C-c b") 'helm-org-rifle)
+
+;; ;; Fix for dired-do-rename
+;; (defun my/helm-ignore-error (orig-fun &rest args)
+;;   "Ignore error caused from exiting `dired-do-rename' command
+;; with `helm-mode' enabled"
+;;   (condition-case nil
+;;       (apply orig-fun args)
+;;     (error nil)
+;;     (keyboard-quit)))
+
+;; (advice-add 'expand-file-name :around #'my/helm-ignore-error)
 
 ;; Enable undo-tree-mode
 (require 'undo-tree)
@@ -224,6 +236,12 @@ with `helm-mode' enabled"
         ("*Org Attach*"                     :align below              :select t)
         ("*Org Export Dispatcher*"          :align below              :select t)
         ("*Select Link*"                    :align below              :select t)
+
+        ;; PDF Tools
+        ("*PDF-Occur*"                      :align below :ratio 0.20  :select t)
+        ("\\*Edit Annotation.*\\*":regexp t :align below :ratio 0.10  :select t)
+        ("*Contents*"                       :align below :ratio 0.10)
+        ("\\*.* annots\\*"        :regexp t :align below :ratio 0.20  :select t)
 
         ;; Don't Work
         ;; (dired-mode                         :align below :ratio 0.20  :select t)
@@ -414,79 +432,88 @@ text properties of buttons, use `text-properties-at'."
 (which-key-mode)
 (setq which-key-idle-delay 1.0)
 
-;; Magit mode
-(require 'magit)
-(global-set-key (kbd "C-x g") 'magit-status)
+;; ;; Magit mode
+;; ;; This isn't currently working for some reason.
+;; ;; (require 'magit)
 
-;; Magithub
-;; https://github.com/vermiculus/magithub/issues/299
-(use-package magithub
-  :demand t
-  :after magit
-  :init
-  ;; fixme this is a temporary hack; see https://github.com/vermiculus/magithub/issues/299
-  (define-error 'ghub-404 "Not Found" 'ghub-http-error)
-  :config
-  (magithub-feature-autoinject t))
+;; (global-set-key (kbd "C-x g") 'magit-status)
 
-;; ;; Ivy mode
-;; (ivy-mode t)
-;; (setq ivy-use-virtual-buffers t)
-;; (setq enable-recursive-minibuffers t)
-;; (setq ivy-wrap t)
-;; (setq ivy-height 10)
-;; (setq ivy-fixed-height-minibuffer t)
+;; ;; https://magit.vc/manual/magit/Switching-Buffers.html
+;; ;; (setq magit-display-buffer-function
+
+;; ;; (define-key magit-mode-map (kbd "q") 'delete-frame)
+
+;; ;; Magithub
+;; ;; https://github.com/vermiculus/magithub/issues/299
+;; (use-package magithub
+;;   :demand t
+;;   :after magit
+;;   :init
+;;   ;; fixme this is a temporary hack; see https://github.com/vermiculus/magithub/issues/299
+;;   (define-error 'ghub-404 "Not Found" 'ghub-http-error)
+;;   :config
+;;   (magithub-feature-autoinject t))
+
+;; Ivy mode
+(ivy-mode t)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+(setq ivy-wrap t)
+(setq ivy-height 10)
+(setq ivy-fixed-height-minibuffer t)
 ;; (setq ivy-count-format "%d/%d")
-;; (setq ivy-format-function 'ivy-format-function-arrow)
+(setq ivy-count-format "")
+(setq ivy-count-format "%d/%d ")
+(setq ivy-format-function 'ivy-format-function-arrow)
 
-;; ;; Keybindings
-;; (global-set-key "\C-s" 'swiper)
-;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
-;; (global-set-key (kbd "<f6>") 'ivy-resume)
-;; (global-set-key (kbd "M-x") 'counsel-M-x)
-;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-;; (global-set-key (kbd "<f1> l") 'counsel-find-library)
-;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-;; (global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
-;; ;; (global-set-key (kbd "C-c g") 'counsel-git)
-;; ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
-;; ;; (global-set-key (kbd "C-c k") 'counsel-ag)
-;; ;; (global-set-key (kbd "C-x l") 'counsel-locate)
-;; ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-;;
-;; ;; Mark Solution
-;; (defvar ivy-marked-candidates '()
-;;   "Holds marked candidates")
-;;
-;; (defun ivy-mark-candidate ()
-;;   "Add current candidate to `ivy-marked-candidates'.
-;; If candidate is already in, remove it."
-;;   (interactive)
-;;   (let ((cand (or (assoc ivy--current (ivy-state-collection ivy-last))
-;;                ivy--current)))
-;;     (if (-contains? ivy-marked-candidates cand)
-;;      ;; remove it from the marked list
-;;      (setq ivy-marked-candidates
-;;            (-remove-item cand ivy-marked-candidates))
-;;
-;;       ;; add to list
-;;       (setq ivy-marked-candidates
-;;          (append ivy-marked-candidates (list cand)))))
-;;   (ivy-next-line))
-;;
-;; (defun ivy-show-marked-candidates ()
-;;   "Show marked candidates."
-;;   (interactive)
-;;   (when ivy-marked-candidates
-;;     (setf (ivy-state-collection ivy-last) ivy-marked-candidates)
-;;     (setf (ivy-state-preselect ivy-last) ivy--current)
-;;     (ivy--reset-state ivy-last)))
-;;
-;; (define-key ivy-minibuffer-map (kbd "C-<SPC>") 'ivy-mark-candidate)
+;; Keybindings
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
+;; (global-set-key (kbd "C-c g") 'counsel-git)
+;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
+;; (global-set-key (kbd "C-c k") 'counsel-ag)
+;; (global-set-key (kbd "C-x l") 'counsel-locate)
+;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+
+;; Mark Solution
+(defvar ivy-marked-candidates '()
+  "Holds marked candidates")
+
+(defun ivy-mark-candidate ()
+  "Add current candidate to `ivy-marked-candidates'.
+If candidate is already in, remove it."
+  (interactive)
+  (let ((cand (or (assoc ivy--current (ivy-state-collection ivy-last))
+               ivy--current)))
+    (if (-contains? ivy-marked-candidates cand)
+     ;; remove it from the marked list
+     (setq ivy-marked-candidates
+           (-remove-item cand ivy-marked-candidates))
+
+      ;; add to list
+      (setq ivy-marked-candidates
+         (append ivy-marked-candidates (list cand)))))
+  (ivy-next-line))
+
+(defun ivy-show-marked-candidates ()
+  "Show marked candidates."
+  (interactive)
+  (when ivy-marked-candidates
+    (setf (ivy-state-collection ivy-last) ivy-marked-candidates)
+    (setf (ivy-state-preselect ivy-last) ivy--current)
+    (ivy--reset-state ivy-last)))
+
+(define-key ivy-minibuffer-map (kbd "C-<SPC>") 'ivy-mark-candidate)
 
 ;; Show keystrokes
 (require 'mwe-log-commands)

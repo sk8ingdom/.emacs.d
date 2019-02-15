@@ -104,16 +104,20 @@
 (defun my/org-insert-link-contact (&optional contact)
   (interactive)
   (if (equal contact nil)
-      (setq contact (read-string "Person or business: ")))
-  (insert (org-make-link-string (concat "peo:" contact) contact)))
+      (progn
+        (setq contact (read-string "Person or business: "))
+        (insert (org-make-link-string (concat "peo:" contact) contact)))
+    (org-make-link-string (concat "peo:" contact) contact)))
 
 (define-key org-mode-map "\C-cg" 'my/org-insert-link-contact)
 
 ;; Insert multiple contacts
 ;; Requires list in the format ("Dominic Surano" "Other Person")
 (defun my/org-insert-link-contacts (&optional contacts)
-  (while contacts
-    (my/org-insert-link-contact (car contacts))
-    (if (> (length contacts) 1)
-        (insert ", "))
-    (setq contacts (cdr contacts))))
+  (let ((result ""))
+    (while contacts
+      (setq result (concat result (my/org-insert-link-contact (car contacts))))
+      (if (> (length contacts) 1)
+          (setq result (concat result ", ")))
+      (setq contacts (cdr contacts)))
+    result))
